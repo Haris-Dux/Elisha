@@ -24,7 +24,7 @@ const WomenMainPage = () => {
           </div>
           {/* WOMEN-HEADER */}
           <div className="women-mainpage-header">
-            <h1 className="women-mainpage-header-title fw-bold py-1">WOMENS</h1>
+            <h1 className="women-mainpage-header-title fw-bold py-1">WOMENS Mens</h1>
             <div className="row mx-0">
               <div className="col-md-12 col-lg-6 px-0">
                 <p className="women-mainpage-header-text py-2">
