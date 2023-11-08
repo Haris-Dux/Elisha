@@ -107,17 +107,6 @@ export const deleteCategoryTypeAsync = createAsyncThunk("categoryType/delete", a
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // INITIAL STATE
 const initialState = {
     createCategory: null,
