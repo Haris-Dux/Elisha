@@ -51,7 +51,7 @@ const AdminMainPage = () => {
         </div>
         <div className="offcanvas-body mx-0 p-0">
           <div className="dashboard-offcanvas py-3">
-            <h2 className="dashboard-heading">Dashboard</h2>
+            <h2 className="dashboard-heading">Dashboarsd</h2>
             <div className="AdminMainPage-body-left-list mt-4">
               <Link to="/adminOrderList" className="btn dashboard-btn text-start">Admin Order List</Link>
               <Link to="/newproductform" className="btn dashboard-btn text-start">Add Products</Link>
