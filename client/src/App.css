@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Gotu&family=Italiana&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #E0D7CE;
+  -webkit-box-shadow: #E0D7CE;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #faf9f9;
+}
+
+.card {
+  background-color: #faf9f9;
+}
+
+.pagination {
+  background-color: #faf9f9 !important;
+}
+
+
+/* font-family: 'Gotu', sans-serif;
+font-family: 'Italiana', sans-serif;
+font-family: 'Lato', sans-serif; */

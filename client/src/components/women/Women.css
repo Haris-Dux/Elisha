@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style-type: none;
+}
+
+.women-mainpage {
+    padding-block: 3rem;
+}
+
+.women-mainpage-header-title {
+    font-size: 2.2rem;
+}
+
+.women-mainpage-header-text {
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    line-height: 1.5;
+}
+
+.women-mainpage-body-title {
+    font-family: 'Gotu', sans-serif;
+}
+
+.women-mainpage-box {
+    height: 23rem;
+    display: flex;
+}
+
+.women-mainpage-box-cont {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.women-mainpage-box-left ul li {
+    text-align: start;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.women-mainpage-box-right {
+    text-align: start;
+}
+
+.women-mainpage-box-right ul li {
+    text-align: start;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* --------- ALL PRODUCT ---------*/
+
+.all-product-body-card {
+    margin-inline: .6rem;
+    border: none;
+    overflow: hidden;
+}
+
+.all-product-body-card:hover img {
+    transition: all .5s ease;
+    /* scale: 1.1; */
+}
+
+
+.all-product-card-body {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.all-product-body-card img {
+    cursor: pointer;
+}
+
+.card-body-detail-section {
+    margin-inline: 0;
+    padding-inline: 0;
+}
+
+.card-data {
+    font-weight: 600;
+}
+
+.women-card-body-button-btn {
+    margin-top: .5rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: .4s;
+    background-color: #E0D7CE;
+    color: black;
+    border-radius: 10px;
+}
+
+.women-card-body-button-btn:hover {
+    background-color: #E0D7CE;
+    color: black;
+}
+
+
+/* --------- WOMEN - NEW ARRIVALS ---------*/
+
+.new-arrivals {
+    min-height: 80vh;
+}
+
+/* --------- MEDIA QUERY ---------*/
+
+@media only screen and (max-width: 1400px) {
+    .women-mainpage-box {
+        padding-inline: 0;
+    }
+
+    .women-mainpage-box-detail ul li {
+        text-align: center;
+
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .card-body-detail-section {
+        flex-direction: column;
+    }
+
+    .card-data {
+        font-size: 1.2rem;
+    }
+
+    .women-card-body-button-btn {
+        padding-inline: 2rem;
+
+    }
+}
+
+@media only screen and (max-width: 992px) {
+
+    .women-mainpage-header {
+        text-align: center;
+        width: 90%;
+        margin: auto;
+        margin-block: 2rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .new-arrivals-body {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .women-mainpage-box-right {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-top: -14rem;
+        margin-right: 3rem;
+    }
+
+    .women-mainpage-box-left {
+        margin-top: 3.5rem;
+    }
+}

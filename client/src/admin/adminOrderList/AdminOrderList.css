@@ -1,0 +1,13 @@
+.admin_order_list {
+    background-color: #E0D7CE;
+}
+
+.admin_order_list-header h3 {
+    font-size: 2.5rem !important;
+    letter-spacing: .3px;
+}
+
+.table-header {
+    background-color: #c2bdb9 !important;
+    font-size: 1.15rem;
+}

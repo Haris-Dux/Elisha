@@ -1,0 +1,135 @@
+.sign-left-cont {
+    /* padding-top: 6rem; */
+    min-height: 80vh !important;
+}
+
+.sign-right-cont {
+    padding-block: 4rem;
+    background-color: #E0D7CE;
+    min-height: 80vh !important;
+}
+
+.sign-title {
+    color: #4F4E4A;
+    letter-spacing: 1px;
+    font-size: 2.1rem;
+    font-weight: 700;
+    font-family: 'Gotu', sans-serif;
+}
+
+.login-link,
+.signup-link {
+    color: #4F4E4A;
+    font-weight: 700;
+}
+
+.sign-form {
+    width: 68%;
+}
+
+.form-control-inputs {
+    font-size: 1rem !important;
+    background-color: #4F4E4A !important;
+    color: #CEB499 !important;
+    padding: .65rem 1rem !important;
+    border-radius: 10px;
+    border: none !important;
+    outline: none !important;
+}
+
+.form-control-inputs::placeholder {
+    color: #CEB499 !important;
+    font-size: 1.2rem;
+}
+
+.form-control-inputs:hover {
+    background-color: #4F4E4A !important;
+    color: #fff !important;
+    border-radius: 10px;
+    outline: none;
+}
+
+.form-control-inputs:focus {
+    background-color: #4F4E4A !important;
+    color: #fff !important;
+    border-radius: 10px;
+    outline: none;
+}
+
+.form-control-inputs:-webkit-autofill {
+    -webkit-text-fill-color: #CEB499 !important;
+    -webkit-box-shadow: 0 0 0 1000px #4F4E4A inset !important;
+    background-color: #4F4E4A !important;
+}
+
+.form-forget-password {
+    color: #4F4E4A;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.sign-btn {
+    background-color: #4F4E4A;
+    color: #CEB499;
+    padding: .6rem 2.2rem;
+    border-radius: 12px;
+    letter-spacing: .5px;
+    text-transform: uppercase !important;
+}
+
+.sign-btn:hover,
+.sign-btn:focus {
+    background-color: #4F4E4A;
+    color: #CEB499;
+    border-radius: 12px;
+}
+
+.sign-btn:active {
+    background-color: #4F4E4A;
+    color: #CEB499;
+}
+
+
+
+
+
+
+
+
+
+
+.sign-page-login-link {
+    color: #4F4E4A;
+
+}
+
+
+
+
+@media only screen and (max-width: 1300px) {
+    .contactus-button-list {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .sign-form {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .sign-form {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .sign-form {
+        width: 90%;
+    }
+
+    .sign-left {
+        display: none;
+    }
+}

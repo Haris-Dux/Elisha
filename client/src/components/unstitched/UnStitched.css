@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.AllProducts-heading {
+    font-family: 'Italiana', sans-serif;
+}
+
+.unStitchedAllProducts-header-subtitle {
+    font-size: 2.8rem !important;
+    font-family: 'Gotu', sans-serif;
+    padding-top: .2rem;
+}
+
+.unStitchedAllProducts-header-text {
+    margin-inline: auto;
+    width: 60%;
+    font-weight: 500 !important;
+    font-size: 1.2rem;
+}
+
+.buttons-list-btn,
+.dropdown-toggle {
+    padding: .8rem 2rem;
+    background-color: #E0D7CE;
+    color: black;
+    border: none;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: .8px;
+    border-radius: 8px;
+}
+
+.buttons-list-btn,
+.dropdown {
+    background-color: #E0D7CE;
+    color: black;
+    margin-inline: 1rem;
+    border-radius: 8px;
+}
+
+.buttons-list-btn:hover,
+.dropdown-toggle:hover {
+    background-color: #f1e8de;
+    color: black;
+}
+
+.buttons-list-btn:focus,
+.dropdown-toggle:focus {
+    background-color: #f1e8de;
+    color: black;
+}
+
+
+/* StitchedAllProducts -- RENDRING */
+
+.card-body-detail-section {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* .card-body-details {
+    margin-right: 4rem;
+} */
+
+/* .card-body-button {
+    margin-left: 1.7rem;
+} */
+
+.card-body-detail-section {
+    margin-inline: 0;
+    padding-inline: 0;
+}
+
+.unstitched-card-body-button-btn {
+    margin-top: .5rem;
+    margin-inline: 0;
+    padding-inline: 1.5rem;
+    padding-block: .7rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: .4s;
+    background-color: #E0D7CE;
+    color: black;
+    border-radius: 10px;
+}
+
+.unstitched-card-body-button-btn:hover {
+    background-color: #E0D7CE;
+    color: black;
+}
+
+
+/* StitchedAllProducts -- PAGINATION */
+
+.page-link {
+    color: black;
+    border: 1px solid #fff;
+    outline: none;
+    font-size: 1.7rem;
+    font-weight: 600;
+    padding: .4rem 1.2rem;
+}
+
+.page-link:hover {
+    color: black;
+    background-color: #fff;
+    border: 1px solid black;
+    outline: none;
+}
+
+.page-link:focus {
+    color: black;
+    background-color: #fff;
+    border: 1px solid black;
+    outline: none;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .unStitchedAllProducts-header-text {
+        width: 70% !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .unStitchedAllProducts-header-text {
+        width: 75% !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .unStitchedAllProducts-header-text {
+        width: 85% !important;
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .unStitchedAllProducts-header-subtitle {
+        font-size: 3rem !important;
+    }
+
+    .unStitchedAllProducts-header-text {
+        width: 90% !important;
+        font-size: 1.3rem !important;
+    }
+
+    .buttons-list-btn,
+    .dropdown {
+        width: 15rem !important;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .unStitchedAllProducts-header-text {
+        width: 90% !important;
+        font-size: 1.2rem !important;
+    }
+
+}

@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.StitchedAllProducts-header-subtitle {
+    font-size: 2.8rem;
+    font-family: 'Gotu', sans-serif;
+    padding-top: .2rem;
+}
+
+.StitchedAllProducts-header-text {
+    margin-inline: auto;
+    width: 60%;
+    font-weight: 500;
+    font-size: 1.2rem !important;
+}
+
+.buttons-list-btn,
+.dropdown-toggle {
+    padding: .8rem 2rem;
+    background-color: #E0D7CE;
+    color: black;
+    border: none;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: .8px;
+    border-radius: 8px;
+}
+
+.buttons-list-btn,
+.dropdown {
+    background-color: #E0D7CE;
+    color: black;
+    margin-inline: 1rem;
+    border-radius: 8px;
+}
+
+.buttons-list-btn:hover,
+.dropdown-toggle:hover {
+    background-color: #f1e8de;
+    color: black;
+}
+
+.buttons-list-btn:focus,
+.dropdown-toggle:focus {
+    background-color: #f1e8de;
+    color: black;
+}
+
+/* StitchedAllProducts -- RENDRING */
+
+.stitched-card-body-detail-section {
+    display: flex;
+    padding-inline: 0;
+    margin-inline: 0;
+}
+
+.stitched-card-data {
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+}
+
+.stitched-card-body-button-btn {
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: .4s;
+    background-color: #E0D7CE;
+    color: black;
+    border-radius: 10px;
+}
+
+.stitched-card-body-button-btn:hover {
+    background-color: #E0D7CE;
+    color: black;
+}
+
+.subcategory-heading {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #4F4D4A;
+    font-family: 'Gotu', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+/* StitchedAllProducts -- PAGINATION */
+
+.page-link {
+    color: black;
+    border: 1px solid #fff;
+    outline: none;
+    font-size: 1.7rem;
+    font-weight: 600;
+    padding: .4rem 1.2rem;
+}
+
+.page-link:hover {
+    color: black;
+    background-color: #fff;
+    border: 1px solid black;
+    outline: none;
+}
+
+.page-link:clicked {
+    color: black;
+    background-color: #fff;
+    border: 1px solid black;
+    outline: none;
+}
+
+.page-link:focus {
+    color: black;
+    background-color: #fff;
+    border: 1px solid black;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1200px) {
+    .StitchedAllProducts-header-text {
+        width: 70% !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .StitchedAllProducts-header-text {
+        width: 75% !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .StitchedAllProducts-header-text {
+        width: 85% !important;
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .StitchedAllProducts-header-subtitle {
+        font-size: 3rem !important;
+    }
+
+    .StitchedAllProducts-header-text {
+        width: 90% !important;
+        font-size: 1.3rem !important;
+    }
+
+    .buttons-list-btn,
+    .dropdown {
+        width: 15rem !important;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .StitchedAllProducts-header-text {
+        width: 90% !important;
+        font-size: 1.2rem !important;
+    }
+
+}

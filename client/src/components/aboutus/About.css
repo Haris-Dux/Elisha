@@ -1,0 +1,127 @@
+/* ------------ SHOP-BY-TYPE ------------ */
+.shop-by-type {
+    padding-block: 3rem;
+}
+
+.shop-by-type-header {
+    margin: auto;
+    width: max-content;
+    padding: 1rem 2rem;
+    background-color: var(--brown-color);
+    color: #fff;
+    box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+}
+
+.shop-by-type-boxes {
+    display: flex;
+    justify-content: center;
+}
+
+.shop-by-type-title {
+    font-size: 2rem;
+}
+
+/* BODY */
+.shop-by-type-content {
+    margin-block: 4rem;
+}
+
+.shop-by-type-content-cont {
+    text-align: center;
+    margin: auto;
+}
+
+.aboutus-card {
+    border: none;
+    width: 15rem;
+    text-align: center;
+}
+
+.parent-box {
+    margin: auto;
+    width: 11rem;
+    height: 11rem;
+    background-color: var(--brown-color);
+    border-radius: 50%;
+}
+
+.child-box {
+    width: 9rem;
+    height: 9rem;
+    background-color: #E1D9CF;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.child-box-img-cont {
+    width: 5rem;
+    height: 4rem;
+}
+
+.child-box_img {
+    width: 100%;
+    margin-top: 1.7rem;
+    border-radius: 100%;
+}
+
+aboutus-card-title {
+    font-size: 1.2rem;
+}
+
+.aboutus-cards-buttons {
+    background-color: #E1D9CF;
+    padding: .6rem 1.5rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: .7s ease-in-out;
+}
+
+.aboutus-cards-buttons:hover {
+    background-color: black;
+    color: #fff;
+    transition: .7s ease-in-out;
+
+}
+
+/* ABOUT US TEXT  */
+
+.aboutus-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.3rem;
+}
+
+.aboutus-heading {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: .4rem;
+}
+
+.aboutus-text {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: .3px;
+    line-height: 1.6;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1200px) {}
+
+@media only screen and (max-width: 992px) {}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 576px) {}

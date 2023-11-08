@@ -1,0 +1,292 @@
+::placeholder {
+    color: #807979;
+    font-size: 1.2rem;
+}
+
+i {
+    cursor: pointer;
+}
+
+.AdminMainPage {
+    min-height: 100vh;
+}
+
+.logo-cont {
+    width: 7rem;
+    height: 6rem;
+}
+
+.AdminMainPage-header-left {
+    background-color: #E0D7CE;
+}
+
+.AdminMainPage-header-left {
+    height: 6rem;
+}
+
+.dashboard {
+    background-color: #E0D7CE;
+    min-height: 100vh;
+    padding-left: .7rem;
+}
+
+.offcanvas-body {
+    background-color: #E0D7CE;
+}
+
+.dashboard-offcanvas {
+    min-height: 75vh;
+    padding-left: .7rem;
+}
+
+.offcanvas-header {
+    background-color: #E0D7CE;
+}
+
+.dashboard-heading {
+    padding-left: 1rem;
+    font-size: 1.6rem;
+}
+
+.dashboard-btn {
+    width: 90%;
+    padding: .55rem 1.5rem;
+    font-size: 1.2rem !important;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+.dashboard-btn:hover {
+    background-color: #cfbfae;
+}
+
+.AdminMainPage-body-left-list {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: start;
+}
+
+.AdminMainPage-body-header-right h2 {
+    font-size: 1.6rem;
+}
+
+.product-grid-searchbar {
+    width: 20rem;
+    padding: .6rem 2rem;
+}
+
+.product-grid-btn {
+    padding: .4rem 2rem;
+    background-color: #E0D7CE;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    transition: .5s ease;
+}
+
+.product-grid-btn:hover {
+    background-color: #cfbfae;
+    color: #000;
+}
+
+.product-grid-body-card-body {
+    padding-block: .5rem;
+    padding-inline: .5rem;
+}
+
+.card-detail {
+    font-size: 1.2rem;
+}
+
+.product-grid-body-card-body-buttons-btn {
+    border: 1px solid #999999;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.product-grid-body-card-body-buttons-btn:hover {
+    border: 1px solid #999999;
+    background-color: #E0D7CE;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1400px) {
+    .product-grid-body-card-body-buttons {
+        flex-direction: column;
+
+        .btn {
+            width: 90%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .product-grid-btn {
+        padding: .3rem 1.4rem;
+    }
+
+    .product-grid-body-card-body-buttons {
+        flex-direction: column;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+        margin: .4rem 0;
+        padding: .7rem 1rem;
+        font-size: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .product-grid-searchbar {
+        width: 13rem;
+        padding: .6rem 2rem;
+    }
+
+    .product-grid-btn {
+        padding: .3rem 1.1rem;
+    }
+
+    .product-grid-body-card-body-buttons {
+        flex-direction: row;
+    }
+
+    .product-grid-body-card-body-buttons-btn {
+        margin-inline: .3rem;
+    }
+
+    .product-grid-body-card-body-buttons-btn span {
+        display: none;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+        padding: .7rem 0rem;
+        font-size: 1.2rem;
+    }
+
+    .dashboard-heading {
+        padding-left: .3rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .product-grid-body-card-body-buttons-btn span {
+        display: inline;
+    }
+
+    .product-grid-btn {
+        padding: .3rem .5rem;
+    }
+
+    .product-grid-body-card-body-buttons-btn {
+        font-size: .9rem;
+    }
+
+
+
+    .dashboard-btn {
+        width: 100%;
+        padding: .7rem 0rem;
+        font-size: 1.2rem;
+    }
+
+    .dashboard-heading {
+        padding-left: 0rem;
+    }
+
+}
+
+@media only screen and (max-width: 710px) {
+    .product-grid-header {
+        flex-direction: column;
+    }
+
+    .product-grid-searchbar {
+        width: 26rem;
+        padding: .6rem 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .product-grid-btn {
+        padding-inline: 2rem;
+    }
+
+    .product-grid-btn {
+        padding: .3rem .7rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .product-grid-searchbar {
+        width: 20rem;
+    }
+
+    .dashboard {
+        min-height: max-content;
+    }
+
+    .AdminMainPage-body-left-list {
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .dashboard-heading {
+        margin: auto;
+        text-align: center;
+        font-size: 1.9rem;
+        font-weight: 600;
+    }
+
+    .dashboard-btn {
+        margin: .3rem 0;
+        width: 10rem;
+        background-color: #f9f9f9;
+        text-align: center !important;
+    }
+}
+
+@media only screen and (max-width: 406px) {
+    .AdminMainPage-body-header-right {
+        flex-direction: column;
+    }
+
+    .AdminMainPage-buttons {
+        margin-inline: auto !important;
+    }
+
+    .AdminMainPage-buttons-btn {
+        padding-inline: 3rem !important;
+        margin-inline: auto;
+        margin-top: .4rem;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 369px) {
+    .dashboard-btn {
+        width: 90%;
+    }
+
+    .product-grid-searchbar {
+        width: 19rem;
+    }
+}

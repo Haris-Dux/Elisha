@@ -1,0 +1,326 @@
+:root {
+    --brown-color: #4E4D49;
+}
+
+/* ------------ MAIN-PAGE ------------ */
+.main_page_img {
+    width: 98%;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ------------ TOPBAR ------------ */
+
+.topbar-card {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+
+}
+
+.topbar-card-body {
+    font-size: 1.2rem;
+    color: #333333cc;
+    font-weight: 600;
+    /* margin: auto; */
+    /* text-align: center; */
+}
+
+/* ------------ SHOP-BY-TYPE ------------ */
+/* HEADER */
+.shop-by-type {
+    padding-block: 4rem;
+}
+
+.shop-by-type-header {
+    margin: auto;
+    width: max-content;
+    padding: 1rem 2rem;
+    background-color: var(--brown-color);
+    color: #fff;
+    box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+}
+
+.shop-by-type-title {
+    font-size: 2rem;
+
+}
+
+/* BODY */
+.shop-by-type-content {
+    margin-block: 4rem;
+}
+
+/* .shop-by-type-content-cont {
+    flex-direction: column;
+
+} */
+
+.shop-by-type-card {
+    border: none;
+}
+
+.parent-box {
+    margin: auto;
+    width: 10rem;
+    height: 10rem;
+    background-color: var(--brown-color);
+    border-radius: 50%;
+}
+
+.child-box {
+    width: 8rem;
+    height: 8rem;
+    background-color: #E1D9CF;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.child-box-img-cont {
+    width: 4rem;
+    height: 3rem;
+}
+
+.child-box_img {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.shop-by-type-card-title {
+    font-size: 1.6rem;
+}
+
+.shop-by-type-card-body {
+    margin: auto;
+    text-align: center;
+}
+
+.shop-by-type-cards-buttons {
+    background-color: #E1D9CF;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: .4s ease-in-out;
+    margin: auto;
+    text-align: center;
+}
+
+.shop-by-type-cards-buttons:hover {
+    background-color: black;
+    color: #fff;
+    transition: .4s ease-in-out;
+
+}
+
+/* ------------ NEW ARRIVALS ------------ */
+.new-arrivals {
+    padding-block: 4rem;
+}
+
+.new-arrivals-title {
+    color: #525252;
+}
+
+.new-arrivals-cont {
+    background-color: #BFC2BB;
+    border-radius: 15px;
+    padding: 2rem 4rem;
+}
+
+.new-arrivals-card {
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.new-arrivals-card-img {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    cursor: pointer;
+}
+
+/* ------------ BrandNameLogo ------------ */
+/* ------------ FEATURED DESIGN BRAND ------------ */
+
+.brand-name-logo {
+    padding-block: 3rem;
+}
+
+.brand-name-logo-content {
+    width: 80%;
+}
+
+.brand-name-logo-header {
+    color: #525252;
+}
+
+.brand-name-logo-box {
+    background-color: #e4e4e4;
+    min-width: 11rem;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    margin-inline: 1rem;
+    margin-block: .7rem;
+}
+
+
+/* ------------ DEALS BY CATEGORY ------------ */
+
+.DealsByCategory {
+    padding-block: 3rem;
+}
+
+.DealsByCategory-cont {
+    padding-block: 3rem;
+}
+
+.DealsByCategory-header {
+    margin: auto;
+    width: max-content;
+    padding: 1rem 2rem;
+    background-color: var(--brown-color);
+    color: #fff;
+    box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+}
+
+.DealsByCategory-title {
+    font-size: 2rem;
+}
+
+/* DEALS BY CATEGORY - BODY */
+
+.DealsByCategory-card {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+
+}
+
+/* DEALS BY CATEGORY - POSTER */
+
+.DealsByCategory-poster {
+    width: 98%;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ------------ PRET STYLES ------------ */
+.pret-style {
+    padding-block: 3rem;
+}
+
+.pret-style-header {
+    margin: auto;
+    width: max-content;
+    padding: 1rem 5rem;
+    background-color: var(--brown-color);
+    color: #fff;
+    box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(133, 133, 133, 0.75);
+}
+
+.pret-style-title {
+    font-size: 2rem;
+}
+
+.pert-style-card {
+    border: none;
+}
+
+.pert-style-card-body {
+    text-align: center;
+}
+
+.pert-style-cont {
+    width: 80 !important;
+}
+
+.pert-style-content {
+    width: 70% !important;
+    margin: auto;
+}
+
+
+.control-btn .next,
+.control-btn .prev {
+    position: absolute;
+    top: 40%;
+    width: 50px;
+    height: 50px;
+    line-height: 52px;
+    background: var(--brown-color);
+    border-radius: 50%;
+    transition: .5s;
+    z-index: 5;
+}
+
+.control-btn .prev {
+    left: -20px;
+}
+
+.control-btn .next {
+    right: -20px;
+}
+
+.control-btn .next i,
+.control-btn .prev i {
+    font-size: 20px;
+    transition: .3s;
+    color: #fff;
+}
+
+.control-btn .next:hover,
+.control-btn .prev:hover {
+    background: var(--brown-color);
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1400px) {
+    .shop-by-type-card-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .shop-by-type-card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .topbar-card-body {
+        font-size: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 576px) {
+    .new-arrivals-cont {
+        background-color: #BFC2BB;
+        border-radius: 10px;
+        padding: 2rem 2rem;
+    }
+}

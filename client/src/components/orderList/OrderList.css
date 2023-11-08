@@ -1,0 +1,49 @@
+.orderList-body-cont {
+    padding-inline: 1rem 1.5rem;
+    border-radius: 10px;
+    background-color: #E0D7CE;
+    border: none;
+}
+
+.orderList-header-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    /* color: #9E9388; */
+    font-family: 'Gotu', sans-serif;
+}
+
+.shipping-address h4 {
+    font-size: 1.2rem !important;
+}
+
+.shipping-address-bar {
+    width: 100%;
+    padding: .7rem .9rem;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    resize: none;
+    font-size: 1rem !important;
+}
+
+.shipping-address-bar::placeholder {
+    color: rgb(145, 145, 145) !important;
+}
+
+.order_id {
+    font-size: 1.4rem;
+}
+
+.order_status {
+    font-size: 1.3rem !important;
+}
+
+.orderList-body-content {
+    font-size: 1.05rem;
+}
+
+.orders-total {
+    font-size: 1.2rem;
+    font-weight: 700;
+}

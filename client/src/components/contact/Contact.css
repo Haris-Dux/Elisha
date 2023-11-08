@@ -1,0 +1,114 @@
+.contactus-left-cont {
+    /* padding-top: 3rem; */
+    min-height: 70vh !important;
+}
+
+.contactus-right-cont {
+    padding-block: 4rem;
+    background-color: #E0D7CE;
+    min-height: 70vh !important;
+}
+
+.contactus-title {
+    color: #4F4E4A;
+    letter-spacing: 1px;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.contactus-form {
+    width: 65%;
+}
+
+.form-control {
+    outline: none !important;
+    background-color: #4F4E4A !important;
+    padding: .6rem 1rem;
+    border-radius: 10px;
+    border: none !important;
+}
+
+.form-control::placeholder {
+    color: #CEB499 !important;
+    font-size: 1rem;
+}
+
+.form-control:hover,
+.form-control:active,
+.form-control:focus {
+    background-color: #dfddd7;
+    outline: none !important;
+}
+
+.form-control:-webkit-autofill {
+    -webkit-text-fill-color: #CEB499 !important;
+    -webkit-box-shadow: 0 0 0 1000px #4F4E4A inset !important;
+    background-color: #4F4E4A !important;
+}
+
+.form-forget-password {
+    color: #4F4E4A;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.contactus-btn {
+    background-color: #4F4E4A;
+    color: #CEB499;
+    padding: .5rem 2rem;
+    border-radius: 12px;
+}
+
+.contactus-btn:hover,
+.contactus-btn:focus {
+    background-color: #4F4E4A;
+    color: #CEB499;
+    padding: .5rem 2rem;
+    border-radius: 12px;
+}
+
+.contactusign-page-login-link {
+    color: #4F4E4A;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1300px) {
+    .contactus-button-list {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .contactus-form {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .contactus-form {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .contactus-form {
+        width: 90%;
+    }
+
+    .contactus-left {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 576px) {}
