@@ -185,9 +185,9 @@ const CategoryType = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categoryTypes.map((categoryTypes) => (
-                                        <tr key={categoryTypes.id}>
-                                            <td className='py-2'>{categoryTypes.name}</td>
+                                    {categoryTypes.map((category) => (
+                                        <tr key={category.id}>
+                                            <td className='py-2'>{category.name}</td>
                                             <td>
                                                 <div className="action_buttons">
                                                     <i className="fa-solid fa-pen-to-square fs-4 px-2 mx-2"></i>
