@@ -36,7 +36,7 @@ i {
 
 .dashboard-offcanvas {
     min-height: 75vh;
-    padding-left: .7rem;
+    /* padding-left: .7rem; */
 }
 
 .offcanvas-header {
@@ -44,20 +44,23 @@ i {
 }
 
 .dashboard-heading {
-    padding-left: 1rem;
+    padding-left: 2rem;
     font-size: 1.6rem;
 }
 
 .dashboard-btn {
-    width: 90%;
-    padding: .55rem 1.5rem;
-    font-size: 1.2rem !important;
-    font-weight: 500;
-    border-radius: 10px;
+    padding-block: .7rem;
+    font-size: 1.2rem;
+    border-radius: 0;
+    padding-left: 2rem;
+    border: none;
 }
 
-.dashboard-btn:hover {
-    background-color: #cfbfae;
+.dashboard-btn:hover,
+.dashboard-btn:focus,
+.dashboard-btn:active {
+    background-color: #cfbfae !important;
+    border: none;
 }
 
 .AdminMainPage-body-left-list {

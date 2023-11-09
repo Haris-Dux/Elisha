@@ -3,7 +3,7 @@ import "../createNewProduct/NewProductForm.css";
 import { createProductAsync } from '../../features/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createCategoryAsync, deleteCategoryAsync, getCategoryAsync } from '../../features/categorySlice';
 
 
@@ -11,9 +11,9 @@ const Category = () => {
     // const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getCategoryAsync());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getCategoryAsync());
+    // }, []);
 
     const categories = useSelector((state) => state.category.categories);
     console.log('Main categories', categories);
@@ -22,6 +22,7 @@ const Category = () => {
         name: '',
     });
 
+    // handle Input Change
     const handleInputChange = (event) => {
         setCategory({
             ...category,
@@ -29,22 +30,28 @@ const Category = () => {
         });
     };
 
+    // handle Submit
     const handleSubmit = (event) => {
         event.preventDefault();
         try {
-            dispatch(createCategoryAsync(category));
-            dispatch(getCategoryAsync());
+            dispatch(createCategoryAsync(category))
+                .then(() => {
+                    dispatch(getCategoryAsync());
+                    setCategory({ name: '' });
+                })
             console.log(category);
         } catch (error) {
             console.log(error);
         }
     };
 
-
+    // handle delete
     const handleDelete = (id) => {
         try {
             dispatch(deleteCategoryAsync({ id: id }))
-            dispatch(getCategoryAsync());
+                .then(() => {
+                    dispatch(getCategoryAsync());
+                })
             console.log(category);
         } catch (error) {
             console.log(error);
@@ -67,7 +74,7 @@ const Category = () => {
                                             className='newproduct-input'
                                             type="text"
                                             name="category"
-                                            placeholder='Catrgory Name'
+                                            placeholder='Enter Catrgory Name'
                                             value={category.name}
                                             onChange={handleInputChange}
                                         />
@@ -109,6 +116,10 @@ const Category = () => {
                                     ))}
                                 </tbody>
                             </table>
+
+                            <Link to="/categorytype" className="px-3 mt-5 fs-5 text-decoration-none text-dark">
+                                Go to Categories Type &#8674;
+                            </Link>
                         </div>
                     </div>
                 </section>

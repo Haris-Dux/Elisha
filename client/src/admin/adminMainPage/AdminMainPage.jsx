@@ -9,10 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import { getAllOrderForAdminAsync } from "../../features/orderSlice";
 import { getProductAsync } from "../../features/ProductSlice";
+import { getCategoryAsync } from "../../features/categorySlice";
 
 const AdminMainPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getCategoryAsync());
+  }, []);
 
   const handleItemClick = (itemId) => {
     navigate(`/updateproduct/${itemId}`);
@@ -51,7 +56,7 @@ const AdminMainPage = () => {
         </div>
         <div className="offcanvas-body mx-0 p-0">
           <div className="dashboard-offcanvas py-3">
-            <h2 className="dashboard-heading">Dashboard Buddy</h2>
+            <h2 className="dashboard-heading">Dashboard</h2>
             <div className="AdminMainPage-body-left-list mt-4">
               <Link to="/adminOrderList" className="btn dashboard-btn text-start">Admin Order List</Link>
               <Link to="/newproductform" className="btn dashboard-btn text-start">Add Products</Link>

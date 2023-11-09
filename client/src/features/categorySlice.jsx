@@ -78,7 +78,7 @@ export const createCategoryTypeAsync = createAsyncThunk("categoryType/create", a
 });
 
 
-//Get ASYNC THUNK
+// Get CATEGORIES ASYNC THUNK
 export const getCategoryTypeAsync = createAsyncThunk("categoryType/get", async (category) => {
     try {
         const response = await axios.post(getAllCategoryTypesUrl, category);
@@ -92,7 +92,7 @@ export const getCategoryTypeAsync = createAsyncThunk("categoryType/get", async (
 });
 
 
-//Get ASYNC THUNK
+// Delete CATEGORIES ASYNC THUNK
 export const deleteCategoryTypeAsync = createAsyncThunk("categoryType/delete", async (id) => {
     try {
         const response = await axios.post(deleteCategoryTypeUrl, id);
@@ -106,12 +106,69 @@ export const deleteCategoryTypeAsync = createAsyncThunk("categoryType/delete", a
 });
 
 
+// SUB-CATEGORIES-TYPE API THUNK
+export const createSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/create", async (subcategoryTypeData) => {
+    try {
+        const response = await axios.post(createSubCategoryUrl, subcategoryTypeData);
+        toast.success(response.data.msg);
+        console.log('response.data', response.data);
+        return response.data;
+
+    } catch (error) {
+        toast.error(error.response.data.msg);
+    }
+});
+
+
+// Get SUB-CATEGORIES ASYNC THUNK
+export const getSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/get", async (category) => {
+    try {
+        const response = await axios.post(getAllSubCategoriesUrl, category);
+        // toast.success(response.data.msg);
+        console.log('response.data', response.data);
+        return response.data;
+
+    } catch (error) {
+        toast.error(error.response.data.msg);
+    }
+});
+
+
+
+
+
+
+// Get SUB - CATEGORIES ASYNC THUNK
+// export const deleteSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/delete", async (category) => {
+//     try {
+//         const response = await axios.post(getAllSubCategoriesUrl, category);
+//         // toast.success(response.data.msg);
+//         console.log('response.data', response.data);
+//         return response.data;
+
+//     } catch (error) {
+//         toast.error(error.response.data.msg);
+//     }
+// });
+
+
+
+
+
+
+
+
+
+
+
+
 
 // INITIAL STATE
 const initialState = {
     createCategory: null,
     categories: [],
     categoriesType: [],
+    subcategoriesType: [],
 };
 
 
@@ -177,6 +234,35 @@ const categorySlice = createSlice({
                 state.loading = false;
                 state.categoriesType = state.categoriesType.filter(category => category.id !== action.payload);
             })
+
+
+            // ------------ SUB-CATEGORIES-TYPE API ------------  
+            // createSubCategoryAsync
+            .addCase(createSubCategoryTypeAsync.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(createSubCategoryTypeAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.subcategoriesType = action.payload;
+            })
+
+            // getSubCategoryAsync
+            .addCase(getSubCategoryTypeAsync.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(getSubCategoryTypeAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.subcategoriesType = action.payload.subCategoryData;
+            })
+
+        // deleteSubCategoryAsync
+        // .addCase(deleteSubCategoryTypeAsync.pending, (state, action) => {
+        //     state.loading = true;
+        // })
+        // .addCase(deleteSubCategoryTypeAsync.fulfilled, (state, action) => {
+        //     state.loading = false;
+        //     state.subcategoriesType = state.subcategoriesType.filter(category => category.id !== action.payload);
+        // })
     }
 })
 

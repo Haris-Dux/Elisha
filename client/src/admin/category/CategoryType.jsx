@@ -3,6 +3,7 @@ import "../createNewProduct/NewProductForm.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { getCategoryAsync, createCategoryTypeAsync, getCategoryTypeAsync, deleteCategoryTypeAsync } from '../../features/categorySlice';
+import { Link } from 'react-router-dom';
 
 const CategoryType = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,28 @@ const CategoryType = () => {
         dispatch(getCategoryAsync());
     }, []);
 
+
+    //GET CATEGORY
     const categories = useSelector((state) => state.category.categories);
+    // console.log("categories", categories)
+
+    useEffect(() => {
+        // HERE WE EXTRACT THE ID OF ALL CARTEGORIES
+        const extractIds = () => {
+            return categories.map((item) => item.id)
+        }
+
+        const categoryIds = extractIds(categories);
+        // console.log('categoryIds', categoryIds);
+
+        // HERE WE SEND ALL EXTRACT ID'S TO BACKEND
+        dispatch(getCategoryTypeAsync({ category: categoryIds }))
+    }, [dispatch])
+
+
+    const categoryTypes = useSelector((state) => state.category.categoriesType);
+    // console.log('categoryTypes', categoryTypes);
+
 
 
     // This function is called when the selected category changes
@@ -33,8 +55,7 @@ const CategoryType = () => {
         }
     };
 
-    const categoryTypes = useSelector((state) => state.category.categoriesType);
-    console.log('categoryTypes', categoryTypes);
+
 
 
     const handleImageChange = (e) => {
@@ -72,8 +93,22 @@ const CategoryType = () => {
         };
 
         try {
-            dispatch(createCategoryTypeAsync(categoryTypeData));
-            // console.log(categoryTypeData);
+            dispatch(createCategoryTypeAsync(categoryTypeData))
+                .then(() => {
+                    // here we refresh the list of category
+                    const categoryIds = categories.map((item) => item.id);
+                    dispatch(getCategoryTypeAsync({ category: categoryIds }));
+
+                    setCategory({
+                        category: '',
+                        image: '',
+                        name: '',
+                    });
+
+                    if (fileInputRef.current) {
+                        fileInputRef.current.value = '';
+                    }
+                })
         } catch (error) {
             console.log(error);
         }
@@ -82,7 +117,11 @@ const CategoryType = () => {
     const handleDelete = (id) => {
         try {
             dispatch(deleteCategoryTypeAsync({ id: id }))
-            console.log(category);
+                .then(() => {
+                    const categoryIds = categories.map((item) => item.id);
+                    dispatch(getCategoryTypeAsync({ category: categoryIds }));
+                })
+            // console.log(category);
         } catch (error) {
             console.log(error);
         }
@@ -180,24 +219,36 @@ const CategoryType = () => {
                             <table className="table">
                                 <thead>
                                     <tr>
+                                        <th scope="col">Category Name</th>
                                         <th scope="col">Category Type</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categoryTypes.map((category) => (
-                                        <tr key={category.id}>
-                                            <td className='py-2'>{category.name}</td>
-                                            <td>
-                                                <div className="action_buttons">
-                                                    <i className="fa-solid fa-pen-to-square fs-4 px-2 mx-2"></i>
-                                                    <i className="fa-solid fa-trash fs-4 px-2 mx-2" onClick={() => handleDelete(categoryTypes.id)}></i>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    {categories.map((cat) => (
+                                        Array.isArray(categoryTypes) &&
+                                        categoryTypes
+                                            .filter((type) => type.category === cat.id)
+                                            .map((categoryType) => (
+                                                <tr key={categoryType.id}>
+                                                    <td className='py-2'>{cat.name}</td>
+                                                    <td>
+                                                        {categoryType.name}
+                                                    </td>
+                                                    <td>
+                                                        <div className="action_buttons">
+                                                            <i className="fa-solid fa-pen-to-square fs-4 px-2 mx-2"></i>
+                                                            <i className="fa-solid fa-trash fs-4 px-2 mx-2" onClick={() => handleDelete(categoryType.id)}></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))
                                     ))}
                                 </tbody>
                             </table>
+
+                            <Link to="/subcategory" className="px-3 mt-5 fs-5 text-decoration-none text-dark">Go to Sub Category &#8674;</Link>
+
                         </div>
                     </div>
                 </section>

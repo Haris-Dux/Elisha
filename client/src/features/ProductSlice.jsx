@@ -44,7 +44,7 @@ const getProductUrl = "http://localhost:3000/api/getProduct";
 export const getProductByIdAsync = createAsyncThunk("product/productById", async (id) => {
     try {
      const response = await axios.post(getProductUrl,{id});
-     console.log(response.data);
+    //  console.log(response.data);
      return response.data;
     } catch (error) {
      //console.log(error);
@@ -57,7 +57,7 @@ export const getProductByIdAsync = createAsyncThunk("product/productById", async
 export const createProductAsync = createAsyncThunk("products/createProduct", async (product) => {
     try {
         const response = await axios.post(productsUrl, product);
-        console.log(response.data);
+        // console.log(response.data);
         //toast.success(response.data.msg);
         return response.data;
 
@@ -71,7 +71,7 @@ export const createProductAsync = createAsyncThunk("products/createProduct", asy
 export const getProductAsync = createAsyncThunk("products/getProduct", async () => {
     try {
         const response = await axios.post(getAllProductsUrl);
-        console.log( response.data);
+        // console.log( response.data);
         //toast.success(response.data.msg);
         return response.data;
 
