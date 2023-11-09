@@ -16,6 +16,7 @@ const CategoryType = () => {
 
     useEffect(() => {
         dispatch(getCategoryAsync());
+        
     }, []);
 
     const categories = useSelector((state) => state.category.categories);

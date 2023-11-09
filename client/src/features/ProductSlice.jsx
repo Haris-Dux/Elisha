@@ -71,7 +71,7 @@ export const createProductAsync = createAsyncThunk("products/createProduct", asy
 export const getProductAsync = createAsyncThunk("products/getProduct", async () => {
     try {
         const response = await axios.post(getAllProductsUrl);
-        console.log( response.data);
+        //console.log( response.data);
         //toast.success(response.data.msg);
         return response.data;
 

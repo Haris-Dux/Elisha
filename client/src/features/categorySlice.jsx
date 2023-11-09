@@ -83,7 +83,7 @@ export const getCategoryTypeAsync = createAsyncThunk("categoryType/get", async (
     try {
         const response = await axios.post(getAllCategoryTypesUrl, category);
         // toast.success(response.data.msg);
-        // console.log('response.data', response.data);
+        console.log( response.data);
         return response.data;
 
     } catch (error) {
