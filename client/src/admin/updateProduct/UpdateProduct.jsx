@@ -146,16 +146,16 @@ const UpdateProduct = () => {
 
     return (
         <>
-            <section className="NewProductForm py-4 shadow">
+            <section className="NewProductForm py-4">
                 <div className="container NewProductForm-cont py-3">
                     <h3 className='fs-1 text-center py-2'>Update Product</h3>
 
                     <div className="row mx-0">
                         <div className="col-md-12">
                             <form method="post">
-                                <div className="row mx-0 mb-2 d-flex justify-content-center align-item-center">
+                                <div className="row mx-0 mb-2">
                                     {product.image ? (
-                                        <div className="col-md-2 py-3 product-displayer-cont">
+                                        <div className="py-3 product-displayer-cont">
                                             <div className="product-displayer">
                                                 <img
                                                     src={product.image.secure_url || product.image}
@@ -423,7 +423,7 @@ const UpdateProduct = () => {
                                                 <textarea
                                                     className='newproduct-input'
                                                     name="productDetail"
-                                                    rows="7"
+                                                    rows="5"
                                                     placeholder='Item Detail'
                                                     value={product.productDetail}
                                                     onChange={handleInputChange}
@@ -434,7 +434,7 @@ const UpdateProduct = () => {
                                     </div>
                                 </div>
 
-                                <div className="pt-4 my-3 d-flex flex-row justify-content-center">
+                                <div className="update-btns-bar pt-4 my-3 d-flex flex-row justify-content-center">
                                     <button type="submit" onClick={handleSubmit} className='add-product-submit-btn shadow mx-3'>Update Product</button>
                                     <span className='add-product-submit-btn shadow mx-3' onClick={handleDelete}>Delete Product</span>
                                 </div>

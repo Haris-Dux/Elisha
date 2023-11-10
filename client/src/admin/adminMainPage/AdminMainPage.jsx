@@ -115,7 +115,7 @@ const AdminMainPage = () => {
 
                 {/* BODY ---> PRODUCT GRID CONTAINER */}
                 <div className="container py-2 mt-3">
-                  <div className="product-grid-header d-flex justify-content-between align-items-center">
+                  {/* <div className="product-grid-header d-flex justify-content-between align-items-center">
 
                     <div className="product-grid-header-buttons">
                       <button className="product-grid-btn mx-2">
@@ -125,7 +125,7 @@ const AdminMainPage = () => {
                         Last Edit
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                   {/* BODY ---> PRODUCT GRID CONTAINER-BODY */}
                   <div className="all-product-body py-3">
                     <div className="row ">

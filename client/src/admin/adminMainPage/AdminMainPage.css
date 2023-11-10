@@ -147,13 +147,6 @@ i {
     .product-grid-body-card-body-buttons {
         flex-direction: column;
     }
-
-    .dashboard-btn {
-        width: 100%;
-        margin: .4rem 0;
-        padding: .7rem 1rem;
-        font-size: 1.3rem;
-    }
 }
 
 @media only screen and (max-width: 992px) {
@@ -178,14 +171,8 @@ i {
         display: none;
     }
 
-    .dashboard-btn {
-        width: 100%;
-        padding: .7rem 0rem;
-        font-size: 1.2rem;
-    }
-
     .dashboard-heading {
-        padding-left: .3rem;
+        padding-left: 2rem;
     }
 }
 
@@ -202,18 +189,9 @@ i {
         font-size: .9rem;
     }
 
-
-
-    .dashboard-btn {
-        width: 100%;
-        padding: .7rem 0rem;
-        font-size: 1.2rem;
-    }
-
     .dashboard-heading {
-        padding-left: 0rem;
+        padding-left: 2rem;
     }
-
 }
 
 @media only screen and (max-width: 710px) {
@@ -240,31 +218,6 @@ i {
     .product-grid-searchbar {
         width: 20rem;
     }
-
-    .dashboard {
-        min-height: max-content;
-    }
-
-    .AdminMainPage-body-left-list {
-        justify-content: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    .dashboard-heading {
-        margin: auto;
-        text-align: center;
-        font-size: 1.9rem;
-        font-weight: 600;
-    }
-
-    .dashboard-btn {
-        margin: .3rem 0;
-        width: 10rem;
-        background-color: #f9f9f9;
-        text-align: center !important;
-    }
 }
 
 @media only screen and (max-width: 406px) {
@@ -285,10 +238,6 @@ i {
 }
 
 @media only screen and (max-width: 369px) {
-    .dashboard-btn {
-        width: 90%;
-    }
-
     .product-grid-searchbar {
         width: 19rem;
     }

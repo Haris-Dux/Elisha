@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "../createNewProduct/NewProductForm.css";
+import "./Category.css";
 import { createProductAsync } from '../../features/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
@@ -108,8 +109,8 @@ const Category = () => {
                                             <td className='py-2'>{category.name}</td>
                                             <td>
                                                 <div className="action_buttons">
-                                                    <i className="fa-solid fa-pen-to-square fs-4 px-2 mx-2"></i>
-                                                    <i className="fa-solid fa-trash fs-4 px-2 mx-2" onClick={() => handleDelete(category.id)}></i>
+                                                    <i className="fa-solid fa-pen-to-square fs-5 px-2 mx-2"></i>
+                                                    <i className="fa-solid fa-trash fs-5 px-2 mx-2" onClick={() => handleDelete(category.id)}></i>
                                                 </div>
                                             </td>
                                         </tr>
@@ -117,9 +118,11 @@ const Category = () => {
                                 </tbody>
                             </table>
 
-                            <Link to="/categorytype" className="px-3 mt-5 fs-5 text-decoration-none text-dark">
-                                Go to Categories Type &#8674;
-                            </Link>
+                            <div className="navigate-bar pt-2 d-flex justify-content-between align-item-center">
+                                <Link to="/adminmainpage" className="px-3 fs-5 text-decoration-none text-dark">&#8672; Go to Dashboard</Link>
+                                <Link to="/categorytype" className="px-3 fs-5 text-decoration-none text-dark"> Go to Categories Type &#8674;</Link>
+                            </div>
+
                         </div>
                     </div>
                 </section>

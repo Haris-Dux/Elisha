@@ -1,0 +1,58 @@
+.admin_order_list {
+    background-color: #E0D7CE;
+}
+
+.categoryType-fields {
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+    flex-direction: row;
+}
+
+.left-input,
+.right-input {
+    width: 20rem;
+    margin-inline: 1rem;
+}
+
+
+
+@media only screen and (max-width: 780px) {
+    .table-container {
+        overflow-x: auto !important;
+    }
+
+    .table {
+        width: 100%;
+        white-space: nowrap;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px;
+    }
+
+    .categoryType-fields {
+        flex-direction: column;
+    }
+}
+
+
+@media only screen and (max-width: 550px) {
+
+    .navigate-bar {
+        text-align: center;
+        display: flex;
+        justify-content: center !important;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .left-input,
+    .right-input {
+        width: 15rem;
+        margin-inline: 1rem;
+    }
+}

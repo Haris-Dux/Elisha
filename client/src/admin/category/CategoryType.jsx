@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "../createNewProduct/NewProductForm.css";
 import { useDispatch, useSelector } from 'react-redux';
+import "./Category.css";
 import { toast } from "react-toastify";
 import { getCategoryAsync, createCategoryTypeAsync, getCategoryTypeAsync, deleteCategoryTypeAsync } from '../../features/categorySlice';
 import { Link } from 'react-router-dom';
@@ -174,8 +175,8 @@ const CategoryType = () => {
                                 </div>
 
                                 {/* FIRST ROW */}
-                                <div className="my-3 d-flex justify-content-evenly">
-                                    <div className="col-md-4">
+                                <div className="my-3 categoryType-fields">
+                                    <div className="left-input">
                                         <input
                                             className='newproduct-input'
                                             type="text"
@@ -185,9 +186,9 @@ const CategoryType = () => {
                                             onChange={handleInputChange}
                                         />
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="right-input">
                                         <select
-                                            className='newproduct-input'
+                                            className='newproduct-input py-2'
                                             name="category"
                                             value={category.category}
                                             onChange={handleCategoryChange}
@@ -215,7 +216,7 @@ const CategoryType = () => {
 
                 <section className="admin_order_list py-2">
                     <div className="container">
-                        <div className="admin_order_list-body py-4">
+                        <div className="admin_order_list-body py-4 table-container">
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -237,8 +238,8 @@ const CategoryType = () => {
                                                     </td>
                                                     <td>
                                                         <div className="action_buttons">
-                                                            <i className="fa-solid fa-pen-to-square fs-4 px-2 mx-2"></i>
-                                                            <i className="fa-solid fa-trash fs-4 px-2 mx-2" onClick={() => handleDelete(categoryType.id)}></i>
+                                                            <i className="fa-solid fa-pen-to-square fs-5 px-2 mx-2"></i>
+                                                            <i className="fa-solid fa-trash fs-5 px-2 mx-2" onClick={() => handleDelete(categoryType.id)}></i>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -247,8 +248,11 @@ const CategoryType = () => {
                                 </tbody>
                             </table>
 
-                            <Link to="/subcategory" className="px-3 mt-5 fs-5 text-decoration-none text-dark">Go to Sub Category &#8674;</Link>
 
+                            <div className="navigate-bar pt-2 d-flex justify-content-between align-item-center">
+                                <Link to="/category" className="px-3 fs-5 text-decoration-none text-dark">&#8672; Go to Category</Link>
+                                <Link to="/subcategory" className="px-3 fs-5 text-decoration-none text-dark">Go to Sub Categories &#8674;</Link>
+                            </div>
                         </div>
                     </div>
                 </section>
