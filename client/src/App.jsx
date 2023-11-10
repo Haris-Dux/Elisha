@@ -33,6 +33,7 @@ import UpdateProduct from "./admin/updateProduct/updateProduct";
 import Category from "./admin/category/Category";
 import CategoryType from "./admin/category/CategoryType";
 import SubCategory from "./admin/category/SubCategory";
+import { getCategoryTypeAsync } from "./features/categorySlice";
 
 
 
@@ -45,12 +46,19 @@ function App() {
     dispatch(getProductAsync());
   }, [dispatch]);
 
+//GET CATEGORYTYPES
+const categories = useSelector((state) => state.category.categories);
+console.log(categories)
 
+useEffect(()=>{
+  const extractIds = () => {
+    return categories.map((item)=>item.id)
+  }
+  const categoryIds = extractIds(categories);
+  dispatch(getCategoryTypeAsync({category:categoryIds}))
+},[dispatch])
 
-  // GET USER DATA
-  const user = useSelector((state) => state.auth.user);
-  // console.log("app", user);
-
+  
 
   useEffect(() => {
 
