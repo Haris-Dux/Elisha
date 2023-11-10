@@ -1,37 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./NewProductForm.css";
 import { createProductAsync } from '../../features/ProductSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
+import { getCategoryTypeAsync, getSubCategoryTypeAsync } from '../../features/categorySlice';
 
 const NewProductForm = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [selectedImage, setSelectedImage] = useState('');
-    const [productSize, setProductSizes] = useState({ size: [], });
-    const [imageSelected, setImageSelected] = useState(false);
     const fileInputRef = useRef(null);
 
-    const handleSizeChange = (e) => {
-        const sizeValue = e.target.value;
-        const isChecked = e.target.checked;
-
-        // Update the selected sizes based on the checkbox state.
-        if (isChecked) {
-            setProduct((prevProduct) => ({
-                ...prevProduct,
-                size: [...prevProduct.size, sizeValue],
-            }));
-        } else {
-            setProduct((prevProduct) => ({
-                ...prevProduct,
-                size: prevProduct.size.filter((size) => size !== sizeValue),
-            }));
-        }
-    };
-
-    const [product, setProduct] = useState({
+    const [formdata, setFormdata] = useState({
         name: '',
         itemCode: '',
         fabric: '',
@@ -44,50 +24,152 @@ const NewProductForm = () => {
         discount: false,
         newArrival: false,
         price: '',
-        size: '',
+        size: [],
         productDetail: '',
+        image: '',
     });
+
+    const [filteredCategoriesType, setFilteredCategoriesType] = useState([]);
+    const [subCategories, setSubCategories] = useState([]);
+
+    const categories = useSelector((state) => state.category.categories);
+    const categoriesType = useSelector((state) => state.category.categoriesType);
+
+    useEffect(() => {
+        const categoryIds = categories.map((item) => item.id);
+        dispatch(getCategoryTypeAsync({ category: categoryIds }));
+    }, [dispatch, categories]);
+
+    useEffect(() => {
+        setFilteredCategoriesType(categoriesType.filter(type => type.category === formdata.category));
+    }, [formdata.category, categoriesType]);
+
+    useEffect(() => {
+        if (formdata.category && formdata.categoryType) {
+            dispatch(getSubCategoryTypeAsync({ category: formdata.category, categoryType: formdata.categoryType }))
+                .then((result) => {
+                    setSubCategories(result.payload.subCategoryData);
+                })
+                .catch((error) => {
+                    console.error('Error fetching subcategories:', error);
+                });
+        }
+    }, [formdata.category, formdata.categoryType, dispatch]);
+
+    const handleCategoryChange = (e) => {
+        const selectedCategory = e.target.value;
+        setFormdata({
+            ...formdata,
+            category: selectedCategory,
+            categoryType: '',
+            subCategory: '',
+        });
+        // Clear subcategories when the category changes
+        setSubCategories([]);
+    };
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormdata({
+            ...formdata,
+            [name]: value,
+        });
+    };
+
+    const handleCategoryTypeChange = (e) => {
+        setFormdata({
+            ...formdata,
+            categoryType: e.target.value,
+            subCategory: '', // Clear subcategory when category type changes
+        });
+    };
+
+    const handleSizeChange = (e) => {
+        const sizeValue = e.target.value;
+        const isChecked = e.target.checked;
+
+        // Update the selected sizes based on the checkbox state.
+        setFormdata((prevProduct) => {
+            if (isChecked) {
+                return { ...prevProduct, size: [...prevProduct.size, sizeValue] };
+            } else {
+                return { ...prevProduct, size: prevProduct.size.filter((size) => size !== sizeValue) };
+            }
+        });
+    };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setFileToBase(file);
     };
 
-
     const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            setProduct({ ...product, image: reader.result });
-        }
-    }
+            setFormdata({ ...formdata, image: reader.result });
+        };
+    };
 
-    const handleInputChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        const newValue = type === 'checkbox' ? checked : value;
+    const handleCheckChange = (event) => {
+        const { name, type, checked } = event.target;
+        const newValue = type === 'checkbox' ? checked : event.target.value;
 
-        setProduct({
-            ...product,
+        setFormdata({
+            ...formdata,
             [name]: newValue,
         });
     };
 
     const resetImage = () => {
-        setProduct({ ...product, image: '' });
+        setFormdata({ ...formdata, image: '' });
         fileInputRef.current.value = '';
     };
 
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
+        // Perform form validation
+        if (!isFormValid()) {
+            return;
+        }
+
         try {
-            dispatch(createProductAsync(product));
-            console.log(product);
-            // navigate("/adminpage");
+            dispatch(createProductAsync(formdata))
+                .then(() => {
+                    console.log(formdata);
+                    setFormdata({
+                        name: '',
+                        itemCode: '',
+                        fabric: '',
+                        description: '',
+                        availableQuantity: '',
+                        category: '',
+                        categoryType: '',
+                        subCategory: '',
+                        topSales: false,
+                        discount: false,
+                        newArrival: false,
+                        price: '',
+                        size: [],
+                        productDetail: '',
+                        image: '',
+                    });
+
+                    fileInputRef.current.value = '';
+                })
+
         } catch (error) {
             console.log(error);
         }
+    };
+
+    // Function to perform form validation
+    const isFormValid = () => {
+        if (!formdata.name || !formdata.itemCode || !formdata.description || !formdata.availableQuantity || !formdata.price || !formdata.productDetail) {
+            toast.error("Please fill in all required fields");
+            return false;
+        }
+        return true;
     };
 
     return (
@@ -100,11 +182,11 @@ const NewProductForm = () => {
                         <div className="col-md-12">
                             <form method="post">
                                 <div className="row mx-0 mb-2">
-                                    {product.image ? (
+                                    {formdata.image ? (
                                         <div className="py-3 product-displayer-cont">
                                             <div className="product-displayer">
                                                 <img
-                                                    src={product.image}
+                                                    src={formdata.image}
                                                     alt="Selected"
                                                     width="200px"
                                                     height="300px"
@@ -143,7 +225,7 @@ const NewProductForm = () => {
                                             type="text"
                                             name="name"
                                             placeholder='Item Name'
-                                            value={product.name}
+                                            value={formdata.name}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -154,7 +236,7 @@ const NewProductForm = () => {
                                             type="text"
                                             name="itemCode"
                                             placeholder='Item Code'
-                                            value={product.itemCode}
+                                            value={formdata.itemCode}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -165,7 +247,7 @@ const NewProductForm = () => {
                                             type="text"
                                             name="fabric"
                                             placeholder='Item Fabric'
-                                            value={product.fabric}
+                                            value={formdata.fabric}
                                             onChange={handleInputChange}
                                         />
                                     </div>
@@ -179,7 +261,7 @@ const NewProductForm = () => {
                                             type="text"
                                             name="description"
                                             placeholder='Item desc'
-                                            value={product.description}
+                                            value={formdata.description}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -190,7 +272,7 @@ const NewProductForm = () => {
                                             type="number"
                                             name="availableQuantity"
                                             placeholder='Item Quantity'
-                                            value={product.availableQuantity}
+                                            value={formdata.availableQuantity}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -199,39 +281,60 @@ const NewProductForm = () => {
 
                                 {/* THIRD ROW */}
                                 <div className="row mx-0 my-1">
-                                    <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
-                                        <input
+                                    <div className="col-md-4">
+                                        <select
                                             className='newproduct-input'
-                                            type="text"
                                             name="category"
-                                            placeholder='Category'
-                                            value={product.category}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                            value={formdata.category}
+                                            onChange={handleCategoryChange}
+                                        >
+                                            <option value="">Select a category</option>
+                                            {categories.map((cat) => (
+                                                <option key={cat.id} value={cat.id}>
+                                                    {cat.name}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
-                                    <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
-                                        <input
+                                    <div className="col-md-4">
+                                        <select
                                             className='newproduct-input'
-                                            type="text"
                                             name="categoryType"
-                                            placeholder='Category Type'
-                                            value={product.categoryType}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                            value={formdata.categoryType}
+                                            onChange={handleCategoryTypeChange}
+                                        >
+                                            <option value="">Select a category type</option>
+                                            {filteredCategoriesType.length > 0 ? (
+                                                filteredCategoriesType.map((type) => (
+                                                    <option key={type.id} value={type.id}>
+                                                        {type.name}
+                                                    </option>
+                                                ))
+                                            ) : (
+                                                <option value="" disabled>
+                                                    No category types available
+                                                </option>
+                                            )}
+                                        </select>
                                     </div>
                                     <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
-                                        <input
-                                            className='newproduct-input'
-                                            type="text"
+                                        <select
+                                            className='newproduct-input px-2'
                                             name="subCategory"
-                                            placeholder='Sub Category'
-                                            value={product.subCategory}
-                                            onChange={handleInputChange}
+                                            value={formdata.subCategory}
+                                            onChange={(e) => handleInputChange(e)}
                                             required
-                                        />
+                                        >
+                                            <option value="">Select a subcategory</option>
+                                            {subCategories.map((subCat) => (
+                                                <option key={subCat.id} value={subCat.id}>
+                                                    {subCat.name}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
+
+
                                 </div>
 
                                 {/* FORTH ROW */}
@@ -244,32 +347,34 @@ const NewProductForm = () => {
                                                     <input
                                                         type="checkbox"
                                                         name="topSales"
-                                                        checked={product.topSales}
-                                                        onChange={handleInputChange}
+                                                        checked={formdata.topSales}
+                                                        onChange={handleCheckChange}
                                                     />
                                                     <span className="checkmark"></span>
                                                     <span className="checkbox-text fs-5">Top Sales</span>
                                                 </label>
                                             </div>
+
                                             <div className="col-md-12">
                                                 <label className="checkbox">
                                                     <input
                                                         type="checkbox"
                                                         name="discount"
-                                                        checked={product.discount}
-                                                        onChange={handleInputChange}
+                                                        checked={formdata.discount}
+                                                        onChange={handleCheckChange}
                                                     />
                                                     <span className="checkmark"></span>
                                                     <span className="checkbox-text fs-5">Discount</span>
                                                 </label>
                                             </div>
+
                                             <div className="col-md-12">
                                                 <label className="checkbox">
                                                     <input
                                                         type="checkbox"
                                                         name="newArrival"
-                                                        checked={product.newArrival}
-                                                        onChange={handleInputChange}
+                                                        checked={formdata.newArrival}
+                                                        onChange={handleCheckChange}
                                                     />
                                                     <span className="checkmark"></span>
                                                     <span className="checkbox-text fs-5">New Arrivals</span>
@@ -286,7 +391,7 @@ const NewProductForm = () => {
                                                     type="number"
                                                     name="price"
                                                     placeholder='Item Price'
-                                                    value={product.price}
+                                                    value={formdata.price}
                                                     onChange={handleInputChange}
                                                     required
                                                 />
@@ -300,7 +405,7 @@ const NewProductForm = () => {
                                                         type="checkbox"
                                                         id="flexCheckDefault1"
                                                         value="XS"
-                                                        checked={product.size.includes("XS")}
+                                                        checked={formdata.size.includes("XS")}
                                                         onChange={handleSizeChange} />
                                                     <label
                                                         className="form-check-label"
@@ -314,7 +419,7 @@ const NewProductForm = () => {
                                                         type="checkbox"
                                                         id="flexCheckDefault2"
                                                         value="S"
-                                                        checked={product.size.includes("S")}
+                                                        checked={formdata.size.includes("S")}
                                                         onChange={handleSizeChange} />
                                                     <label
                                                         className="form-check-label"
@@ -328,7 +433,7 @@ const NewProductForm = () => {
                                                         type="checkbox"
                                                         id="flexCheckDefault3"
                                                         value="M"
-                                                        checked={product.size.includes("M")}
+                                                        checked={formdata.size.includes("M")}
                                                         onChange={handleSizeChange} />
                                                     <label
                                                         className="form-check-label"
@@ -342,7 +447,7 @@ const NewProductForm = () => {
                                                         type="checkbox"
                                                         id="flexCheckDefault4"
                                                         value="L"
-                                                        checked={product.size.includes("L")}
+                                                        checked={formdata.size.includes("L")}
                                                         onChange={handleSizeChange} />
                                                     <label
                                                         className="form-check-label"
@@ -356,7 +461,7 @@ const NewProductForm = () => {
                                                         type="checkbox"
                                                         id="flexCheckDefault5"
                                                         value="XL"
-                                                        checked={product.size.includes("XL")}
+                                                        checked={formdata.size.includes("XL")}
                                                         onChange={handleSizeChange} />
                                                     <label
                                                         className="form-check-label"
@@ -371,7 +476,7 @@ const NewProductForm = () => {
                                                     name="productDetail"
                                                     rows="5"
                                                     placeholder='Item Detail'
-                                                    value={product.productDetail}
+                                                    value={formdata.productDetail}
                                                     onChange={handleInputChange}
                                                     required
                                                 ></textarea>

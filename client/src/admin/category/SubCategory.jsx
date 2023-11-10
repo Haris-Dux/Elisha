@@ -1,28 +1,18 @@
 import React, { useRef, useState, useEffect } from 'react';
 import "../createNewProduct/NewProductForm.css";
-import { createProductAsync } from '../../features/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
-import { createSubCategoryTypeAsync, getSubCategoryTypeAsync } from '../../features/categorySlice';
+import { createSubCategoryTypeAsync, deleteSubCategoryTypeAsync, getSubCategoryTypeAsync } from '../../features/categorySlice';
 
 const SubCategory = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [filteredCategoriesType, setFilteredCategoriesType] = useState([]);
+    const [subCategories, setSubCategories] = useState([]);
 
-    // getting all categories here
     const categories = useSelector((state) => state.category.categories);
-    // console.log('categories', categories);
-
-    // getting all category-types here
     const categoriesType = useSelector((state) => state.category.categoriesType);
-    // console.log('categoriesType', categoriesType);
-
-    // getting all subcategory-types here
-    const subCategoryTypes = useSelector((state) => state.category.subCategoryTypes);
-    console.log('subCategoryTypes', subCategoryTypes);
+    // const subCategoryTypes = useSelector((state) => state.category.subCategoryTypes);
 
     const [formdata, setFormdata] = useState({
         category: '',
@@ -36,10 +26,16 @@ const SubCategory = () => {
 
     useEffect(() => {
         if (formdata.category && formdata.categoryType) {
-            dispatch(getSubCategoryTypeAsync({ category: formdata.category, categoryType: formdata.categoryType }));
-            console.log(formdata.category, formdata.categoryType);
+            dispatch(getSubCategoryTypeAsync({ category: formdata.category, categoryType: formdata.categoryType }))
+                .then((result) => {
+                    setSubCategories(result.payload.subCategoryData);
+                })
+                .catch((error) => {
+                    console.error('Error fetching subcategories:', error);
+                });
         }
     }, [formdata.category, formdata.categoryType, dispatch]);
+
 
     const handleCategoryChange = (e) => {
         const selectedCategory = e.target.value;
@@ -48,6 +44,8 @@ const SubCategory = () => {
             category: selectedCategory,
             categoryType: '',
         });
+        // Clear subcategories when the category changes
+        setSubCategories([]);
     };
 
     const handleInputChange = (event) => {
@@ -68,9 +66,13 @@ const SubCategory = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         try {
-            dispatch(createSubCategoryTypeAsync(formdata));
-            console.log(formdata);
-            // navigate("/adminmainpage");
+            dispatch(createSubCategoryTypeAsync(formdata))
+                .then(() => {
+                    dispatch(getSubCategoryTypeAsync({ category: formdata.category, categoryType: formdata.categoryType }))
+                        .then((result) => {
+                            setSubCategories(result.payload.subCategoryData);
+                        })
+                })
         } catch (error) {
             console.log(error);
         }
@@ -78,16 +80,20 @@ const SubCategory = () => {
 
     const handleDelete = (id) => {
         try {
-            dispatch(deleteCategoryTypeAsync({ id: id }))
+            dispatch(deleteSubCategoryTypeAsync({ id: id }))
                 .then(() => {
-                    const categoryIds = categories.map((item) => item.id);
-                    dispatch(getCategoryTypeAsync({ category: categoryIds }));
+                    dispatch(getSubCategoryTypeAsync({ category: formdata.category, categoryType: formdata.categoryType }))
+                        .then((result) => {
+                            setSubCategories(result.payload.subCategoryData);
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching subcategories after deletion:', error);
+                        });
                 })
-            console.log(categories);
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
 
     return (
@@ -174,21 +180,27 @@ const SubCategory = () => {
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
-                                {/* <tbody>
-                                    {subCategoryTypes.map((subCategoryType) => (
-                                        <tr key={subCategoryType.id}>
-                                            <td>{subCategoryType.category}</td>
-                                            <td>{subCategoryType.categoryType}</td>
-                                            <td>{subCategoryType.name}</td>
+                                <tbody>
+                                    {Array.isArray(subCategories) && subCategories.map((subCategory) => (
+                                        <tr key={subCategory.id}>
+                                            <td>
+                                                {/* Map the category ID to its name */}
+                                                {categories.find(cat => cat.id === subCategory.category)?.name || 'Unknown'}
+                                            </td>
+                                            <td>
+                                                {/* Map the category type ID to its name */}
+                                                {categoriesType.find(type => type.id === subCategory.categoryType)?.name || 'Unknown'}
+                                            </td>
+                                            <td>{subCategory.name}</td>
                                             <td>
                                                 <div className="action_buttons">
-                                                    <i className="fa-solid fa-pen-to-square fs-4 px-2"></i>
-                                                    <i className="fa-solid fa-trash fs-4 px-2" onClick={() => handleDelete(subCategoryType.id)}></i>
+                                                    <i className="fa-solid fa-pen-to-square fs-5 px-2"></i>
+                                                    <i className="fa-solid fa-trash fs-5 px-2" onClick={() => handleDelete(subCategory.id)}></i>
                                                 </div>
                                             </td>
                                         </tr>
                                     ))}
-                                </tbody> */}
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -198,5 +210,4 @@ const SubCategory = () => {
     );
 }
 
-export default SubCategory
-
+export default SubCategory;

@@ -43,14 +43,14 @@ const getProductUrl = "http://localhost:3000/api/getProduct";
 // Create an async thunk to fetch data
 export const getProductByIdAsync = createAsyncThunk("product/productById", async (id) => {
     try {
-     const response = await axios.post(getProductUrl,{id});
-    //  console.log(response.data);
-     return response.data;
+        const response = await axios.post(getProductUrl, { id });
+        //  console.log(response.data);
+        return response.data;
     } catch (error) {
-     //console.log(error);
-         throw error;
+        //console.log(error);
+        throw error;
     }
-   });
+});
 
 
 // createProductAsync
@@ -58,12 +58,12 @@ export const createProductAsync = createAsyncThunk("products/createProduct", asy
     try {
         const response = await axios.post(productsUrl, product);
         // console.log(response.data);
-        //toast.success(response.data.msg);
+        toast.success(response.data.msg);
         return response.data;
 
     } catch (error) {
         console.log(error.response);
-        //toast.error(error.response.data.msg);
+        toast.error(error.response.data.msg);
     }
 });
 
@@ -77,7 +77,7 @@ export const getProductAsync = createAsyncThunk("products/getProduct", async () 
 
     } catch (error) {
         console.log(error.response.data.msg);
-        //toast.error(error.response.data.msg);
+        // toast.error(error.response.data.msg);
     }
 });
 
@@ -87,10 +87,12 @@ export const updateProductAsync = createAsyncThunk("products/updateProduct", asy
     try {
         const response = await axios.post(updateProductUrl, product);
         //console.log(product);
+        toast.success(error.response.data.msg);
         console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error.response.data.msg);
+        toast.error(error.response.data.msg);
     }
 });
 
@@ -98,10 +100,12 @@ export const updateProductAsync = createAsyncThunk("products/updateProduct", asy
 export const deleteProductAsync = createAsyncThunk("products/deleteProduct", async (id) => {
     try {
         const response = await axios.post(deleteProductUrl, id);
+        toast.success(error.response.data.msg);
         console.log(response);
         return response.data;
     } catch (error) {
         console.log(error.response);
+        toast.error(error.response.data.msg);
     }
 });
 
@@ -114,7 +118,7 @@ const initialState = {
     createProduct: null,
     products: fetchFromLocalStorage(),
     updatedProduct: null,
-    getProductById:null
+    getProductById: null
 };
 
 

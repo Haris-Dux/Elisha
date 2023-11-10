@@ -62,6 +62,8 @@ const UpdateProduct = () => {
         }
     }, [selectedProduct]);
 
+
+    // HANDLE SIZE CHANGE
     const handleSizeChange = (e) => {
         const sizeValue = e.target.value;
         const isChecked = e.target.checked;
@@ -79,11 +81,13 @@ const UpdateProduct = () => {
         }
     };
 
+    // HANDLE IMAGE UPLOAD
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setFileToBase(file);
     };
 
+    // CONERTING IMAGE TO BASE64
     const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -92,6 +96,7 @@ const UpdateProduct = () => {
         };
     }
 
+    // HANDLE INPUT CHANGE
     const handleInputChange = (event) => {
         const { name, value, type, checked } = event.target;
         const newValue = type === 'checkbox' ? checked : value;
@@ -102,13 +107,16 @@ const UpdateProduct = () => {
         });
     };
 
+
+    // RESET IMAGE 
     const resetImage = () => {
         setProduct({ ...product, image: '' });
         fileInputRef.current.value = '';
     };
 
 
-    const handleSubmit = (e) => {
+    // HANDLE UPDATE
+    const handleUpdate = (e) => {
         e.preventDefault();
         if (product.image instanceof Object) {
             const base64Image = null;
@@ -120,11 +128,15 @@ const UpdateProduct = () => {
             dispatch(updateProductAsync({ ...product, image: base64Image }))
         } else {
             dispatch(updateProductAsync(product))
+            // .then(() => {
+            //     navigate("/adminmainpage");
+            // })
             console.log(product)
         }
-
     };
 
+
+    // HANDLE DELETE
     const handleDelete = () => {
         try {
             dispatch(deleteProductAsync({ id: product.id }))
@@ -153,6 +165,8 @@ const UpdateProduct = () => {
                     <div className="row mx-0">
                         <div className="col-md-12">
                             <form method="post">
+
+                                {/* IMAGE DISPLAYER */}
                                 <div className="row mx-0 mb-2">
                                     {product.image ? (
                                         <div className="py-3 product-displayer-cont">
@@ -435,8 +449,8 @@ const UpdateProduct = () => {
                                 </div>
 
                                 <div className="update-btns-bar pt-4 my-3 d-flex flex-row justify-content-center">
-                                    <button type="submit" onClick={handleSubmit} className='add-product-submit-btn shadow mx-3'>Update Product</button>
-                                    <span className='add-product-submit-btn shadow mx-3' onClick={handleDelete}>Delete Product</span>
+                                    <button type="submit" onClick={handleUpdate} className='add-product-submit-btn shadow mx-3'>Update Product</button>
+                                    <span className='add-product-submit-btn shadow mx-3' style={{ cursor: "pointer" }} onClick={handleDelete}>Delete Product</span>
                                 </div>
                             </form>
                         </div>

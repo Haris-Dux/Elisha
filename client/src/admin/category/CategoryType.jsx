@@ -26,7 +26,6 @@ const CategoryType = () => {
     // console.log("categories", categories)
 
     useEffect(() => {
-        // HERE WE EXTRACT THE ID OF ALL CARTEGORIES
         const extractIds = () => {
             return categories.map((item) => item.id)
         }
@@ -176,16 +175,6 @@ const CategoryType = () => {
 
                                 {/* FIRST ROW */}
                                 <div className="my-3 categoryType-fields">
-                                    <div className="left-input">
-                                        <input
-                                            className='newproduct-input'
-                                            type="text"
-                                            name="name"
-                                            placeholder='Category Type Name'
-                                            value={category.name}
-                                            onChange={handleInputChange}
-                                        />
-                                    </div>
                                     <div className="right-input">
                                         <select
                                             className='newproduct-input py-2'
@@ -200,6 +189,16 @@ const CategoryType = () => {
                                                 </option>
                                             ))}
                                         </select>
+                                    </div>
+                                    <div className="left-input">
+                                        <input
+                                            className='newproduct-input'
+                                            type="text"
+                                            name="name"
+                                            placeholder='Category Type Name'
+                                            value={category.name}
+                                            onChange={handleInputChange}
+                                        />
                                     </div>
                                 </div>
 

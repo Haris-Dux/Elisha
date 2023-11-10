@@ -11,13 +11,13 @@ const getAllCategoriesUrl = "http://localhost:3000/api/getAllCategories";
 
 // CATEGORIES-TYPE API
 const createCategoryTypeUrl = "http://localhost:3000/api/createCategoryType";
-const updateCategoryTypeUrl = "http://localhost:3000/api/updateCategoryType";
+const updateCategoryTypeUrl = "http://localhost:3000/api/updateCategoryType";   // This api is not added currently
 const deleteCategoryTypeUrl = "http://localhost:3000/api/deleteCategoryType";
 const getAllCategoryTypesUrl = "http://localhost:3000/api/getAllCategoryTypes";
 
 // SUB-CATEGORIES TYPE API
 const createSubCategoryUrl = "http://localhost:3000/api/createSubCategory";
-const updateSubCategoryUrl = "http://localhost:3000/api/updateSubCategory";
+const updateSubCategoryUrl = "http://localhost:3000/api/updateSubCategory";  // This api is not added currently
 const deleteSubCategoryUrl = "http://localhost:3000/api/deleteSubCategory";
 const getAllSubCategoriesUrl = "http://localhost:3000/api/getAllSubCategories";
 
@@ -134,22 +134,18 @@ export const getSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/get", a
 });
 
 
-
-
-
-
 // Get SUB - CATEGORIES ASYNC THUNK
-// export const deleteSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/delete", async (category) => {
-//     try {
-//         const response = await axios.post(getAllSubCategoriesUrl, category);
-//         // toast.success(response.data.msg);
-//         console.log('response.data', response.data);
-//         return response.data;
+export const deleteSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/delete", async (id) => {
+    try {
+        const response = await axios.post(deleteSubCategoryUrl, id);
+        toast.success(response.data.msg);
+        console.log('response.data', response.data);
+        return response.data;
 
-//     } catch (error) {
-//         toast.error(error.response.data.msg);
-//     }
-// });
+    } catch (error) {
+        toast.error(error.response.data.msg);
+    }
+});
 
 
 
@@ -255,14 +251,14 @@ const categorySlice = createSlice({
                 state.subcategoriesType = action.payload.subCategoryData;
             })
 
-        // deleteSubCategoryAsync
-        // .addCase(deleteSubCategoryTypeAsync.pending, (state, action) => {
-        //     state.loading = true;
-        // })
-        // .addCase(deleteSubCategoryTypeAsync.fulfilled, (state, action) => {
-        //     state.loading = false;
-        //     state.subcategoriesType = state.subcategoriesType.filter(category => category.id !== action.payload);
-        // })
+            // deleteSubCategoryAsync
+            .addCase(deleteSubCategoryTypeAsync.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(deleteSubCategoryTypeAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.subcategoriesType = state.subcategoriesType.filter(category => category.id !== action.payload);
+            })
     }
 })
 

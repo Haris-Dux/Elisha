@@ -17,6 +17,7 @@ const AdminMainPage = () => {
 
   useEffect(() => {
     dispatch(getCategoryAsync());
+    dispatch(getCategoryAsync());
   }, []);
 
   const handleItemClick = (itemId) => {
@@ -27,6 +28,7 @@ const AdminMainPage = () => {
   useEffect(() => {
     dispatch(getProductAsync());
   }, [dispatch]);
+
 
 
   useEffect(() => {
@@ -54,6 +56,9 @@ const AdminMainPage = () => {
           <img src={logo} alt="..." width="145px" />
           <button type="button" className="btn-close fs-5 me-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+
+
+
         <div className="offcanvas-body mx-0 p-0">
           <div className="dashboard-offcanvas py-3">
             <h2 className="dashboard-heading">Dashboard</h2>
@@ -61,8 +66,8 @@ const AdminMainPage = () => {
               <Link to="/adminOrderList" className="btn dashboard-btn text-start">Admin Order List</Link>
               <Link to="/newproductform" className="btn dashboard-btn text-start">Add Products</Link>
               <Link to="/category" className="btn dashboard-btn text-start">Categories</Link>
-              <Link to="/categorytype" className="btn dashboard-btn text-start">Categories Type</Link>
-              <Link to="/subcategory" className="btn dashboard-btn text-start">Sub Category</Link>
+              {/* <Link to="/categorytype" className="btn dashboard-btn text-start">Categories Type</Link>
+              <Link to="/subcategory" className="btn dashboard-btn text-start">Sub Category</Link> */}
             </div>
           </div>
         </div>
@@ -72,31 +77,40 @@ const AdminMainPage = () => {
       <section className="AdminMainPage">
         <div className="container-fluid px-0">
           {/* ADMINMAINPAGE - HEADER */}
-          <div className="row mx-0">
+          <div className="row mx-0 navbar-cont">
             <div className="col-md-12 py-2 AdminMainPage-header-right">
               <div className="container">
 
-                <nav className="navbar navbar-expand-lg">
-                  <div className="container-fluid">
+                {/* New Updated Navbar */}
+                <nav className="navbar d-flex justify-content-between align-items-center">
+                  <div className="menu_button">
                     <button className="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i className="fa-solid fa-bars fs-4 pt-1"></i></button>
-                    {/* <div
-                    className="collapse navbar-collapse"
-                    id="navbarTogglerDemo03"
-                  > */}
+                  </div>
+
+                  <div className="navbar_text">ADMIN DASHBOARD</div>
+
+                  <div className="navbar_icons">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex flex-row">
                       <li className="nav-item">
-                        <i className="fa-solid fa-bell mx-3 fs-4 pt-2" style={{ cursor: "pointer" }}></i>
+                        <i className="fa-solid fa-bell mx-3 fs-4 pt-2"></i>
                       </li>
                       <li className="nav-item">
-                        <i className="fa-solid fa-user mx-3 fs-4 pt-2" style={{ cursor: "pointer" }}></i>
+                        <i className="fa-solid fa-user mx-3 fs-4 pt-2"></i>
                       </li>
                       <li className="nav-item">
-                        <i className="fa-solid fa-right-from-bracket mx-3 fs-4 pt-2" style={{ cursor: "pointer" }} onClick={handleLogout}></i>
+                        <i className="fa-solid fa-right-from-bracket mx-3 fs-4 pt-2" onClick={handleLogout}></i>
                       </li>
                     </ul>
-                    {/* </div> */}
                   </div>
                 </nav>
+
+
+
+
+
+
+
+
               </div>
 
             </div>
@@ -109,25 +123,14 @@ const AdminMainPage = () => {
                 <div className="container">
                   {/* BODY ---> PRODUCT GRID HEADER */}
                   <div className="AdminMainPage-body-header-right d-flex justify-content-between align-items-center">
-                    <h2 className="mx-4">Product Grid</h2>
+                    <h2 className="mx-4">Products Grid</h2>
                   </div>
                 </div>
 
                 {/* BODY ---> PRODUCT GRID CONTAINER */}
-                <div className="container py-2 mt-3">
-                  {/* <div className="product-grid-header d-flex justify-content-between align-items-center">
-
-                    <div className="product-grid-header-buttons">
-                      <button className="product-grid-btn mx-2">
-                        Category
-                      </button>
-                      <button className="product-grid-btn mx-2">
-                        Last Edit
-                      </button>
-                    </div>
-                  </div> */}
+                <div className="container py-1 mt-2">
                   {/* BODY ---> PRODUCT GRID CONTAINER-BODY */}
-                  <div className="all-product-body py-3">
+                  <div className="all-product-body py-1">
                     <div className="row ">
                       {Womendata.map((Womendata) => {
                         return (
@@ -161,7 +164,7 @@ const AdminMainPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 };
