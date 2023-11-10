@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "../createNewProduct/NewProductForm.css";
+import "./Category.css";
 import { createProductAsync } from '../../features/ProductSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createCategoryAsync, deleteCategoryAsync, getCategoryAsync } from '../../features/categorySlice';
 
 
@@ -11,9 +12,9 @@ const Category = () => {
     // const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getCategoryAsync());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getCategoryAsync());
+    // }, []);
 
     const categories = useSelector((state) => state.category.categories);
     console.log('Main categories', categories);
@@ -22,6 +23,7 @@ const Category = () => {
         name: '',
     });
 
+    // handle Input Change
     const handleInputChange = (event) => {
         setCategory({
             ...category,
@@ -29,22 +31,28 @@ const Category = () => {
         });
     };
 
+    // handle Submit
     const handleSubmit = (event) => {
         event.preventDefault();
         try {
-            dispatch(createCategoryAsync(category));
-            dispatch(getCategoryAsync());
+            dispatch(createCategoryAsync(category))
+                .then(() => {
+                    dispatch(getCategoryAsync());
+                    setCategory({ name: '' });
+                })
             console.log(category);
         } catch (error) {
             console.log(error);
         }
     };
 
-
+    // handle delete
     const handleDelete = (id) => {
         try {
             dispatch(deleteCategoryAsync({ id: id }))
-            dispatch(getCategoryAsync());
+                .then(() => {
+                    dispatch(getCategoryAsync());
+                })
             console.log(category);
         } catch (error) {
             console.log(error);
@@ -67,7 +75,7 @@ const Category = () => {
                                             className='newproduct-input'
                                             type="text"
                                             name="category"
-                                            placeholder='Catrgory Name'
+                                            placeholder='Enter Catrgory Name'
                                             value={category.name}
                                             onChange={handleInputChange}
                                         />
@@ -101,14 +109,20 @@ const Category = () => {
                                             <td className='py-2'>{category.name}</td>
                                             <td>
                                                 <div className="action_buttons">
-                                                    <i className="fa-solid fa-pen-to-square fs-4 px-2 mx-2"></i>
-                                                    <i className="fa-solid fa-trash fs-4 px-2 mx-2" onClick={() => handleDelete(category.id)}></i>
+                                                    <i className="fa-solid fa-pen-to-square fs-5 px-2 mx-2"></i>
+                                                    <i className="fa-solid fa-trash fs-5 px-2 mx-2" onClick={() => handleDelete(category.id)}></i>
                                                 </div>
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
+
+                            <div className="navigate-bar pt-2 d-flex justify-content-between align-item-center">
+                                <Link to="/adminmainpage" className="px-3 fs-5 text-decoration-none text-dark">&#8672; Go to Dashboard</Link>
+                                <Link to="/categorytype" className="px-3 fs-5 text-decoration-none text-dark"> Go to Categories Type &#8674;</Link>
+                            </div>
+
                         </div>
                     </div>
                 </section>

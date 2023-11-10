@@ -1,5 +1,5 @@
 .admin_order_list {
-    background-color: #E0D7CE;
+    background-color: #F2F2F2;
 }
 
 .admin_order_list-header h3 {
@@ -8,6 +8,8 @@
 }
 
 .table-header {
-    background-color: #c2bdb9 !important;
-    font-size: 1.15rem;
+    background-color: #bea896 !important;
+    color: #fff !important;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
 }

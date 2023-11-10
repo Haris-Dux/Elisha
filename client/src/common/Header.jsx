@@ -10,13 +10,13 @@ const Header = () => {
 
   return (
     <>
-      {/* {user === null || (user !== null && user.role !== "admin") ? ( */}
+      {user === null || (user !== null && user.role !== "admin") ? (
         <>
           <Head />
           <LogoComponent />
           <Navbar />
         </>
-      {/* ) : null} */}
+      ) : null}
     </>
   );
 };

@@ -28,7 +28,7 @@ export const createOrderAsync = createAsyncThunk("products/createOrder", async (
 export const getAllOrderForUserAsync = createAsyncThunk("products/getUserOrder", async (userID) => {
     try {
         const response = await axios.post(getAllOrdersForUserUrl, userID);
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
 
     } catch (error) {
@@ -40,7 +40,7 @@ export const getAllOrderForUserAsync = createAsyncThunk("products/getUserOrder",
 export const getAllOrderForAdminAsync = createAsyncThunk("products/getAdminOrder", async () => {
     try {
         const response = await axios.post(getAllOrdersUrl);
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
 
     } catch (error) {
