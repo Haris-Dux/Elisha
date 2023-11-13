@@ -11,73 +11,20 @@ const StitchedAllProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [subCategories, setSubCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const allProducts = useSelector(state => state.product.products);
   console.log('allProducts', allProducts);
 
 
   // Use selectors to get data from Redux store
-  const categories = useSelector((state) => state.category.categories);
-  const categoriesType = useSelector((state) => state.category.categoriesType);
-  console.log('categoriesType', categoriesType);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch categories
-        await dispatch(getCategoryAsync());
-
-        const stitchedCategory = categories.find(category => category.name === 'Stitched');
-        if (!stitchedCategory) {
-          throw new Error("Stitched category not found.");
-        }
-
-        // Fetch category types for 'Stitched'
-        await dispatch(getCategoryTypeAsync({ category: stitchedCategory.id }));
-
-        const stitchedCategoryType = categoriesType.find(categoryType => categoryType.name === 'Stitched Shirts');
-        if (!stitchedCategoryType) {
-          throw new Error("Stitched category type not found.");
-        }
-
-        // Fetch subcategories for 'Stitched Shirts'
-        const result = await dispatch(getSubCategoryTypeAsync({
-          category: stitchedCategory.id,
-          categoryType: stitchedCategoryType.id
-        }));
-
-        setSubCategories(result.payload.subCategoryData);
-        setLoading(false);
-      }
-      catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-  console.log('subCategories', subCategories);
-
-
+  // const categories = useSelector((state) => state.category.categories);
+  // const categoriesType = useSelector((state) => state.category.categoriesType);
 
 
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
     window.scrollTo(0, 0);
   };
-
-
 
 
   // const stitchedData = useSelector(state => state.womenData.item).slice(0, 12)
