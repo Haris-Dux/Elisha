@@ -1,27 +1,91 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 // import stitchedData from "./StitchedData";
 import PretStyles from "../home/PretStyles";
 import NewArrivals from "../home/NewArrivals";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
+import { getCategoryAsync, getCategoryTypeAsync, getSubCategoryTypeAsync } from "../../features/categorySlice";
 
 const StitchedAllProducts = () => {
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [subCategories, setSubCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const allProducts = useSelector(state => state.product.products);
+  console.log('allProducts', allProducts);
+
+
+  // Use selectors to get data from Redux store
+  const categories = useSelector((state) => state.category.categories);
+  const categoriesType = useSelector((state) => state.category.categoriesType);
+  console.log('categoriesType', categoriesType);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch categories
+        await dispatch(getCategoryAsync());
+
+        const stitchedCategory = categories.find(category => category.name === 'Stitched');
+        if (!stitchedCategory) {
+          throw new Error("Stitched category not found.");
+        }
+
+        // Fetch category types for 'Stitched'
+        await dispatch(getCategoryTypeAsync({ category: stitchedCategory.id }));
+
+        const stitchedCategoryType = categoriesType.find(categoryType => categoryType.name === 'Stitched Shirts');
+        if (!stitchedCategoryType) {
+          throw new Error("Stitched category type not found.");
+        }
+
+        // Fetch subcategories for 'Stitched Shirts'
+        const result = await dispatch(getSubCategoryTypeAsync({
+          category: stitchedCategory.id,
+          categoryType: stitchedCategoryType.id
+        }));
+
+        setSubCategories(result.payload.subCategoryData);
+        setLoading(false);
+      }
+      catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+  console.log('subCategories', subCategories);
+
+
+
 
   const handleItemClick = (itemId) => {
-    console.log('jdkjsn');
     navigate(`/selectedItem/${itemId}`);
-
     window.scrollTo(0, 0);
   };
 
-  const dispatch = useDispatch();
 
-  const stitchedData = useSelector(state => state.womenData.item).slice(0, 12)
 
-  const groupedProducts = stitchedData.reduce((acc, product) => {
+
+  // const stitchedData = useSelector(state => state.womenData.item).slice(0, 12)
+  // console.log('stitchedData', stitchedData);
+
+
+
+  const groupedProducts = allProducts.reduce((acc, product) => {
     if (!acc[product.subCategory]) {
       acc[product.subCategory] = [];
     }
@@ -145,29 +209,22 @@ const StitchedAllProducts = () => {
           {/* StitchedAllProducts -- MAPPING BODY */}
           <div className="all-product-body">
             <div className="row mx-0">
-              {Object.keys(groupedProducts).map((subCategory) => (
-                <div key={subCategory}>
-                  <h2 className="subcategory-heading text-center mt-3">
-                    {subCategory}
-                  </h2>
+              {subCategories.map((subCategory) => (
+                <div key={subCategory.id}>
+                  <h2 className="subcategory-heading text-center mt-3">{subCategory.name}</h2>
                   <div className="row mx-0 my-4">
-                    {groupedProducts[subCategory].map((product) => (
+                    {groupedProducts[subCategory.name].map((product) => (
                       <div key={product.id} className="col-sm-6 col-md-4 col-lg-3 ">
                         <div className="card all-product-body-card my-2">
                           <div onClick={() => handleItemClick(product.id)}>
-                            <img src={product.image} className="card-img-top shadow" alt="..." />
+                            <img src={product.image.secure_url} className="card-img-top shadow" alt="..." />
                           </div>
 
-                          {/* CARD BODY */}
                           <div className="card-body d-flex justify-content-between align-item-center pt-3 px-0">
-                            {/* ITEM DETAILS */}
                             <div className="stitched-card-body-details">
-
-                              <p className="card-data stitched-card-data my-0">Rs.{product.product_price}</p>
-                              <p className="card-data stitched-card-data my-0">{product.product_name}</p>
-
+                              <p className="card-data stitched-card-data my-0">{product.name}</p>
+                              <p className="card-data stitched-card-data my-0">Rs.{product.price}</p>
                             </div>
-                            {/* Button */}
                             <div className="stitched-card-body-button">
                               <button className="btn stitched-card-body-button-btn" onClick={() => dispatch(addToCart(product))}>
                                 <i className="fa-solid fa-plus"></i>
