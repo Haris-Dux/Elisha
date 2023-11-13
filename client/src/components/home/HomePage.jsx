@@ -8,13 +8,14 @@ import DealsByCategory from "./DealsByCategory";
 import PretStyles from "./PretStyles";
 import { useDispatch } from "react-redux";
 import { getProductAsync } from "../../features/ProductSlice";
+import { getCategoryAsync } from "../../features/categorySlice";
 
 const HomePage = () => {
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProductAsync());
+    dispatch(getCategoryAsync());
   }, [dispatch]);
 
 

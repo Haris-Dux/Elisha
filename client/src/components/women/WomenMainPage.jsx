@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bg_box_1 from "./bg_box_1.png";
 import bg_box_2 from "./bg_box_2.png";
 import bg_box_3 from "./bg_box_3.png";
@@ -6,13 +6,43 @@ import bg_box_4 from "./bg_box_4.png";
 import PretStyles from "../home/PretStyles";
 import womenMainPageData from "./WomenMainPageData";
 import "./Women.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoryTypeAsync, getSubCategoryTypeAsync } from "../../features/categorySlice";
 
 const WomenMainPage = () => {
+  const dispatch = useDispatch();
 
-  const id1 = womenMainPageData.find(item => item.id === 1);
-  const id2 = womenMainPageData.find(item => item.id === 2);
-  const id3 = womenMainPageData.find(item => item.id === 3);
-  const id4 = womenMainPageData.find(item => item.id === 4);
+  // FETCH STITCHED CATEGORY FROM STORE
+  const womenCategoryId = useSelector(state =>
+    state.category.categories.find(category => category.name === "Women")?.id);
+
+
+
+
+  // CALL TO GET ALL CATEGORIES-TYPES
+  useEffect(() => {
+    dispatch(getCategoryTypeAsync({ category: womenCategoryId }));
+    dispatch(getSubCategoryTypeAsync({ category: womenCategoryId, categoryType: categoryTypeIds }));
+  }, [womenCategoryId, dispatch]);
+
+
+  const categoriesType = useSelector((state) => state.category.categoriesType);
+
+
+  const extractIds = () => {
+    return categoriesType.map((item) => item.id)
+  }
+
+  const categoryTypeIds = extractIds(categoriesType);
+
+
+  const subCategoriesType = useSelector((state) => state.category.subcategoriesType);
+  console.log('subCategoriesType', subCategoriesType);
+
+
+
+
+
 
   return (
     <>
@@ -43,29 +73,33 @@ const WomenMainPage = () => {
 
             <div className="women-mainpage-body-content my-3 py-3">
               <div className="row mx-0 d-flex justify-content-center align-items-center">
+
+
+
                 {/* FIRST BOX  */}
-                <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_1})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
-                  <div className="row mx-0 women-mainpage-box-cont">
-                    {/* LEFT */}
-                    <div className="col-xs-0 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
-                    </div>
-                    {/* RIGHT */}
-                    <div className="col-xs-12 col-sm-7 col-md-7 col-lg-7 women-mainpage-box-right">
-                      <div className="women-mainpage-box-1">
-                        <h4 className="fw-bold ps-4">{id1.heading}</h4>
-                        <ul>
-                          {id1.link_list.map((link, index) => (
-                            <li key={index}>{link}</li>
-                          ))}
-                        </ul>
+                {categoriesType.map((data) => {
+                  return (
+                    <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${data.image.secure_url})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
+
+                      <div className="row mx-0 women-mainpage-box-cont">
+                        <div className="col-xs-0 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
+                        </div>
+                        <div className="col-xs-12 col-sm-7 col-md-7 col-lg-7 women-mainpage-box-right">
+                          <div className="women-mainpage-box-1">
+                            <h4 className="fw-bold ps-4 text-light fs-1">{data.name}</h4>
+                            <ul>
+                              {/* {id1.link_list.map((link, index) => (
+                                <li key={index}>{link}</li>
+                              ))} */}
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  )
+                })}
 
-                {/* SECOND BOX */}
-
-                <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_2})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
+                {/* <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_2})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
                   <div className="row mx-0 women-mainpage-box-cont">
                     <div className="col-md-7 women-mainpage-box-left">
                       <div className="women-mainpage-box-1">
@@ -83,13 +117,10 @@ const WomenMainPage = () => {
                   </div>
                 </div>
 
-                {/* THIRD BOX  */}
                 <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_3})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
                   <div className="row mx-0 women-mainpage-box-cont">
-                    {/* LEFT */}
                     <div className="col-xs-6 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
                     </div>
-                    {/* RIGHT */}
                     <div className="col-xs-6 col-sm-7 col-md-7 col-lg-7 women-mainpage-box-right">
                       <div className="women-mainpage-box-1">
                         <h4 className="fw-bold ps-4 fs-2 me-4">{id3.heading}</h4>
@@ -98,13 +129,10 @@ const WomenMainPage = () => {
                   </div>
                 </div>
 
-                {/* FORTH BOX */}
                 <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_4})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
                   <div className="row mx-0 women-mainpage-box-cont">
-                    {/* LEFT */}
                     <div className="col-xs-6 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
                     </div>
-                    {/* RIGHT */}
                     <div className="col-xs-6 col-sm-7 col-md-7 col-lg-7 women-mainpage-box-right">
                       <div className="women-mainpage-box-1">
                         <h4 className="fw-bold pe-4">{id4.heading}</h4>
@@ -116,7 +144,7 @@ const WomenMainPage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
               </div>
             </div>

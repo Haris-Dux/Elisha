@@ -10,11 +10,15 @@ import { getCategoryAsync, getCategoryTypeAsync } from "../../features/categoryS
 const StitchedAllProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [subCategories, setSubCategories] = useState([]);
+  // const [subCategories, setSubCategories] = useState([]);
+
+  const handleItemClick = (itemId) => {
+    navigate(`/selectedItem/${itemId}`);
+    window.scrollTo(0, 0);
+  };
 
   const allProducts = useSelector(state => state.product.products);
-  // console.log('allProducts', allProducts);
-
+  console.log('allProducts', allProducts);
 
   // CALL TO GET ALL CATEGORIES
   useEffect(() => {
@@ -59,10 +63,7 @@ const StitchedAllProducts = () => {
 
 
 
-  const handleItemClick = (itemId) => {
-    navigate(`/selectedItem/${itemId}`);
-    window.scrollTo(0, 0);
-  };
+
   return (
     <>
       <section className="StitchedAllProducts py-4 my-3">
