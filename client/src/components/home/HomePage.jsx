@@ -17,7 +17,7 @@ const HomePage = () => {
     dispatch(getProductAsync());
     dispatch(getCategoryAsync());
   }, [dispatch]);
-
+  
 
   return (
     <>

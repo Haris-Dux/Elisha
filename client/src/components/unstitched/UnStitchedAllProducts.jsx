@@ -10,9 +10,9 @@ const UnStitchedAllProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCategoryAsync());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCategoryAsync());
+  // }, []);
 
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);

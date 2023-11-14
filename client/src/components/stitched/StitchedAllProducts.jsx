@@ -6,6 +6,7 @@ import NewArrivals from "../home/NewArrivals";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
 import { getCategoryAsync, getCategoryTypeAsync } from "../../features/categorySlice";
+import Top_Sales_cont from "../home/Top_Sales_cont";
 
 const StitchedAllProducts = () => {
   const navigate = useNavigate();
@@ -217,7 +218,7 @@ const StitchedAllProducts = () => {
           <NewArrivals heading="NEW ARRIVALS" />
 
           {/* StitchedAllProducts -- TOP SALES */}
-          <NewArrivals heading="TOP SALES" />
+          <Top_Sales_cont heading="TOP SALES" />
 
           {/* StitchedAllProducts -- PAGINATION */}
           <div className="container my-5">

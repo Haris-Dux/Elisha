@@ -79,18 +79,21 @@ const WomenMainPage = () => {
                 {/* FIRST BOX  */}
                 {categoriesType.map((data) => {
                   return (
-                    <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${data.image.secure_url})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
+                    <div className=" col-sm-12 col-md-6 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${data.image.secure_url})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
 
                       <div className="row mx-0 women-mainpage-box-cont">
-                        <div className="col-xs-0 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
-                        </div>
-                        <div className="col-xs-12 col-sm-7 col-md-7 col-lg-7 women-mainpage-box-right">
+                        {/* <div className="col-xs-0 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
+                        </div> */}
+                        <div className="col-xs-12 col-sm-7 col-md-7 col-lg-12 women-mainpage-box-right">
                           <div className="women-mainpage-box-1">
                             <h4 className="fw-bold ps-4 text-light fs-1">{data.name}</h4>
-                            <ul>
-                              {/* {id1.link_list.map((link, index) => (
-                                <li key={index}>{link}</li>
-                              ))} */}
+                            <ul className="subCategories_name">
+                              {/* HERE WE MAP THE SUB-CATEGORY OF THAT CORRESPONDING CATEGORY */}
+                              {subCategoriesType
+                                .filter((subCategory) => subCategory.categoryType === data.id)
+                                .map((subCategory) => (
+                                  <li key={subCategory.id}>{subCategory.name}</li>
+                                ))}
                             </ul>
                           </div>
                         </div>
@@ -98,54 +101,6 @@ const WomenMainPage = () => {
                     </div>
                   )
                 })}
-
-                {/* <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_2})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
-                  <div className="row mx-0 women-mainpage-box-cont">
-                    <div className="col-md-7 women-mainpage-box-left">
-                      <div className="women-mainpage-box-1">
-                        <h4 className="fw-bold text-start ps-4">{id2.heading}</h4>
-                        <ul>
-                          {id2.link_list.map((link, index) => (
-                            <li key={index}>{link}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="col-md-5 women-mainpage-box-right">
-
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_3})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
-                  <div className="row mx-0 women-mainpage-box-cont">
-                    <div className="col-xs-6 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
-                    </div>
-                    <div className="col-xs-6 col-sm-7 col-md-7 col-lg-7 women-mainpage-box-right">
-                      <div className="women-mainpage-box-1">
-                        <h4 className="fw-bold ps-4 fs-2 me-4">{id3.heading}</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-md-12 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${bg_box_4})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
-                  <div className="row mx-0 women-mainpage-box-cont">
-                    <div className="col-xs-6 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
-                    </div>
-                    <div className="col-xs-6 col-sm-7 col-md-7 col-lg-7 women-mainpage-box-right">
-                      <div className="women-mainpage-box-1">
-                        <h4 className="fw-bold pe-4">{id4.heading}</h4>
-                        <ul className="px-0">
-                          {id4.link_list.map((link, index) => (
-                            <li key={index}>{link}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-
               </div>
             </div>
           </div>

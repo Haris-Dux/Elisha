@@ -27,7 +27,8 @@ li {
 }
 
 .women-mainpage-box {
-    height: 23rem;
+    height: 20rem;
+    width: 32rem;
     display: flex;
 }
 
@@ -48,10 +49,16 @@ li {
     text-align: start;
 }
 
-.women-mainpage-box-right ul li {
+/* .women-mainpage-box-right ul li {
     text-align: start;
     font-size: 1.2rem;
     font-weight: 500;
+} */
+
+.subCategories_name li {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 700;
 }
 
 /* --------- ALL PRODUCT ---------*/
