@@ -19,11 +19,7 @@ const WomenMainPage = () => {
 
 
 
-  // CALL TO GET ALL CATEGORIES-TYPES
-  useEffect(() => {
-    dispatch(getCategoryTypeAsync({ category: womenCategoryId }));
-    dispatch(getSubCategoryTypeAsync({ category: womenCategoryId, categoryType: categoryTypeIds }));
-  }, [womenCategoryId, dispatch]);
+
 
 
   const categoriesType = useSelector((state) => state.category.categoriesType);
@@ -34,15 +30,21 @@ const WomenMainPage = () => {
   }
 
   const categoryTypeIds = extractIds(categoriesType);
+  // console.log('categoryTypeIds',categoryTypeIds);
 
 
   const subCategoriesType = useSelector((state) => state.category.subcategoriesType);
   console.log('subCategoriesType', subCategoriesType);
 
 
+  // CALL TO GET ALL CATEGORIES-TYPES
+  useEffect(() => {
+    dispatch(getCategoryTypeAsync({ category: womenCategoryId }));
+    dispatch(getSubCategoryTypeAsync({ category: womenCategoryId, categoryType: categoryTypeIds }));
+  }, [womenCategoryId, dispatch]);
 
 
-
+  
 
   return (
     <>

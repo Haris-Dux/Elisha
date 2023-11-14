@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import logo from "../components/contact/logo.png"
+import React, { useState, useEffect } from "react";
+import logo from "../components/contact/logo.png";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
 import { loginuserAsync } from "../features/authSlice";
 import "./Sign.css";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // SCROLL TO TOP FUNCTION
   const scrollToTop = () => {
@@ -21,7 +21,6 @@ const Login = () => {
     email: "",
     password: "",
   });
-
 
   // HANDLE INPUT CHANGE
   const handleInputChange = (e) => {
@@ -37,39 +36,29 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      dispatch(loginuserAsync(logData))
-        .then((response) => {
+      const response = await dispatch(loginuserAsync(logData));
 
-          console.log("role", response.payload.data.userData.role);
+      console.log("role", response.payload.data.userData.role);
 
-          if (response.payload.data.userData.role === "user") {
-            navigate("/");
-            scrollToTop();
-          }
-          else if (response.payload.data.userData.role === "admin") {
-            navigate("/adminmainpage");
-            scrollToTop();
-          }
+      if (response.payload.data.userData.role === "user") {
+        // Check if the user came from the cart page
+        const fromCart = new URLSearchParams(location.search).get("from") === "cart";
 
+        // Redirect to the cart page if they came from there, otherwise, go to the home page
+        navigate(fromCart ? "/cartpage" : "/");
+        scrollToTop();
+      } else if (response.payload.data.userData.role === "admin") {
+        navigate("/adminmainpage");
+        scrollToTop();
+      }
 
-
-
-
-
-
-
-          // console.log(response);
-          // const token = response.accessToken;
-          // Cookies.set(
-          //   "token", token
-          // )
-        })
-
+      // Set your authentication token or user details in Cookies or state as needed
+      // const token = response.accessToken;
+      // Cookies.set("token", token);
     } catch (error) {
       console.log(error);
     }
   };
-
 
   return (
     <>
@@ -115,9 +104,16 @@ const Login = () => {
                     Forgot Password?
                   </Link>
                 </div>
-                <button type="submit" className="btn sign-btn">Login</button>
+                <button type="submit" className="btn sign-btn">
+                  Login
+                </button>
 
-                <p className="mt-3">Create an Account? <Link className="signup-link" to="/signup">Sign Up</Link></p>
+                <p className="mt-3">
+                  Create an Account?{" "}
+                  <Link className="signup-link" to="/signup">
+                    Sign Up
+                  </Link>
+                </p>
               </form>
             </div>
           </div>

@@ -22,9 +22,9 @@ const StitchedAllProducts = () => {
   console.log('allProducts', allProducts);
 
   // CALL TO GET ALL CATEGORIES
-  useEffect(() => {
-    dispatch(getCategoryAsync());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCategoryAsync());
+  // }, []);
 
 
   // FETCH STITCHED CATEGORY FROM STORE
