@@ -69,11 +69,7 @@ useEffect(()=>{
           // console.log(response);
         })
     }
-
   }, [])
-
-
-
 
 
   return (
