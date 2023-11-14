@@ -12,7 +12,7 @@ const NewArrivals = ({ heading }) => {
 
 
   // const item = useSelector(state => state.womenData.item).slice(12, 16)
-  const Womendata = useSelector(state => state.product.products)
+  const Womendata = useSelector(state => state.product.products).slice(0, 4)
   // console.log("New Arrivals", Womendata);
 
 

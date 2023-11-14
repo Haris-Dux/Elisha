@@ -46,19 +46,19 @@ function App() {
     dispatch(getProductAsync());
   }, [dispatch]);
 
-//GET CATEGORYTYPES
-const categories = useSelector((state) => state.category.categories);
-console.log(categories)
+  //GET CATEGORYTYPES
+  const categories = useSelector((state) => state.category.categories);
+  console.log(categories)
 
-useEffect(()=>{
-  const extractIds = () => {
-    return categories.map((item)=>item.id)
-  }
-  const categoryIds = extractIds(categories);
-  dispatch(getCategoryTypeAsync({category:categoryIds}))
-},[dispatch])
+  useEffect(() => {
+    const extractIds = () => {
+      return categories.map((item) => item.id)
+    }
+    const categoryIds = extractIds(categories);
+    dispatch(getCategoryTypeAsync({ category: categoryIds }))
+  }, [dispatch])
 
-  
+
 
   useEffect(() => {
 

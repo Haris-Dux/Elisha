@@ -1,19 +1,17 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import relatedProduct from "./RelatedProductsData";
 import { useDispatch, useSelector } from "react-redux";
 
 const RelatedProducts = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
-
     window.scrollTo(0, 0);
   };
 
-  const dispatch = useDispatch();
-  const item = useSelector(state => state.womenData.item).slice(0, 5)
+  const item = useSelector(state => state.product.products).slice(0, 5)
 
   return (
     <>
@@ -27,18 +25,11 @@ const RelatedProducts = () => {
                   <div key={item.id} className="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 my-2">
                     <div className="card relatedProduct-card mx-0 ">
                       <div onClick={() => handleItemClick(item.id)} style={{ cursor: "pointer" }}>
-                        <img src={item.image} className="card-img-top" alt="..." />
+                        <img src={item.image.secure_url} className="card-img-top" alt="..." />
                       </div>
-                      <div className="card-body d-flex justify-content-start flex-column text-start px-0 py-1 mx-0">
-                        <p className="relatedProduct-name my-0">
-                          {item.product_name}
-                        </p>
-                        <p className="relatedProduct-type my-0">
-                          {item.product_type}
-                        </p>
-                        <p className="relatedProduct-type my-0 fw-bold">
-                          {item.product_price}
-                        </p>
+                      <div className="stitched-card-body-details text-start">
+                        <p className="card-data stitched-card-data my-0">{item.name}</p>
+                        <p className="card-data stitched-card-data my-0">Rs.{item.price}</p>
                       </div>
                     </div>
                   </div>

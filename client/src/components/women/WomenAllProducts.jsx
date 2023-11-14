@@ -1,32 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-// import Womendata from "./Womendata";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
-import { useEffect } from "react";
 import { getProductAsync } from "../../features/ProductSlice";
+import { getCategoryAsync } from "../../features/categorySlice";
 
 const WomenAllProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getCategoryAsync());
+  }, []);
 
-  const Womendata = useSelector(state => state.product.products);
-  // console.log("Womendata", Womendata);
+  // Get all products
+  const allProducts = useSelector(state => state.product.products);
 
+  // Get the "Women" category ID
+  const womenCategoryId = useSelector(state => state.category.categories.find(category => category.name === "Women")?.id);
+
+  // Filter products that belong to the "Women" category
+  const womenProducts = allProducts.filter(product =>
+    product.category === womenCategoryId
+  );
 
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
     window.scrollTo(0, 0);
   };
 
-
-
-  // useEffect(() => {
-  //   dispatch(getProductAsync());
-  // }, [dispatch]);
-
-
+  useEffect(() => {
+    dispatch(getProductAsync());
+  }, [dispatch]);
 
   return (
     <>
@@ -38,37 +43,31 @@ const WomenAllProducts = () => {
 
           <div className="all-product-body">
             <div className="row mx-0">
+              {womenProducts.map((product) => (
+                <div key={product.id} className="col-sm-6 col-md-4 col-lg-3">
+                  <div className="card all-product-body-card my-2">
+                    <div onClick={() => handleItemClick(product.id)}>
+                      <img src={product.image.secure_url} className="card-img-top shadow" alt="..." />
+                    </div>
 
-              {/* {Womendata.map((Womendata) => {
-                return (
-                  <div key={Womendata.id} className="col-sm-6 col-md-4 col-lg-4">
-                    <div className="card all-product-body-card my-2">
-                      <div onClick={() => handleItemClick(Womendata.id)}>
-                        <img src={Womendata.image.secure_url} className="card-img-top shadow" alt="..." />
+                    <div className="card-body d-flex justify-content-between pt-3 px-0">
+                      {/* ITEM DETAILS */}
+                      <div className="card-body-details">
+
+                        <p className="card-data stitched-card-data my-0">{product.name}</p>
+                        <p className="card-data stitched-card-data my-0">Rs.{product.price}</p>
+
                       </div>
-
-                      <div className="card-body card-body-detail-section">
-                        <div className="card-body-detail d-flex flex-column">
-                          <h5 className="card-data">
-                            {Womendata.name}
-                          </h5>
-                          <h5 className="card-data">
-                            {Womendata.itemCode}
-                          </h5>
-                          <h5 className="card-data">
-                            Rs.{Womendata.price}
-                          </h5>
-                        </div>
-                        <div className="card-body-button mx-0">
-                          <button className="btn women-card-body-button-btn" onClick={() => dispatch(addToCart(Womendata))}>
-                            Add Cart
-                          </button>
-                        </div>
+                      {/* Button */}
+                      <div className="stitched-card-body-button">
+                        <button className="btn stitched-card-body-button-btn" onClick={() => dispatch(addToCart(product))}>
+                          <i className="fa-solid fa-plus"></i>
+                        </button>
                       </div>
                     </div>
                   </div>
-                );
-              })} */}
+                </div>
+              ))}
             </div>
           </div>
         </div>

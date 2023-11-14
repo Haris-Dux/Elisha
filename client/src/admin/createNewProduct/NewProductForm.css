@@ -12,7 +12,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
 }
 
 .product-displayer img {
@@ -22,6 +21,11 @@
 
 .NewProductForm-img-cont i {
     font-size: 5rem;
+}
+
+.select {
+    padding: .6rem 1rem !important;
+    color: #646464;
 }
 
 .newproduct-input {

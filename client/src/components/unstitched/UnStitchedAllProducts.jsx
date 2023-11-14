@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 // import unstitchedData from "./UnStitchedData";
 import PretStyles from "../home/PretStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
+import { getCategoryAsync } from "../../features/categorySlice";
 
 const UnStitchedAllProducts = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getCategoryAsync());
+  // }, []);
 
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
-
     window.scrollTo(0, 0);
   };
 
-  const dispatch = useDispatch();
-  const item = useSelector(state => state.womenData.item).slice(0, 9)
+  // Get all products
+  const allProducts = useSelector(state => state.product.products);
+
+
+  // Get the "Women" category ID
+  const womenCategoryId = useSelector(state =>
+    state.category.categories.find(category => category.name === "Unstitched")?.id
+  );
+
+
+  // Filter products that belong to the "Women" category
+  const unStitchedProducts = allProducts.filter(product =>
+    product.category === womenCategoryId
+  );
+
+
+
 
   return (
     <section className="UnstitchedAllProducts py-4 my-3">
@@ -131,20 +151,19 @@ const UnStitchedAllProducts = () => {
         {/* UnStitchedAllProducts -- MAPPING BODY */}
         <div className="all-product-body">
           <div className="row mx-0">
-            {item.map((item) => (
-              <div key={item.id} className="col-md-4">
+            {unStitchedProducts.map((product) => (
+              <div key={product.id} className="col-md-3">
                 <div className="card all-product-body-card my-2">
-                  <div onClick={() => handleItemClick(item.id)}>
-                    <img src={item.image} className="card-img-top shadow" alt="..." />
+                  <div onClick={() => handleItemClick(product.id)}>
+                    <img src={product.image.secure_url} className="card-img-top shadow" alt="..." />
                   </div>
 
                   <div className="card-body d-flex justify-content-between pt-3 px-0">
                     {/* ITEM DETAILS */}
                     <div className="card-body-details">
 
-                      <p className="card-data stitched-card-data my-0">{item.product_name}</p>
-                      <p className="card-data stitched-card-data my-0">{item.product_type}</p>
-                      <p className="card-data stitched-card-data my-0">Rs.{item.product_price}</p>
+                      <p className="card-data stitched-card-data my-0">{product.name}</p>
+                      <p className="card-data stitched-card-data my-0">Rs.{product.price}</p>
 
                     </div>
                     {/* Button */}

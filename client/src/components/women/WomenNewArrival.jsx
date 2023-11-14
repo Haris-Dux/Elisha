@@ -3,23 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
 import women_newArrivals_1 from "./women_newArrivals_1.jpg";
-// import women_newArrivals_2 from "./women_newArrivals_2.jpg";
-// import women_newArrivals_3 from "./women_newArrivals_3.jpg";
-// import women_newArrivals_4 from "./women_newArrivals_4.jpg";
-// import women_newArrivals_5 from "./women_newArrivals_5.jpg";
 
 const WomenNewArrival = () => {
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
-
     window.scrollTo(0, 0);
   };
 
-  const dispatch = useDispatch();
-  const Womendata = useSelector(state => state.womenData.item).slice(17, 21);
+  const allProducts = useSelector(state => state.product.products);
+  const BigImage = allProducts.filter(product => product.newArrival === true).slice(0, 1);
+  const newArrival_left = allProducts.filter(product => product.newArrival === true).slice(1, 5);
+
+
   return (
     <>
       <section className="new-arrivals">
@@ -30,17 +29,23 @@ const WomenNewArrival = () => {
           <div className="new-arrivals-body">
             <div className="row mx-0">
 
-              <div className="col-md-6 new-arrivals-body-left">
-                <img src={women_newArrivals_1} alt="" width="90%" />
-              </div>
+              {BigImage.map((item) => {
+                return (
+                  <div className="col-md-6 new-arrivals-body-left" style={{ cursor: "pointer" }}>
+                    <div onClick={() => handleItemClick(item.id)}>
+                      <img src={item.image.secure_url} alt="" width="90%" />
+                    </div>
+                  </div>
+                )
+              })}
               <div className="col-md-6 new-arrivals-body-right">
                 <div className="row mx-0">
 
-                  {Womendata.map((item) => {
+                  {newArrival_left.map((item) => {
                     return (
                       <div key={item.id} className="col-md-6 my-4" style={{ cursor: "pointer" }}>
                         <div onClick={() => handleItemClick(item.id)}>
-                          <img src={item.image} alt="" width="90%" />
+                          <img src={item.image.secure_url} alt="" width="90%" />
                         </div>
                       </div>
                     )

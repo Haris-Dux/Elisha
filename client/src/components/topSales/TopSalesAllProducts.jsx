@@ -6,22 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
 
 const TopSalesAllProducts = () => {
-
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleItemClick = (itemId) => {
-    console.log('jdkjsn');
-    navigate(`/selectedItem/${itemId}`);
 
+  const handleItemClick = (itemId) => {
+    navigate(`/selectedItem/${itemId}`);
     window.scrollTo(0, 0);
   };
 
 
-  const dispatch = useDispatch();
-  const item = useSelector(state => state.womenData.item).slice(0, 9)
-  return (
+  // Get all products
+  const allProducts = useSelector(state => state.product.products);
+  console.log('allProducts', allProducts);
 
+
+  // Filter only top sales products
+  const topSalesProducts = allProducts.filter(product => product.topSales === true);
+
+  return (
     <>
       <section className="StitchedAllProducts py-4 my-3">
         <div className="container">
@@ -138,25 +141,25 @@ const TopSalesAllProducts = () => {
           {/* StitchedAllProducts -- MAPPING BODY */}
           <div className="all-product-body">
             <div className="row mx-0">
-              {item.map((item) => {
+              {topSalesProducts.map((item) => {
                 return (
-                  <div key={item.id} className="col-md-4">
+                  <div key={item.id} className="col-md-3">
                     <div className="card all-product-body-card my-2">
                       <div onClick={() => handleItemClick(item.id)}>
-                        <img src={item.image} className="card-img-top shadow" alt="..." />
+                        <img src={item.image.secure_url} className="card-img-top shadow" alt="..." />
                       </div>
                       <div className="card-body d-flex justify-content-between pt-3 px-0">
                         {/* ITEM DETAILS */}
                         <div className="card-body-details">
 
-                          <p className="card-data stitched-card-data my-0">{item.product_name}</p>
-                          <p className="card-data stitched-card-data my-0">{item.product_type}</p>
-                          <p className="card-data stitched-card-data my-0">Rs.{item.product_price}</p>
+                          <p className="card-data stitched-card-data my-0">{item.name}</p>
+                          {/* <p className="card-data stitched-card-data my-0">{item.product_type}</p> */}
+                          <p className="card-data stitched-card-data my-0">Rs.{item.price}</p>
 
                         </div>
                         {/* Button */}
                         <div className="stitched-card-body-button">
-                          <button className="btn stitched-card-body-button-btn" onClick={() => dispatch(addToCart(product))}>
+                          <button className="btn stitched-card-body-button-btn" onClick={() => handleItemClick(item.id)}>
                             <i className="fa-solid fa-plus"></i>
                           </button>
                         </div>
