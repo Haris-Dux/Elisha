@@ -27,12 +27,13 @@ const CartPage = () => {
         dispatch(getCartTotal());
     }, [cart]);
 
+
     const handleCheck = () => {
         if (user) {
             navigate("/checkout");
         }
         else {
-            navigate("/login");
+            navigate("/login?from=cart");
         }
     }
 

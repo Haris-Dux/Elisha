@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const OrderList = () => {
     const dispatch = useDispatch();
-    const orderList = useSelector((state) => state.order.allOrderForUsers);
+    const orderList = useSelector((state) => [...state.order.allOrderForUsers].reverse());
     console.log('orderList', orderList);
-
 
 
 

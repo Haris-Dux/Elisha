@@ -283,7 +283,7 @@ const NewProductForm = () => {
                                 <div className="row mx-0 my-1">
                                     <div className="col-md-4">
                                         <select
-                                            className='newproduct-input'
+                                            className='newproduct-input select'
                                             name="category"
                                             value={formdata.category}
                                             onChange={handleCategoryChange}
@@ -298,7 +298,7 @@ const NewProductForm = () => {
                                     </div>
                                     <div className="col-md-4">
                                         <select
-                                            className='newproduct-input'
+                                            className='newproduct-input select'
                                             name="categoryType"
                                             value={formdata.categoryType}
                                             onChange={handleCategoryTypeChange}
@@ -319,7 +319,7 @@ const NewProductForm = () => {
                                     </div>
                                     <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
                                         <select
-                                            className='newproduct-input px-2'
+                                            className='newproduct-input px-2 select'
                                             name="subCategory"
                                             value={formdata.subCategory}
                                             onChange={(e) => handleInputChange(e)}
@@ -327,14 +327,12 @@ const NewProductForm = () => {
                                         >
                                             <option value="">Select a subcategory</option>
                                             {subCategories.map((subCat) => (
-                                                <option key={subCat.id} value={subCat.id}>
+                                                <option className='my-4' key={subCat.id} value={subCat.id}>
                                                     {subCat.name}
                                                 </option>
                                             ))}
                                         </select>
                                     </div>
-
-
                                 </div>
 
                                 {/* FORTH ROW */}

@@ -1,33 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 // import stitchedData from "./StitchedData";
 import PretStyles from "../home/PretStyles";
 import NewArrivals from "../home/NewArrivals";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
+import { getCategoryAsync, getCategoryTypeAsync } from "../../features/categorySlice";
+import Top_Sales_cont from "../home/Top_Sales_cont";
 
 const StitchedAllProducts = () => {
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const [subCategories, setSubCategories] = useState([]);
 
   const handleItemClick = (itemId) => {
-    console.log('jdkjsn');
     navigate(`/selectedItem/${itemId}`);
-
     window.scrollTo(0, 0);
   };
 
-  const dispatch = useDispatch();
+  const allProducts = useSelector(state => state.product.products);
+  console.log('allProducts', allProducts);
 
-  const stitchedData = useSelector(state => state.womenData.item).slice(0, 12)
+  // CALL TO GET ALL CATEGORIES
+  // useEffect(() => {
+  //   dispatch(getCategoryAsync());
+  // }, []);
 
-  const groupedProducts = stitchedData.reduce((acc, product) => {
-    if (!acc[product.subCategory]) {
-      acc[product.subCategory] = [];
+
+  // FETCH STITCHED CATEGORY FROM STORE
+  const womenCategoryId = useSelector(state => state.category.categories.find(category => category.name === "Stitched")?.id);
+
+
+  // CALL TO GET ALL CATEGORIES-TYPES
+  useEffect(() => {
+    if (womenCategoryId) {
+      dispatch(getCategoryTypeAsync({ category: womenCategoryId }));
     }
-    acc[product.subCategory].push(product);
+  }, [womenCategoryId, dispatch]);
+
+  // Fetch the category types from the store
+  const categoriesType = useSelector((state) => state.category.categoriesType);
+
+  // Group products by category type
+  const groupedProductsByType = allProducts.reduce((acc, product) => {
+    const categoryType = categoriesType.find((type) => type.id === product.categoryType);
+    if (categoryType) {
+      if (!acc[categoryType.name]) {
+        acc[categoryType.name] = [];
+      }
+      acc[categoryType.name].push(product);
+    }
     return acc;
   }, {});
+
+
+  // Sort the entries based on category type
+  const sortedGroupedProducts = Object.entries(groupedProductsByType).sort(([a], [b]) => {
+    // Adjust the sorting logic based on your specific category type names
+    if (a === "Stitched 1pc") return -1;
+    if (b === "Stitched 1pc") return 1;
+    return a.localeCompare(b);
+  });
+
+
+
 
   return (
     <>
@@ -145,31 +181,26 @@ const StitchedAllProducts = () => {
           {/* StitchedAllProducts -- MAPPING BODY */}
           <div className="all-product-body">
             <div className="row mx-0">
-              {Object.keys(groupedProducts).map((subCategory) => (
-                <div key={subCategory}>
-                  <h2 className="subcategory-heading text-center mt-3">
-                    {subCategory}
-                  </h2>
+              {sortedGroupedProducts.map(([categoryTypeName, products]) => (
+                <div key={categoryTypeName}>
+                  <h2 className="subcategory-heading text-center mt-3">{categoryTypeName}</h2>
                   <div className="row mx-0 my-4">
-                    {groupedProducts[subCategory].map((product) => (
+                    {products.map((product) => (
                       <div key={product.id} className="col-sm-6 col-md-4 col-lg-3 ">
                         <div className="card all-product-body-card my-2">
                           <div onClick={() => handleItemClick(product.id)}>
-                            <img src={product.image} className="card-img-top shadow" alt="..." />
+                            <img src={product.image.secure_url} className="card-img-top shadow" alt="..." />
                           </div>
-
-                          {/* CARD BODY */}
                           <div className="card-body d-flex justify-content-between align-item-center pt-3 px-0">
-                            {/* ITEM DETAILS */}
                             <div className="stitched-card-body-details">
-
-                              <p className="card-data stitched-card-data my-0">Rs.{product.product_price}</p>
-                              <p className="card-data stitched-card-data my-0">{product.product_name}</p>
-
+                              <p className="card-data stitched-card-data my-0">{product.name}</p>
+                              <p className="card-data stitched-card-data my-0">Rs.{product.price}</p>
                             </div>
-                            {/* Button */}
                             <div className="stitched-card-body-button">
-                              <button className="btn stitched-card-body-button-btn" onClick={() => dispatch(addToCart(product))}>
+                              <button
+                                className="btn stitched-card-body-button-btn"
+                                onClick={() => dispatch(addToCart(product))}
+                              >
                                 <i className="fa-solid fa-plus"></i>
                               </button>
                             </div>
@@ -187,7 +218,7 @@ const StitchedAllProducts = () => {
           <NewArrivals heading="NEW ARRIVALS" />
 
           {/* StitchedAllProducts -- TOP SALES */}
-          <NewArrivals heading="TOP SALES" />
+          <Top_Sales_cont heading="TOP SALES" />
 
           {/* StitchedAllProducts -- PAGINATION */}
           <div className="container my-5">

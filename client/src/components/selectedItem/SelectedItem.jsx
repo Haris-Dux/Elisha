@@ -15,6 +15,7 @@ const SelectedItem = () => {
   // Getting all data from slice
   const productData = useSelector(state => state.product.products);
 
+
   // filter given id's data in from all data 
   const product = productData.filter((item) => item.id === id);
   // console.log("filter", product);

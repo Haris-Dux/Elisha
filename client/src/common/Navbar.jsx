@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-
   const user = useSelector((state) => state.auth.user)
 
   return (
@@ -23,54 +22,54 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
-            {/* {user && user.role === "admin" ? ( */}
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/adminmainpage">
-                  Admin
-                </Link>
-              </li>
-            </ul>
+            {user && user.role === "admin" ? (
+              <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/adminmainpage">
+                    Admin
+                  </Link>
+                </li>
+              </ul>
 
-            {/* ) : ( */}
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/women">
-                  Women
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/stitched">
-                  Stitched
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/unstitched">
-                  Unstitched
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/topsales">
-                  TopSales
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/aboutus">
-                  About Us
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mx-3" to="/contactus">
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-            {/* )} */}
+            ) : (
+              <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/women">
+                    Women
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/stitched">
+                    Stitched
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/unstitched">
+                    Unstitched
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/topsales">
+                    TopSales
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/aboutus">
+                    About Us
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link mx-3" to="/contactus">
+                    Contact Us
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </nav >

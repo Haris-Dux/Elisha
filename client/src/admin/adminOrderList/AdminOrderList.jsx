@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./AdminOrderList.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrderForAdminAsync, updateOrderAsync } from '../../features/orderSlice';
@@ -73,7 +73,7 @@ const AdminOrderList = () => {
                                                     onChange={(e) => handleStatusChange(order.id, e.target.value, order.address, order.phone)}
                                                 >
                                                     <option value="pending">Pending</option>
-                                                    <option value="approved">Approved</option>
+                                                    <option value="dispatch">Dispatch</option>
                                                     <option value="delayed">Delayed</option>
                                                     <option value="canceled">Canceled</option>
                                                 </select>

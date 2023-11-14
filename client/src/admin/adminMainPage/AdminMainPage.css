@@ -194,7 +194,7 @@ i {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 769px) {
     .product-grid-body-card-body-buttons-btn span {
         display: inline;
     }
@@ -209,6 +209,11 @@ i {
 
     .dashboard-heading {
         padding-left: 2rem;
+    }
+
+    .navbar_text {
+        display: none;
+
     }
 }
 
