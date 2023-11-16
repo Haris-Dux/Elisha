@@ -38,7 +38,7 @@ const ShopByType = () => {
                   </div>
                   <div className="card-body shop-by-type-card-body">
                     <h5 className="card-title shop-by-type-card-title text-center">{item}</h5>
-                    <a onClick={} className="btn shop-by-type-cards-buttons">
+                    <a onClick={handleSeletedItem} className="btn shop-by-type-cards-buttons">
                       SHOP NOW
                     </a>
                   </div>
