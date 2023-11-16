@@ -1,59 +1,39 @@
 import React from "react";
-import topbar_img1 from "./topbar_img1.jpg";
-import topbar_img2 from "./topbar_img2.jpg";
-import topbar_img3 from "./topbar_img3.jpg";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const TopBar = () => {
+  const navigate = useNavigate();
+  const products = useSelector(state => state.product.products).slice(0,12)
+
+  const handleItemClick = (itemId) => {
+    navigate(`/selectedItem/${itemId}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <section className="topbar my-4">
         <div className="container">
           <div className="row mx-0 topbar-content">
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-              <div className="card topbar-card">
+          {products.map((data)=>(
+            <div  onClick={()=>handleItemClick(data.id)} style={{cursor:'pointer'}} className="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                <div className="card topbar-card">
                 <img
-                  src={topbar_img1}
+                  src={data.image.secure_url}
                   className="card-img-top"
                   alt="..."
                   width="100%"
-                  height="100%"
+                  height="80%"
                 />
                 <div className="card-body topbar-card-body d-flex justify-content-between">
-                  <span className="topbar-dress-code">ZCE23-1A</span>
-                  <span className="topbar-dress-price">Rs.9,030</span>
+                  <span className="topbar-dress-code">{data.name}</span>
+                  <span className="topbar-dress-price">RS {data.price}</span>
                 </div>
               </div>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-              <div className="card topbar-card">
-                <img
-                  src={topbar_img2}
-                  className="card-img-top"
-                  alt="..."
-                  width="100%"
-                  height="100%"
-                />
-                <div className="card-body topbar-card-body d-flex justify-content-between">
-                  <span className="topbar-dress-code">ZCE23-1A</span>
-                  <span className="topbar-dress-price">Rs.9,030</span>
-                </div>
               </div>
-            </div>
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-              <div className="card topbar-card">
-                <img
-                  src={topbar_img3}
-                  className="card-img-top"
-                  alt="..."
-                  width="100%"
-                  height="100%"
-                />
-                <div className="card-body topbar-card-body d-flex justify-content-between">
-                  <span className="topbar-dress-code">ZCE23-1A</span>
-                  <span className="topbar-dress-price">Rs.9,030</span>
-                </div>
-              </div>
-            </div>
+              ))}
           </div>
         </div>
       </section>

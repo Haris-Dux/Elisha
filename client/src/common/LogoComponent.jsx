@@ -54,8 +54,7 @@ const LogoComponent = () => {
                   src={logo}
                   className="logo-img-cont-img"
                   alt=""
-                  width="120px"
-                  height="90px"
+                  width="105px"
                 />
               </Link>
             </div>

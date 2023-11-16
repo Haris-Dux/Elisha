@@ -21,15 +21,8 @@ const StitchedAllProducts = () => {
   const allProducts = useSelector(state => state.product.products);
   console.log('allProducts', allProducts);
 
-  // CALL TO GET ALL CATEGORIES
-  // useEffect(() => {
-  //   dispatch(getCategoryAsync());
-  // }, []);
-
-
   // FETCH STITCHED CATEGORY FROM STORE
   const womenCategoryId = useSelector(state => state.category.categories.find(category => category.name === "Stitched")?.id);
-
 
   // CALL TO GET ALL CATEGORIES-TYPES
   useEffect(() => {

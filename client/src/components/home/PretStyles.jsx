@@ -4,8 +4,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import topbar_img1 from "./topbar_img1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoryTypeAsync } from "../../features/categorySlice";
+import { useNavigate } from "react-router-dom";
 
 const NextArrow = (props) => {
+  
   const { onClick } = props;
   return (
     <div className="control-btn" onClick={onClick}>
@@ -15,6 +19,7 @@ const NextArrow = (props) => {
     </div>
   );
 };
+
 const PrevArrow = (props) => {
   const { onClick } = props;
   return (
@@ -27,15 +32,16 @@ const PrevArrow = (props) => {
 };
 
 const PretStyles = ({ heading, slide }) => {
+  const navigate = useNavigate()
   const [slidesToShow, setSlidesToShow] = useState(slide);
-
+  const dispatch = useDispatch();
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     // slidesToShow: 4,
     slidesToScroll: 2,
-    slidesToShow: slidesToShow,
+    slidesToShow: slide,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     // autoplay: true,
@@ -48,7 +54,7 @@ const PretStyles = ({ heading, slide }) => {
       //   setSlidesToShow(4); // Full Desktop view
       // } else 
       if (window.innerWidth >= 1024) {
-        setSlidesToShow(3); // Desktop view
+        setSlidesToShow(4); // Desktop view
       } else if (window.innerWidth >= 768) {
         setSlidesToShow(2); // Tablet view
       } else {
@@ -66,6 +72,20 @@ const PretStyles = ({ heading, slide }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+
+  const category = useSelector(state => state.category.categories);
+  console.log("category", category)
+
+  const categoryTypes = useSelector((state) => state.category.categoriesType);
+ 
+  const handleItemClick = (itemId) => {
+    navigate(`/productbycategory/${itemId}`);
+    window.scrollTo(0, 0);
+  };
+
+  
+
   return (
     <>
       <section className="pert-style my-5">
@@ -75,7 +95,7 @@ const PretStyles = ({ heading, slide }) => {
 
         <div className="pert-style-content">
           <Slider {...settings}>
-            {pretStyles.map((pretStyles) => {
+            {categoryTypes.map((pretStyles) => {
               return (
                 <div className="container pert-style-cont my-5 py-3" key={pretStyles.id}>
                   <div className="card pert-style-card mx-0" >
@@ -84,7 +104,7 @@ const PretStyles = ({ heading, slide }) => {
                         <div className="child-box-img-cont">
                           <img
                             className="child-box_img"
-                            src={topbar_img1}
+                            src={pretStyles.image.secure_url}
                             alt=""
                             width="100%"
                           />
@@ -93,9 +113,9 @@ const PretStyles = ({ heading, slide }) => {
                     </div>
                     <div className="card-body pert-style-card-body">
                       <h5 className="card-title text-center">
-                        {pretStyles.category}
+                        {pretStyles.name}
                       </h5>
-                      <a href="#" className="btn shop-by-type-cards-buttons">
+                      <a onClick={()=>handleItemClick(pretStyles.id)} className="btn shop-by-type-cards-buttons">
                         SHOP NOW
                       </a>
                     </div>

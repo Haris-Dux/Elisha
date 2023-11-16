@@ -11,6 +11,8 @@ const NewProductForm = () => {
     const dispatch = useDispatch();
     const fileInputRef = useRef(null);
 
+    const fabric = ["Silk","Jamawar","Cotton","Khaddar","Wool","Linen","Velvet","lawn","Satin","Chiffon","Fleece"]
+
     const [formdata, setFormdata] = useState({
         name: '',
         itemCode: '',
@@ -242,14 +244,23 @@ const NewProductForm = () => {
                                         />
                                     </div>
                                     <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
-                                        <input
+                                        { <input
                                             className='newproduct-input'
                                             type="text"
                                             name="fabric"
                                             placeholder='Item Fabric'
                                             value={formdata.fabric}
                                             onChange={handleInputChange}
-                                        />
+                                        /> }
+                                        
+                                        <select
+                                            className='newproduct-input select'
+                                            name="category"
+                                            value={formdata.category}
+                                            onChange={handleCategoryChange}
+                                        >
+                                            <option value="">Select Fabric</option>
+                                        </select>
                                     </div>
                                 </div>
 

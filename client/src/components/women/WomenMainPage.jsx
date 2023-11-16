@@ -15,13 +15,6 @@ const WomenMainPage = () => {
   // FETCH STITCHED CATEGORY FROM STORE
   const womenCategoryId = useSelector(state =>
     state.category.categories.find(category => category.name === "Women")?.id);
-
-
-
-
-
-
-
   const categoriesType = useSelector((state) => state.category.categoriesType);
 
 

@@ -1,7 +1,7 @@
 .head {
     background-color: #4E4D49;
     color: #dbdbdb;
-    font-size: 1rem;
+    font-size: .9rem;
     letter-spacing: 1px;
 }
 
@@ -15,7 +15,7 @@ i {
 
 .logoComponent {
     background-color: #faf9f9;
-    height: 8rem !important;
+    /* height: 8rem !important; */
 }
 
 .logo-img-cont-img {
@@ -23,7 +23,7 @@ i {
 }
 
 .nav-link {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     font-weight: 500;
 }
 
