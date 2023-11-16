@@ -9,7 +9,7 @@ const ShopByType = () => {
   // Filter only top sales products
   const filterdNames = allProducts.map((item)=>item.fabric);
   const handleItemClick = (itemId) => {
-    navigate(`/selectedItem/${itemId}`);
+    navigate(`/productbycategory/${itemId}`);
     window.scrollTo(0, 0);
 };
   return (
