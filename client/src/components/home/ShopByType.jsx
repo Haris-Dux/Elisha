@@ -1,15 +1,16 @@
 import React from "react";
 import topbar_img1 from "./topbar_img1.jpg";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ShopByType = () => {
-
+  const navigate = useNavigate();
   const allProducts = useSelector(state => state.product.products)
 
   // Filter only top sales products
   const filterdNames = allProducts.map((item)=>item.fabric);
-  const handleItemClick = (itemId) => {
-    navigate(`/productbycategory/${itemId}`);
+  const handleItemClick = (item) => {
+    navigate(`/productbyfabric/${item}`);
     window.scrollTo(0, 0);
 };
   return (
@@ -41,7 +42,7 @@ const ShopByType = () => {
                   </div>
                   <div className="card-body shop-by-type-card-body">
                     <h5 className="card-title shop-by-type-card-title text-center">{item}</h5>
-                    <a onClick={handleItemClick} className="btn shop-by-type-cards-buttons">
+                    <a onClick={()=>handleItemClick(item)} className="btn shop-by-type-cards-buttons">
                       SHOP NOW
                     </a>
                   </div>
