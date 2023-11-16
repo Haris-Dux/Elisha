@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PretStyles from "../home/PretStyles";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getCategoryAsync, getCategoryTypeAsync } from "../../features/categorySlice";
-
+import {
+  getCategoryAsync,
+  getCategoryTypeAsync,
+} from "../../features/categorySlice";
 
 const NextArrow = (props) => {
-  
   const { onClick } = props;
   return (
     <div className="control-btn" onClick={onClick}>
@@ -30,15 +31,19 @@ const PrevArrow = (props) => {
   );
 };
 
-
-
 const TopSalesAllProducts = () => {
   const [slidesToShow, setSlidesToShow] = useState(3);
+  const [selectedPriceRange, setSelectedPriceRange] = useState("");
+  const [size, selectedSize] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categoryType, selectedCategoryType] = useState("");
+  const sizes = ["XS", "S", "M", "L", "XL"];
+  const productsref = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(()=>{
-    dispatch(getCategoryAsync())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(getCategoryAsync());
+  }, [dispatch]);
   const settings = {
     dots: false,
     infinite: true,
@@ -87,26 +92,54 @@ const TopSalesAllProducts = () => {
   const categories = useSelector((state) => state.category.categories);
   const categoriesType = useSelector((state) => state.category.categoriesType);
   const ids = categories.map((category) => category.id);
-   useEffect(() => {
+
+  useEffect(() => {
     if (categories) {
       dispatch(getCategoryTypeAsync({ category: ids }));
     }
   }, [dispatch, categories]);
-  
-  const [selectedPriceRange, setSelectedPriceRange] = useState("");
 
   const filterProductsByPrice = (range) => {
     setSelectedPriceRange(range);
     const filteredProducts = topSalesProducts.filter((product) => {
       const [min, max] = range.split(" - ");
-      const price = parseInt(product.price); 
+      const price = parseInt(product.price);
       return price >= parseInt(min) && price <= parseInt(max);
     });
+    setFilteredProducts(filteredProducts);
   };
 
-  // let products = [];
+  let products = [];
+  if (filteredProducts.length > 0) {
+    products = filteredProducts;
+  } else {
+    products = topSalesProducts;
+  }
+  useEffect(() => {
+    if (selectedPriceRange || size || (categoryType && productsref.current)) {
+      productsref.current.scrollIntoView({
+        behaviour: "smooth",
+        block: "start",
+      });
+    }
+  });
 
-  // if(filteredProducts)
+  const filterProductsBySize = (size) => {
+    selectedSize(size);
+    const filteredProducts = topSalesProducts.filter((item) => {
+      return item.size.includes(size);
+    });
+    setFilteredProducts(filteredProducts);
+  };
+
+  const handleCategoyFiltering = (id) => {
+    selectedCategoryType(id);
+    const filteredProducts = topSalesProducts.filter((product) => {
+      return product.categoryType === id;
+    });
+    console.log(filteredProducts);
+    setFilteredProducts(filteredProducts);
+  };
 
   return (
     <>
@@ -128,28 +161,28 @@ const TopSalesAllProducts = () => {
           <div className="unStitchedAllProducts-filter">
             <div className="filter">
               <div className="buttons-list d-flex justify-content-center align-items-center flex-wrap py-2 my-5">
+                {/* SIZE-BUTTON */}
                 <div className="dropdown my-2">
                   <a
                     className="btn btn-secondary dropdown-toggle"
-                    href="#"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Size
+                    {size.length > 0 ? size : "Size"}
                   </a>
 
                   <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
+                    {sizes.map((size) => (
+                      <li>
+                        <a
+                          className="dropdown-item"
+                          onClick={() => filterProductsBySize(size)}
+                        >
+                          {size}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 {/* PRICE-BUTTON */}
@@ -160,23 +193,42 @@ const TopSalesAllProducts = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Price
+                    {selectedPriceRange.length > 0
+                      ? selectedPriceRange
+                      : "Price"}
                   </a>
 
                   <ul className="dropdown-menu">
                     <li>
-                      <a className="dropdown-item"  onClick={() => filterProductsByPrice("0 - 1500")}>
-                       0 - 1500
+                      <a
+                        className="dropdown-item"
+                        onClick={() => filterProductsByPrice("0 - 1500")}
+                      >
+                        0 - 1500
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" onClick={() => filterProductsByPrice("1500 - 3000")}>
-                      1500 - 3000
+                      <a
+                        className="dropdown-item"
+                        onClick={() => filterProductsByPrice("1500 - 3000")}
+                      >
+                        1500 - 3000
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" onClick={() => filterProductsByPrice("3000 - 100000")}>
-                      3000 - 5000
+                      <a
+                        className="dropdown-item"
+                        onClick={() => filterProductsByPrice("3000 - 5000")}
+                      >
+                        3000 - 5000
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        onClick={() => filterProductsByPrice("5000 - 10000")}
+                      >
+                        5000 - 10000
                       </a>
                     </li>
                   </ul>
@@ -218,7 +270,9 @@ const TopSalesAllProducts = () => {
                               {pretStyles.name}
                             </h5>
                             <a
-                              href="#"
+                              onClick={() =>
+                                handleCategoyFiltering(pretStyles.id)
+                              }
                               className="btn shop-by-type-cards-buttons"
                             >
                               SHOP NOW
@@ -234,9 +288,9 @@ const TopSalesAllProducts = () => {
           </div>
 
           {/* StitchedAllProducts -- MAPPING BODY */}
-          <div className="all-product-body">
+          <div ref={productsref} className="all-product-body">
             <div className="row mx-0">
-              {topSalesProducts.map((item) => {
+              {products.map((item) => {
                 return (
                   <div key={item.id} className="col-md-3">
                     <div className="card all-product-body-card my-2">
@@ -273,54 +327,6 @@ const TopSalesAllProducts = () => {
                 );
               })}
             </div>
-          </div>
-
-          {/* StitchedAllProducts -- PAGINATION */}
-          <div className="container my-5">
-            <nav aria-label="Page navigation example">
-              <ul className="pagination d-flex justify-content-center align-items-center flex-wrap">
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    Page
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    1
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    2
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    3
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    4
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    5
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    6
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link focus-ring focus-ring-light" href="#">
-                    7
-                  </a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </section>
