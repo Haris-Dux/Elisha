@@ -11,8 +11,20 @@ const NewProductForm = () => {
     const dispatch = useDispatch();
     const fileInputRef = useRef(null);
 
-    const fabric = ["Silk","Jamawar","Cotton","Khaddar","Wool","Linen","Velvet","lawn","Satin","Chiffon","Fleece"]
-
+    const fabrics = [
+        {id:1,name:'Silk'},
+        { id: 2, name: "Jamawar" },
+        { id: 3, name: "Cotton" },
+        { id: 4, name: "Khaddar" },
+        { id: 5, name: "Wool" },
+        { id: 6, name: "Linen" },
+        { id: 7, name: "Velvet" },
+        { id: 8, name: "Lawn" },
+        { id: 9, name: "Satin" },
+        { id: 10, name: "Chiffon" },
+        { id: 11, name: "Fleece" }
+    ];
+    
     const [formdata, setFormdata] = useState({
         name: '',
         itemCode: '',
@@ -244,23 +256,20 @@ const NewProductForm = () => {
                                         />
                                     </div>
                                     <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
-                                        { <input
+                                        { <select
                                             className='newproduct-input'
                                             type="text"
                                             name="fabric"
                                             placeholder='Item Fabric'
                                             value={formdata.fabric}
                                             onChange={handleInputChange}
-                                        /> }
-                                        
-                                        <select
-                                            className='newproduct-input select'
-                                            name="category"
-                                            value={formdata.category}
-                                            onChange={handleCategoryChange}
                                         >
-                                            <option value="">Select Fabric</option>
-                                        </select>
+                                            <option >-- Select Fabric -- (OPTIONAL) </option>
+                                            {fabrics.map((item)=>(
+                                                <option value={item.id}>{item.name}</option>
+                                            ))}
+                                        </select> }
+                                        
                                     </div>
                                 </div>
 
