@@ -35,7 +35,7 @@ const Navbar = () => {
               <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <Link className="nav-link mx-3" to="/">
-                    Suheer
+                    Homeeeeeee
                   </Link>
                 </li>
                 <li className="nav-item">
