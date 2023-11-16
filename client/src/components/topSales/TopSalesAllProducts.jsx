@@ -104,9 +104,9 @@ const TopSalesAllProducts = () => {
     });
   };
 
-  let products = [];
+  // let products = [];
 
-  if(filteredProducts)
+  // if(filteredProducts)
 
   return (
     <>
