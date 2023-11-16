@@ -35,6 +35,7 @@ import CategoryType from "./admin/category/CategoryType";
 import SubCategory from "./admin/category/SubCategory";
 import { getCategoryTypeAsync } from "./features/categorySlice";
 import ProductByCategory from "./components/home/ProductByCategory";
+import ProductsByFabric from "./components/home/ProductsByFabric";
 
 
 
@@ -102,6 +103,7 @@ function App() {
           <Route path="/categorytype" element={<CategoryType />} />
           <Route path="/subcategory" element={<SubCategory />} />
           <Route path="/productbycategory/:id" element={<ProductByCategory />} />
+          <Route path="/productbyfabric/:id" element={<ProductsByFabric />} />
         </Routes>
         <Footer />
       </BrowserRouter>

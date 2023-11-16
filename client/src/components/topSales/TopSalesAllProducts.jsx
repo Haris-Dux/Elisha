@@ -36,11 +36,9 @@ const TopSalesAllProducts = () => {
   const [slidesToShow, setSlidesToShow] = useState(3);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   useEffect(()=>{
     dispatch(getCategoryAsync())
   },[dispatch])
-
   const settings = {
     dots: false,
     infinite: true,
@@ -52,7 +50,6 @@ const TopSalesAllProducts = () => {
     prevArrow: <PrevArrow />,
     // autoplay: true,
   };
-
   // Update the number of slides based on screen size
   useEffect(() => {
     const handleResize = () => {
@@ -76,34 +73,41 @@ const TopSalesAllProducts = () => {
     };
   }, []);
 
-
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
     window.scrollTo(0, 0);
   };
-
-
-    // CALL TO GET ALL CATEGORIES-TYPES
-   
-
   // Get all products
   const allProducts = useSelector((state) => state.product.products);
-
   // Filter only top sales products
   const topSalesProducts = allProducts.filter(
     (product) => product.topSales === true
   );
-
   // Fetch the category types from the store
   const categories = useSelector((state) => state.category.categories);
   const categoriesType = useSelector((state) => state.category.categoriesType);
   const ids = categories.map((category) => category.id);
-
    useEffect(() => {
     if (categories) {
       dispatch(getCategoryTypeAsync({ category: ids }));
     }
   }, [dispatch, categories]);
+  
+  const [selectedPriceRange, setSelectedPriceRange] = useState("");
+
+  const filterProductsByPrice = (range) => {
+    setSelectedPriceRange(range);
+    const filteredProducts = topSalesProducts.filter((product) => {
+      const [min, max] = range.split(" - ");
+      const price = parseInt(product.price); 
+      return price >= parseInt(min) && price <= parseInt(max);
+    });
+  };
+
+  let products = [];
+
+  if(filteredProducts)
+
   return (
     <>
       <section className="StitchedAllProducts py-4 my-3">
@@ -124,12 +128,6 @@ const TopSalesAllProducts = () => {
           <div className="unStitchedAllProducts-filter">
             <div className="filter">
               <div className="buttons-list d-flex justify-content-center align-items-center flex-wrap py-2 my-5">
-                {/* FILTER-BUTTON */}
-                <button className="btn buttons-list-btn">
-                  <i className="fa-solid fa-filter me-2"></i>
-                  <span>Filter</span>
-                </button>
-                {/* SIZE-BUTTON */}
                 <div className="dropdown my-2">
                   <a
                     className="btn btn-secondary dropdown-toggle"
@@ -158,7 +156,6 @@ const TopSalesAllProducts = () => {
                 <div className="dropdown my-2">
                   <a
                     className="btn btn-secondary dropdown-toggle"
-                    href="#"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -168,52 +165,27 @@ const TopSalesAllProducts = () => {
 
                   <ul className="dropdown-menu">
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Action
+                      <a className="dropdown-item"  onClick={() => filterProductsByPrice("0 - 1500")}>
+                       0 - 1500
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
+                      <a className="dropdown-item" onClick={() => filterProductsByPrice("1500 - 3000")}>
+                      1500 - 3000
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" onClick={() => filterProductsByPrice("3000 - 100000")}>
+                      3000 - 5000
                       </a>
                     </li>
                   </ul>
                 </div>
-                {/* DISCOUNT-BUTTON */}
-                <div className="dropdown my-2">
-                  <a
-                    className="btn btn-secondary dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Discount
-                  </a>
-
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                {/* SORT-BUTTON */}
-                <button className="btn buttons-list-btn my-2">
-                  <span> Sort By</span>
-                </button>
               </div>
             </div>
           </div>
 
           <div className="scroll-bar">
-            {/* <PretStyles heading="50 % OFF" category slide={3} categoryTypes={ids} /> */}
             {/* PERTSTYLE */}
             <section className="pert-style my-5">
               <div className="pret-style-header text-center">
