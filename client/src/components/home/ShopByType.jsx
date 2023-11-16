@@ -8,7 +8,10 @@ const ShopByType = () => {
 
   // Filter only top sales products
   const filterdNames = allProducts.map((item)=>item.fabric);
-  console.log(filterdNames);
+  const handleItemClick = (itemId) => {
+    navigate(`/selectedItem/${itemId}`);
+    window.scrollTo(0, 0);
+};
   return (
     <>
       <section className="shop-by-type">
@@ -38,7 +41,7 @@ const ShopByType = () => {
                   </div>
                   <div className="card-body shop-by-type-card-body">
                     <h5 className="card-title shop-by-type-card-title text-center">{item}</h5>
-                    <a onClick={handleSeletedItem} className="btn shop-by-type-cards-buttons">
+                    <a onClick={handleItemClick} className="btn shop-by-type-cards-buttons">
                       SHOP NOW
                     </a>
                   </div>

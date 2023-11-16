@@ -12,17 +12,17 @@ const NewProductForm = () => {
     const fileInputRef = useRef(null);
 
     const fabrics = [
-        {id:1,name:'Silk'},
-        { id: 2, name: "Jamawar" },
-        { id: 3, name: "Cotton" },
-        { id: 4, name: "Khaddar" },
-        { id: 5, name: "Wool" },
-        { id: 6, name: "Linen" },
-        { id: 7, name: "Velvet" },
-        { id: 8, name: "Lawn" },
-        { id: 9, name: "Satin" },
-        { id: 10, name: "Chiffon" },
-        { id: 11, name: "Fleece" }
+        {  name:'Silk'},
+        {  name: "Jamawar" },
+        {  name: "Cotton" },
+        {  name: "Khaddar" },
+        {  name: "Wool" },
+        {  name: "Linen" },
+        {  name: "Velvet" },
+        {  name: "Lawn" },
+        {  name: "Satin" },
+        {  name: "Chiffon" },
+        {  name: "Fleece" }
     ];
     
     const [formdata, setFormdata] = useState({
@@ -266,7 +266,7 @@ const NewProductForm = () => {
                                         >
                                             <option >-- Select Fabric -- (OPTIONAL) </option>
                                             {fabrics.map((item)=>(
-                                                <option value={item.id}>{item.name}</option>
+                                                <option value={item.name}>{item.name}</option>
                                             ))}
                                         </select> }
                                         
