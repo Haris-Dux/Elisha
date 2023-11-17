@@ -57,7 +57,7 @@ const DealsByCategory = () => {
         </div>
       </section>
 
-      <section className="DealsByCategory-poster pb-5">
+      <section className="DealsByCategory-poster py-5">
         <div className="container">
           <div className="img-cont">
             <img

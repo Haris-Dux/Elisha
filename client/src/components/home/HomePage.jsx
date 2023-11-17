@@ -16,11 +16,11 @@ import {
 const HomePage = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
-  
+
   const extractIds = () => {
     return categories.map((item) => item.id);
   };
-  
+
   // Effect for fetching category types
   useEffect(() => {
     if (categories && categories.length > 0) {
@@ -28,23 +28,23 @@ const HomePage = () => {
       dispatch(getCategoryTypeAsync({ category: ids }));
     }
   }, [dispatch, categories]);
-  
+
   // Effect for initial product and category fetch
   useEffect(() => {
     dispatch(getProductAsync());
     dispatch(getCategoryAsync());
   }, [dispatch]);
-  
+
 
   return (
     <>
       <MainPage />
       <TopBar />
-      <ShopByType />
+      <ShopByType  heading="PRET STYLE" slide={3}/>
       <NewArrivals heading="NEW ARRIVALS" />
       <BrandNameLogo />
       <DealsByCategory />
-      <PretStyles heading="PRET STYLE" slide={4} />
+      <PretStyles heading="PRET STYLE" slide={3} />
     </>
   );
 };

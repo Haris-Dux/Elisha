@@ -9,7 +9,6 @@ import { getCategoryAsync, getCategoryTypeAsync } from "../../features/categoryS
 
 
 const NextArrow = (props) => {
-  
   const { onClick } = props;
   return (
     <div className="control-btn" onClick={onClick}>
@@ -36,9 +35,9 @@ const TopSalesAllProducts = () => {
   const [slidesToShow, setSlidesToShow] = useState(3);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getCategoryAsync())
-  },[dispatch])
+  }, [dispatch])
   const settings = {
     dots: false,
     infinite: true,
@@ -79,7 +78,6 @@ const TopSalesAllProducts = () => {
   };
   // Get all products
   const allProducts = useSelector((state) => state.product.products);
-  // Filter only top sales products
   const topSalesProducts = allProducts.filter(
     (product) => product.topSales === true
   );
@@ -87,19 +85,19 @@ const TopSalesAllProducts = () => {
   const categories = useSelector((state) => state.category.categories);
   const categoriesType = useSelector((state) => state.category.categoriesType);
   const ids = categories.map((category) => category.id);
-   useEffect(() => {
+  useEffect(() => {
     if (categories) {
       dispatch(getCategoryTypeAsync({ category: ids }));
     }
   }, [dispatch, categories]);
-  
+
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
 
   const filterProductsByPrice = (range) => {
     setSelectedPriceRange(range);
     const filteredProducts = topSalesProducts.filter((product) => {
       const [min, max] = range.split(" - ");
-      const price = parseInt(product.price); 
+      const price = parseInt(product.price);
       return price >= parseInt(min) && price <= parseInt(max);
     });
   };
@@ -165,18 +163,18 @@ const TopSalesAllProducts = () => {
 
                   <ul className="dropdown-menu">
                     <li>
-                      <a className="dropdown-item"  onClick={() => filterProductsByPrice("0 - 1500")}>
-                       0 - 1500
+                      <a className="dropdown-item" onClick={() => filterProductsByPrice("0 - 1500")}>
+                        0 - 1500
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" onClick={() => filterProductsByPrice("1500 - 3000")}>
-                      1500 - 3000
+                        1500 - 3000
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" onClick={() => filterProductsByPrice("3000 - 100000")}>
-                      3000 - 5000
+                        3000 - 5000
                       </a>
                     </li>
                   </ul>

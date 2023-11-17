@@ -20,7 +20,7 @@ const NewArrivals = ({ heading }) => {
   return (
     <>
       <section className="new-arrivals">
-        <h3 className="new-arrivals-title text-center mt-5 mb-4 fw-bold fs-1 ">
+        <h3 className="new-arrivals-title text-center mt-1 mb-4 fw-bold fs-1 ">
           {heading}
         </h3>
         <div className="container new-arrivals-cont">

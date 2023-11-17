@@ -3,14 +3,15 @@ import logo from "../components/contact/logo.png"
 import "./Sign.css";
 import { toast } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createuserAsync } from "../features/authSlice";
+import { useEffect } from "react";
 
 const Signup = () => {
-
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+
   // Initialize state variables for form inputs and error message
   const [formData, setFormData] = useState({
     name: "",
@@ -18,6 +19,18 @@ const Signup = () => {
     password: "",
     role: "user",
   });
+
+  useEffect(() => {
+    if (user && user.role === 'user') {
+      navigate("/");
+    }
+    else if (user && user.role === 'admin') {
+      navigate("/adminmainpage");
+    }
+  }, [user, navigate]);
+
+
+
 
   // Handle form input changes and update state
   const handleInputChange = (e) => {

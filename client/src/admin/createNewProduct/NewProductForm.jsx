@@ -12,19 +12,19 @@ const NewProductForm = () => {
     const fileInputRef = useRef(null);
 
     const fabrics = [
-        {  name:'Silk'},
-        {  name: "Jamawar" },
-        {  name: "Cotton" },
-        {  name: "Khaddar" },
-        {  name: "Wool" },
-        {  name: "Linen" },
-        {  name: "Velvet" },
-        {  name: "Lawn" },
-        {  name: "Satin" },
-        {  name: "Chiffon" },
-        {  name: "Fleece" }
+        { name: 'Silk' },
+        { name: "Jamawar" },
+        { name: "Cotton" },
+        { name: "Khaddar" },
+        { name: "Wool" },
+        { name: "Linen" },
+        { name: "Velvet" },
+        { name: "Lawn" },
+        { name: "Satin" },
+        { name: "Chiffon" },
+        { name: "Fleece" }
     ];
-    
+
     const [formdata, setFormdata] = useState({
         name: '',
         itemCode: '',
@@ -256,7 +256,7 @@ const NewProductForm = () => {
                                         />
                                     </div>
                                     <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
-                                        { <select
+                                        {<select
                                             className='newproduct-input'
                                             type="text"
                                             name="fabric"
@@ -265,11 +265,11 @@ const NewProductForm = () => {
                                             onChange={handleInputChange}
                                         >
                                             <option >-- Select Fabric -- (OPTIONAL) </option>
-                                            {fabrics.map((item)=>(
+                                            {fabrics.map((item) => (
                                                 <option value={item.name}>{item.name}</option>
                                             ))}
-                                        </select> }
-                                        
+                                        </select>}
+
                                     </div>
                                 </div>
 

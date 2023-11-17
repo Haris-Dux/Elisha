@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bg_box_1 from "./bg_box_1.png";
 import bg_box_2 from "./bg_box_2.png";
 import bg_box_3 from "./bg_box_3.png";
 import bg_box_4 from "./bg_box_4.png";
 import PretStyles from "../home/PretStyles";
 import womenMainPageData from "./WomenMainPageData";
-import "./Women.css";
+import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryTypeAsync, getSubCategoryTypeAsync } from "../../features/categorySlice";
 
 const WomenMainPage = () => {
   const dispatch = useDispatch();
+
 
   // FETCH STITCHED CATEGORY FROM STORE
   const womenCategoryId = useSelector(state =>
@@ -37,7 +38,7 @@ const WomenMainPage = () => {
   }, [womenCategoryId, dispatch]);
 
 
-  
+
 
   return (
     <>
@@ -101,10 +102,6 @@ const WomenMainPage = () => {
           </div>
         </div>
       </section >
-
-      <section className="scroll-bar">
-        <PretStyles heading="50 % OFF" slide={4} />
-      </section>
     </>
   );
 };

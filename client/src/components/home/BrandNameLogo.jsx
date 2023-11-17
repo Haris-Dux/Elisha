@@ -3,7 +3,7 @@ import React from "react";
 const BrandNameLogo = () => {
   return (
     <>
-      <section className="brand-name-logo">
+      <section className="brand-name-logo py-5">
         <h2 className="brand-name-logo-header fs-1 fw-bold text-center">
           FEATURED DESIGNER BRANDS
         </h2>

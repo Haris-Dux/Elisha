@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
+
 const ProductsByFabric = () => {
   const { id } = useParams();
   const product = useSelector((state) => state.product.products);

@@ -9,7 +9,7 @@ import { getCategoryTypeAsync } from "../../features/categorySlice";
 import { useNavigate } from "react-router-dom";
 
 const NextArrow = (props) => {
-  
+
   const { onClick } = props;
   return (
     <div className="control-btn" onClick={onClick}>
@@ -41,7 +41,7 @@ const PretStyles = ({ heading, slide }) => {
     speed: 500,
     // slidesToShow: 4,
     slidesToScroll: 2,
-    slidesToShow: slide,
+    slidesToShow: slidesToShow,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     // autoplay: true,
@@ -50,11 +50,10 @@ const PretStyles = ({ heading, slide }) => {
   // Update the number of slides based on screen size
   useEffect(() => {
     const handleResize = () => {
-      // if (window.innerWidth >= 1200) {
-      //   setSlidesToShow(4); // Full Desktop view
-      // } else 
-      if (window.innerWidth >= 1024) {
-        setSlidesToShow(4); // Desktop view
+      if (window.innerWidth >= 1200) {
+        setSlidesToShow(4); // Full Desktop view
+      } else if (window.innerWidth >= 1024) {
+        setSlidesToShow(3); // Desktop view
       } else if (window.innerWidth >= 768) {
         setSlidesToShow(2); // Tablet view
       } else {
@@ -78,13 +77,13 @@ const PretStyles = ({ heading, slide }) => {
   console.log("category", category)
 
   const categoryTypes = useSelector((state) => state.category.categoriesType);
- 
+
   const handleItemClick = (itemId) => {
     navigate(`/productbycategory/${itemId}`);
     window.scrollTo(0, 0);
   };
 
-  
+
 
   return (
     <>
@@ -115,7 +114,7 @@ const PretStyles = ({ heading, slide }) => {
                       <h5 className="card-title text-center">
                         {pretStyles.name}
                       </h5>
-                      <a onClick={()=>handleItemClick(pretStyles.id)} className="btn shop-by-type-cards-buttons">
+                      <a onClick={() => handleItemClick(pretStyles.id)} className="btn shop-by-type-cards-buttons">
                         SHOP NOW
                       </a>
                     </div>

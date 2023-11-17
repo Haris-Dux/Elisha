@@ -4,19 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from 'react-router-dom';
 import { deleteProductAsync, getProductByIdAsync, updateProductAsync } from '../../features/ProductSlice';
+import { getCategoryTypeAsync, getSubCategoryTypeAsync } from '../../features/categorySlice';
 
 const UpdateProduct = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
     const fileInputRef = useRef(null);
+    const [subCategories, setSubCategories] = useState([]);
 
-    // Get all products
-    const allProducts = useSelector(state => state.product.products);
-
-    // Find the selected product by ID
-    const selectedProduct = useSelector((state) => state.product.getProductById)
-    //console.log( selectedProduct);
+    const selectedProduct = useSelector((state) => state.product.getProductById);
 
     const [product, setProduct] = useState({
         name: '',
@@ -35,9 +32,12 @@ const UpdateProduct = () => {
         size: [],
         productDetail: '',
     });
+
+    console.log('product', product);
+
     useEffect(() => {
-        dispatch(getProductByIdAsync(id))
-    }, [dispatch, id])
+        dispatch(getProductByIdAsync(id));
+    }, [dispatch, id]);
 
     useEffect(() => {
         if (selectedProduct) {
@@ -62,8 +62,67 @@ const UpdateProduct = () => {
         }
     }, [selectedProduct]);
 
+    const categories = useSelector((state) => state.category.categories);
+    const categoriesType = useSelector((state) => state.category.categoriesType);
 
-    // HANDLE SIZE CHANGE
+    useEffect(() => {
+        const categoryIds = categories.map((item) => item.id);
+        dispatch(getCategoryTypeAsync({ category: categoryIds }));
+    }, [dispatch, categories]);
+
+    useEffect(() => {
+        if (product.category && product.categoryType) {
+            dispatch(
+                getSubCategoryTypeAsync({
+                    category: product.category,
+                    categoryType: product.categoryType,
+                })
+            )
+                .then((result) => {
+                    setSubCategories(result.payload.subCategoryData);
+                })
+                .catch((error) => {
+                    console.error('Error fetching subcategories:', error);
+                });
+        }
+    }, [dispatch, product.category, product.categoryType]);
+
+    const categoryTypeOptions = categoriesType.map((item) => ({
+        value: item.id,
+        label: item.name,
+    }));
+
+    const subCategoryOptions = subCategories.map((item) => ({
+        value: item.id,
+        label: item.name,
+    }));
+
+
+    // Function to find the categoryType name based on id
+    const getCategoryTypeName = (categoryId) => {
+        const categoryType = categoriesType.find((item) => item.id === categoryId);
+        return categoryType ? categoryType.name : 'N/A'; // Display 'N/A' if not found
+    };
+
+    // Function to find the subCategory name based on id
+    const getSubCategoryName = (subCategoryId) => {
+        const subCategory = subCategories.find((item) => item.id === subCategoryId);
+        return subCategory ? subCategory.name : 'N/A'; // Display 'N/A' if not found
+    };
+
+    const handleCategoryChange = (selectedOption) => {
+        setProduct({ ...product, category: selectedOption.value, categoryType: '', subCategory: '' });
+        dispatch(getCategoryTypeAsync({ category: selectedOption.value }));
+    };
+
+    const handleCategoryTypeChange = (selectedOption) => {
+        setProduct({ ...product, categoryType: selectedOption.value, subCategory: '' });
+    };
+
+    const handleSubCategoryChange = (selectedOption) => {
+        setProduct({ ...product, subCategory: selectedOption.value });
+    };
+
     const handleSizeChange = (e) => {
         const sizeValue = e.target.value;
         const isChecked = e.target.checked;
@@ -81,22 +140,19 @@ const UpdateProduct = () => {
         }
     };
 
-    // HANDLE IMAGE UPLOAD
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setFileToBase(file);
     };
 
-    // CONERTING IMAGE TO BASE64
     const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
             setProduct({ ...product, image: reader.result });
         };
-    }
+    };
 
-    // HANDLE INPUT CHANGE
     const handleInputChange = (event) => {
         const { name, value, type, checked } = event.target;
         const newValue = type === 'checkbox' ? checked : value;
@@ -107,15 +163,11 @@ const UpdateProduct = () => {
         });
     };
 
-
-    // RESET IMAGE 
     const resetImage = () => {
         setProduct({ ...product, image: '' });
         fileInputRef.current.value = '';
     };
 
-
-    // HANDLE UPDATE
     const handleUpdate = (e) => {
         e.preventDefault();
         if (product.image instanceof Object) {
@@ -124,19 +176,14 @@ const UpdateProduct = () => {
                 ...prev,
                 image: base64Image,
             }));
-            console.log(product)
-            dispatch(updateProductAsync({ ...product, image: base64Image }))
+            console.log(product);
+            dispatch(updateProductAsync({ ...product, image: base64Image }));
         } else {
-            dispatch(updateProductAsync(product))
-            // .then(() => {
-            //     navigate("/adminmainpage");
-            // })
-            console.log(product)
+            dispatch(updateProductAsync(product));
+            console.log(product);
         }
     };
 
-
-    // HANDLE DELETE
     const handleDelete = () => {
         try {
             dispatch(deleteProductAsync({ id: product.id }))
@@ -153,9 +200,7 @@ const UpdateProduct = () => {
             console.error(error);
             toast.error('Error updating product');
         }
-    }
-
-
+    };
     return (
         <>
             <section className="NewProductForm py-4">
@@ -267,38 +312,54 @@ const UpdateProduct = () => {
 
                                 {/* THIRD ROW */}
                                 <div className="row mx-0 my-3">
-                                    <div className="col-md-4">
-                                        <input
-                                            className='newproduct-input'
-                                            type="text"
+                                    <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
+                                        <select
+                                            className='newproduct-input select'
                                             name="category"
-                                            placeholder='Category'
                                             value={product.category}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                            onChange={(e) => handleCategoryChange({ value: e.target.value })}
+                                        >
+                                            <option>-- Select Category --</option>
+                                            {categories.map((item) => (
+                                                <option key={item.id} value={item.id}>
+                                                    {item.name}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
-                                    <div className="col-md-4">
-                                        <input
-                                            className='newproduct-input'
-                                            type="text"
+                                    <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
+                                        <select
+                                            className='newproduct-input select'
                                             name="categoryType"
-                                            placeholder='Category Type'
                                             value={product.categoryType}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                            onChange={(e) => handleCategoryTypeChange({ value: e.target.value })}
+                                        >
+                                            <option>-- Select Category Type --</option>
+                                            {categoryTypeOptions.map((item) => (
+                                                <option key={item.value} value={item.value}>
+                                                    {item.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {/* Display the categoryType name */}
+                                        {/* <div>{getCategoryTypeName(product.categoryType)}</div> */}
                                     </div>
-                                    <div className="col-md-4">
-                                        <input
-                                            className='newproduct-input'
-                                            type="text"
+                                    <div className="mt-1 col-xs-12 col-sm-6 col-md-4">
+                                        <select
+                                            className='newproduct-input select'
                                             name="subCategory"
-                                            placeholder='Sub Category'
                                             value={product.subCategory}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
+                                            onChange={(e) => handleSubCategoryChange({ value: e.target.value })}
+                                        >
+                                            <option>-- Select Sub Category --</option>
+                                            {subCategoryOptions.map((item) => (
+                                                <option key={item.value} value={item.value}>
+                                                    {item.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {/* Display the subCategory name */}
+                                        {/* <div>{getSubCategoryName(product.subCategory)}</div> */}
                                     </div>
                                 </div>
 
@@ -455,8 +516,8 @@ const UpdateProduct = () => {
                             </form>
                         </div>
                     </div>
-                </div>
-            </section>
+                </div >
+            </section >
         </>
     );
 }

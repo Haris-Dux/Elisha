@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../components/contact/logo.png";
 import { toast } from "react-toastify";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginuserAsync } from "../features/authSlice";
 import "./Sign.css";
 
@@ -10,6 +10,21 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const user = useSelector((state) => state.auth.user);
+
+
+  
+  useEffect(() => {
+    if (user && user.role === 'user') {
+      navigate("/");
+    }
+    else if (user && user.role === 'admin') {
+      navigate("/adminmainpage");
+    }
+  }, [user, navigate]);
+
+
+
 
   // SCROLL TO TOP FUNCTION
   const scrollToTop = () => {
@@ -37,28 +52,22 @@ const Login = () => {
 
     try {
       const response = await dispatch(loginuserAsync(logData));
-
       console.log("role", response.payload.data.userData.role);
 
       if (response.payload.data.userData.role === "user") {
-        // Check if the user came from the cart page
         const fromCart = new URLSearchParams(location.search).get("from") === "cart";
 
-        // Redirect to the cart page if they came from there, otherwise, go to the home page
         navigate(fromCart ? "/cartpage" : "/");
         scrollToTop();
       } else if (response.payload.data.userData.role === "admin") {
         navigate("/adminmainpage");
         scrollToTop();
       }
-
-      // Set your authentication token or user details in Cookies or state as needed
-      // const token = response.accessToken;
-      // Cookies.set("token", token);
     } catch (error) {
       console.log(error);
     }
   };
+
 
   return (
     <>
