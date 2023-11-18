@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
@@ -34,6 +34,9 @@ const WomenAllProducts = () => {
   const dispatch = useDispatch();
   const [slidesToShow, setSlidesToShow] = useState(3);
   const [dataToShow, setDataToShow] = useState("womenProducts");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categoryType, selectedCategoryType] = useState("");
+  const productsref = useRef(null);
 
   const settings = {
     dots: false,
@@ -85,6 +88,13 @@ const WomenAllProducts = () => {
     product.category === womenCategoryId
   );
 
+  let products = [];
+  if (filteredProducts.length > 0) {
+    products = filteredProducts;
+  } else {
+    products = womenProducts;
+  }
+
   useEffect(() => {
     if (womenCategoryId) {
       dispatch(getCategoryTypeAsync({ category: womenCategoryId }));
@@ -102,8 +112,18 @@ const WomenAllProducts = () => {
     dispatch(getProductAsync());
   }, [dispatch]);
 
+
+  const handleCategoyFiltering = (id) => {
+    selectedCategoryType(id);
+    const filteredProducts = allProducts.filter((product) => {
+      return product.categoryType === id;
+    });
+    setFilteredProducts(filteredProducts);
+  };
+
   return (
     <>
+      {/* CATEGORY-TYPE SLIDER */}
       <div className="scroll-bar">
         <section className="pert-style my-5">
           <div className="pret-style-header text-center">
@@ -136,7 +156,9 @@ const WomenAllProducts = () => {
                           {pretStyles.name}
                         </h5>
                         <a
-                          href="#"
+                          onClick={() =>
+                            handleCategoyFiltering(pretStyles.id)
+                          }
                           className="btn shop-by-type-cards-buttons"
                         >
                           SHOP NOW
@@ -151,16 +173,15 @@ const WomenAllProducts = () => {
         </section>
       </div>
 
-
       <section className="all-product">
         <div className="container">
           <div className="all-product-header text-center my-3 py-2">
             <h2 className="fs-2 fw-bold">PRODUCTS</h2>
           </div>
 
-          <div className="all-product-body">
+          <div ref={productsref} className="all-product-body">
             <div className="row mx-0">
-              {womenProducts.map((product) => (
+              {products.map((product) => (
                 <div key={product.id} className="col-sm-6 col-md-4 col-lg-3">
                   <div className="card all-product-body-card my-2">
                     <div onClick={() => handleItemClick(product.id)}>

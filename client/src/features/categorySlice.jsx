@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 //API URL
 const createCategoryUrl = "http://localhost:3000/api/createCategory";
-const updateCategoryUrl = "http://localhost:3000/api/updateCategory";    // This api is not added currently
+const updateCategoryUrl = "http://localhost:3000/api/updateCategory";
 const deleteCategoryUrl = "http://localhost:3000/api/deleteCategory";
 const getAllCategoriesUrl = "http://localhost:3000/api/getAllCategories";
 
@@ -37,7 +37,7 @@ export const createCategoryAsync = createAsyncThunk("category/create", async (ca
     }
 });
 
-//Get ASYNC THUNK
+//GET ASYNC THUNK
 export const getCategoryAsync = createAsyncThunk("category/get", async () => {
     try {
         const response = await axios.post(getAllCategoriesUrl);
@@ -49,7 +49,7 @@ export const getCategoryAsync = createAsyncThunk("category/get", async () => {
     }
 });
 
-//Get ASYNC THUNK
+//DELETE ASYNC THUNK
 export const deleteCategoryAsync = createAsyncThunk("category/delete", async (id) => {
     try {
         const response = await axios.post(deleteCategoryUrl, id);
@@ -58,6 +58,19 @@ export const deleteCategoryAsync = createAsyncThunk("category/delete", async (id
         return response.data;
 
     } catch (error) {
+        toast.error(error.response.data.msg);
+    }
+});
+
+// updateProductAsync
+export const updateCategoryAsync = createAsyncThunk("category/update", async (data) => {
+    try {
+        const response = await axios.post(updateCategoryUrl, data);
+        toast.success(error.response.data.msg);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error.response.data.msg);
         toast.error(error.response.data.msg);
     }
 });
@@ -77,13 +90,28 @@ export const createCategoryTypeAsync = createAsyncThunk("categoryType/create", a
     }
 });
 
+export const updateCategoryTypeAsync = createAsyncThunk("categoryType/update", async (data) => {
+    try {
+        const response = await axios.post(updateCategoryTypeUrl, data);
+        toast.success(response.data.msg);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error.response.data.msg);
+        toast.error(error.response.data.msg);
+        throw error; // Re-throw the error to mark the async thunk as rejected
+    }
+}
+);
+
+
 
 // Get CATEGORIES ASYNC THUNK
 export const getCategoryTypeAsync = createAsyncThunk("categoryType/get", async (category) => {
     try {
         const response = await axios.post(getAllCategoryTypesUrl, category);
         // toast.success(response.data.msg);
-        console.log( response.data);
+        console.log(response.data);
         return response.data;
 
     } catch (error) {
@@ -165,6 +193,7 @@ const initialState = {
     categories: [],
     categoriesType: [],
     subcategoriesType: [],
+    updatedCategory: null
 };
 
 
@@ -191,6 +220,15 @@ const categorySlice = createSlice({
             .addCase(getCategoryAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.categories = action.payload.categoryData;
+            })
+
+            // UpdateProductAsync
+            .addCase(updateCategoryAsync.rejected, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(updateCategoryAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.categories = action.payload;
             })
 
             // deleteCategoryAsync
@@ -220,6 +258,15 @@ const categorySlice = createSlice({
             .addCase(getCategoryTypeAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.categoriesType = action.payload.categoryTypesData;
+            })
+
+            // UpdateProductAsync
+            .addCase(updateCategoryTypeAsync.rejected, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(updateCategoryTypeAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.categoriesType = action.payload;
             })
 
             // deleteCategoryAsync

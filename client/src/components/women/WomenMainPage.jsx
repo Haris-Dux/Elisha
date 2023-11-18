@@ -8,9 +8,11 @@ import womenMainPageData from "./WomenMainPageData";
 import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryTypeAsync, getSubCategoryTypeAsync } from "../../features/categorySlice";
+import { useNavigate } from "react-router-dom";
 
 const WomenMainPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 
   // FETCH STITCHED CATEGORY FROM STORE
@@ -37,7 +39,9 @@ const WomenMainPage = () => {
     dispatch(getSubCategoryTypeAsync({ category: womenCategoryId, categoryType: categoryTypeIds }));
   }, [womenCategoryId, dispatch]);
 
+  const handleItemClick = (itemId) => {
 
+  };
 
 
   return (
@@ -75,7 +79,7 @@ const WomenMainPage = () => {
                 {/* FIRST BOX  */}
                 {categoriesType.map((data) => {
                   return (
-                    <div className=" col-sm-12 col-md-6 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${data.image.secure_url})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
+                    <div className=" col-sm-12 col-md-4 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${data.image.secure_url})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
 
                       <div className="row mx-0 women-mainpage-box-cont">
                         {/* <div className="col-xs-0 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
@@ -88,7 +92,7 @@ const WomenMainPage = () => {
                               {subCategoriesType
                                 .filter((subCategory) => subCategory.categoryType === data.id)
                                 .map((subCategory) => (
-                                  <li key={subCategory.id}>{subCategory.name}</li>
+                                  <li onClick={() => handleItemClick(subCategory.id)} key={subCategory.id} style={{ cursor: "pointer" }}>{subCategory.name}</li>
                                 ))}
                             </ul>
                           </div>

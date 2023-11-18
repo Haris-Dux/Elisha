@@ -6,6 +6,10 @@ import poster from "./poster.jpg";
 import { Link } from "react-router-dom";
 
 const DealsByCategory = () => {
+  const handleItemClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <section className="DealsByCategory">
@@ -16,40 +20,40 @@ const DealsByCategory = () => {
           <div className="row mx-0 topbar-content">
             <div className="col-md-4 my-2">
               <div className="card DealsByCategory-card">
-                <Link to='/unstitched'>
-                <img
-                  src={deals_by_category1}
-                  className="card-img-top"
-                  alt="..."
-                  width="100%"
-                  height="100%"
-                />
+                <Link to='/unstitched' onClick={handleItemClick}>
+                  <img
+                    src={deals_by_category1}
+                    className="card-img-top"
+                    alt="..."
+                    width="100%"
+                    height="100%"
+                  />
                 </Link>
               </div>
             </div>
             <div className="col-md-4 my-2">
               <div className="card DealsByCategory-card">
-                <Link to='/stitched'>
-                <img
-                  src={deals_by_category2}
-                  className="card-img-top"
-                  alt="..."
-                  width="100%"
-                  height="100%"
-                />
-               </Link>
+                <Link to='/stitched' onClick={handleItemClick}>
+                  <img
+                    src={deals_by_category2}
+                    className="card-img-top"
+                    alt="..."
+                    width="100%"
+                    height="100%"
+                  />
+                </Link>
               </div>
             </div>
             <div className="col-md-4 my-2">
               <div className="card DealsByCategory-card">
-                <Link to='/women'>
-                <img
-                  src={deals_by_category3}
-                  className="card-img-top"
-                  alt="..."
-                  width="100%"
-                  height="100%"
-                />
+                <Link to='/women' onClick={handleItemClick}>
+                  <img
+                    src={deals_by_category3}
+                    className="card-img-top"
+                    alt="..."
+                    width="100%"
+                    height="100%"
+                  />
                 </Link>
               </div>
             </div>
