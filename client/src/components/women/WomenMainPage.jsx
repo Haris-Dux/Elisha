@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from "react";
-import bg_box_1 from "./bg_box_1.png";
-import bg_box_2 from "./bg_box_2.png";
-import bg_box_3 from "./bg_box_3.png";
-import bg_box_4 from "./bg_box_4.png";
-import PretStyles from "../home/PretStyles";
-import womenMainPageData from "./WomenMainPageData";
 import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryTypeAsync, getSubCategoryTypeAsync } from "../../features/categorySlice";
@@ -13,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const WomenMainPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   // FETCH STITCHED CATEGORY FROM STORE
   const womenCategoryId = useSelector(state =>
@@ -26,8 +19,6 @@ const WomenMainPage = () => {
   }
 
   const categoryTypeIds = extractIds(categoriesType);
-  // console.log('categoryTypeIds',categoryTypeIds);
-
 
   const subCategoriesType = useSelector((state) => state.category.subcategoriesType);
   console.log('subCategoriesType', subCategoriesType);
@@ -39,8 +30,10 @@ const WomenMainPage = () => {
     dispatch(getSubCategoryTypeAsync({ category: womenCategoryId, categoryType: categoryTypeIds }));
   }, [womenCategoryId, dispatch]);
 
-  const handleItemClick = (itemId) => {
 
+  const handleItemClick = (item) => {
+    navigate(`/productbysubcategory/${item}`);
+    window.scrollTo(0, 0);
   };
 
 

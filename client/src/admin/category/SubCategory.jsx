@@ -3,9 +3,10 @@ import "../createNewProduct/NewProductForm.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { createSubCategoryTypeAsync, deleteSubCategoryTypeAsync, getSubCategoryTypeAsync } from '../../features/categorySlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SubCategory = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [filteredCategoriesType, setFilteredCategoriesType] = useState([]);
@@ -15,11 +16,19 @@ const SubCategory = () => {
     const categoriesType = useSelector((state) => state.category.categoriesType);
     // const subCategoryTypes = useSelector((state) => state.category.subCategoryTypes);
 
+
+   
+
     const [formdata, setFormdata] = useState({
         category: '',
         categoryType: '',
         name: '',
     });
+
+    const handleItemClick = (itemId) => {
+        navigate(`/updatesubcategorytype/${itemId}`);
+        window.scrollTo(0, 0);
+    };
 
     useEffect(() => {
         setFilteredCategoriesType(categoriesType.filter(type => type.category === formdata.category));
@@ -102,11 +111,11 @@ const SubCategory = () => {
             <div className="NewProductForm py-4 shadow">
                 <section className="container NewProductForm-cont py-3">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/adminmainpage" className='text-decoration-none text-dark'>Admin Home</Link></li>
-                            <li class="breadcrumb-item"><Link to="/category" className='text-decoration-none text-dark'>Category</Link></li>
-                            <li class="breadcrumb-item"><Link to="/categorytype" className='text-decoration-none text-dark'>Category Type</Link></li>
-                            <li class="breadcrumb-item active text-dark" aria-current="page">Sub Category</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/adminmainpage" className='text-decoration-none text-dark'>Admin Home</Link></li>
+                            <li className="breadcrumb-item"><Link to="/category" className='text-decoration-none text-dark'>Category</Link></li>
+                            <li className="breadcrumb-item"><Link to="/categorytype" className='text-decoration-none text-dark'>Category Type</Link></li>
+                            <li className="breadcrumb-item active text-dark" aria-current="page">Sub Category</li>
                         </ol>
                     </nav>
                     <h3 className='fs-1 text-center py-2'>Sub Category</h3>
@@ -203,7 +212,7 @@ const SubCategory = () => {
                                             <td>{subCategory.name}</td>
                                             <td>
                                                 <div className="action_buttons">
-                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"><i className="fa-solid fa-pen-to-square fs-5 px-2"></i></button>
+                                                    <i onClick={() => handleItemClick(subCategory.id)} className="fa-solid fa-pen-to-square fs-5 px-2"></i>
                                                     <i className="fa-solid fa-trash fs-5 px-2" onClick={() => handleDelete(subCategory.id)}></i>
                                                 </div>
                                             </td>
@@ -211,29 +220,6 @@ const SubCategory = () => {
                                     ))}
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    {/* MODAL */}
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Sub Category</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="recipient-name" class="col-form-label fs-5">Sub Category Name:</label>
-                                            <input type="text" class="form-control form-control-modal" id="recipient-name" />
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Update</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </section>
