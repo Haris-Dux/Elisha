@@ -65,9 +65,9 @@ export const createProductAsync = createAsyncThunk("products/createProduct", asy
 });
 
 // getProductAsync
-export const getProductAsync = createAsyncThunk("products/getProduct", async () => {
+export const getProductAsync = createAsyncThunk("products/getProduct", async ({currentPage,limit,category}) => {
     try {
-        const response = await axios.post(getAllProductsUrl);
+        const response = await axios.post(getAllProductsUrl,{currentPage,limit,category});
         return response.data;
 
     } catch (error) {

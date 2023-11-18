@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-// import unstitchedData from "./UnStitchedData";
-import PretStyles from "../home/PretStyles";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { addToCart } from "../../features/WomenSlice";
-import { getCategoryAsync, getCategoryTypeAsync } from "../../features/categorySlice";
+import {
+  getCategoryAsync,
+  getCategoryTypeAsync,
+} from "../../features/categorySlice";
+import { getProductAsync } from "../../features/ProductSlice";
 
 const NextArrow = (props) => {
   const { onClick } = props;
@@ -36,6 +38,9 @@ const UnStitchedAllProducts = () => {
   const dispatch = useDispatch();
   const [categoryType, selectedCategoryType] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [discountedProducts, setdiscountedProducts] = useState("");
+
+  const [price, setPrice] = useState("");
   const productsref = useRef(null);
   useEffect(() => {
     dispatch(getCategoryAsync());
@@ -73,25 +78,26 @@ const UnStitchedAllProducts = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
     window.scrollTo(0, 0);
   };
 
   // GET ALL PRODUCT
-  const allProducts = useSelector(state => state.product.products);
-
+  const allProducts = useSelector((state) => state.product.products);
 
   // FILTER ALL PRODUCTS FOR UNSTITCHED PRODUCTS
-  const unStitchedId = useSelector(state =>
-    state.category.categories.find(category => category.name === "Unstitched")?.id);
-
+  const unStitchedId = useSelector(
+    (state) =>
+      state.category.categories.find(
+        (category) => category.name === "Unstitched"
+      )?.id
+  );
 
   // Filter products that belong to the "Women" category
-  const unStitchedProducts = allProducts.filter(product =>
-    product.category === unStitchedId);
+  const unStitchedProducts = allProducts.filter(
+    (product) => product.category === unStitchedId
+  );
 
   let products = [];
   if (filteredProducts.length > 0) {
@@ -106,6 +112,14 @@ const UnStitchedAllProducts = () => {
     }
   }, [dispatch, unStitchedId]);
 
+  useEffect(() => {
+    if (discountedProducts || (price && productsref.current)) {
+      productsref.current.scrollIntoView({
+        behaviour: "smooth",
+        block: "start",
+      });
+    }
+  });
   const categoriesType = useSelector((state) => state.category.categoriesType);
 
   const handleCategoyFiltering = (id) => {
@@ -116,7 +130,67 @@ const UnStitchedAllProducts = () => {
     setFilteredProducts(filteredProducts);
   };
 
+  const filterbyDiscount = () => {
+    const discunted = unStitchedProducts.filter(
+      (item) => item.discount === true
+    );
+    setdiscountedProducts(discunted);
+    setFilteredProducts(discunted);
+  };
 
+  const filterbyPrice = (range) => {
+    setPrice(range);
+    let productsByPrice;
+    if (range === "Low To High") {
+      productsByPrice = unStitchedProducts
+        .slice()
+        .sort((a, b) => a.price - b.price);
+    } else if (range === "High To Low") {
+      productsByPrice = unStitchedProducts
+        .slice()
+        .sort((a, b) => b.price - a.price);
+    }
+    setFilteredProducts(productsByPrice);
+  };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(20);
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+
+    dispatch(
+      getProductAsync({ currentPage, limit, category: unStitchedId })
+    ).then((response) => {
+      setTotalPages(response.payload.productData.totalPages);
+    });
+  }, [dispatch, currentPage, limit, unStitchedId]);
+  
+
+  // Function to handle page navigation
+  const goToPage = (currentPage) => {
+    setCurrentPage(currentPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Generating page number buttons
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(
+      <li key={i}>
+        <button
+          onClick={() => goToPage(i)}
+          className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 ${
+            currentPage === i
+              ? "bg-[#E0D7CE] text-black"
+              : "hover:bg-[#E0D7CE] hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          }`}
+        >
+          {i}
+        </button>
+      </li>
+    );
+  }
 
   return (
     <section className="UnstitchedAllProducts py-4 my-3">
@@ -139,94 +213,46 @@ const UnStitchedAllProducts = () => {
         <div className="unStitchedAllProducts-filter">
           <div className="filter">
             <div className="buttons-list d-flex justify-content-center align-items-center flex-wrap py-2 my-5">
-              {/* FILTER-BUTTON */}
-              <button className="btn buttons-list-btn">
-                <i className="fa-solid fa-filter me-2"></i>
-                <span>Filter</span>
-              </button>
-              {/* SIZE-BUTTON */}
-              <div className="dropdown my-2">
-                <a
-                  className="btn btn-secondary dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Size
-                </a>
-
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                </ul>
-              </div>
               {/* PRICE-BUTTON */}
               <div className="dropdown my-2">
                 <a
                   className="btn btn-secondary dropdown-toggle"
-                  href="#"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Price
+                  {price.length > 0 ? price : "Price"}
                 </a>
 
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Action
+                    <a
+                      className="dropdown-item"
+                      onClick={() => filterbyPrice("Low To High")}
+                    >
+                      Low To High
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
+                    <a
+                      className="dropdown-item"
+                      onClick={() => filterbyPrice("High To Low")}
+                    >
+                      High To Low
                     </a>
                   </li>
                 </ul>
               </div>
               {/* DISCOUNT-BUTTON */}
-              <div className="dropdown my-2">
-                <a
-                  className="btn btn-secondary dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Discount
-                </a>
-
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              {/* SORT-BUTTON */}
-              <button className="btn buttons-list-btn my-2">
-                <span> Sort By</span>
+              <button
+                className="btn buttons-list-btn my-2"
+                onClick={filterbyDiscount}
+              >
+                On Discount
               </button>
             </div>
           </div>
         </div>
-
 
         {/* CATEGORY-TYPE SLIDER */}
         <div className="scroll-bar">
@@ -278,8 +304,6 @@ const UnStitchedAllProducts = () => {
           </section>
         </div>
 
-
-
         {/* UnStitchedAllProducts -- MAPPING BODY */}
         <div ref={productsref} className="all-product-body">
           <div className="row mx-0">
@@ -287,20 +311,29 @@ const UnStitchedAllProducts = () => {
               <div key={product.id} className="col-md-3">
                 <div className="card all-product-body-card my-2">
                   <div onClick={() => handleItemClick(product.id)}>
-                    <img src={product.image.secure_url} className="card-img-top shadow" alt="..." />
+                    <img
+                      src={product.image.secure_url}
+                      className="card-img-top shadow"
+                      alt="..."
+                    />
                   </div>
 
                   <div className="card-body d-flex justify-content-between pt-3 px-0">
                     {/* ITEM DETAILS */}
                     <div className="card-body-details">
-
-                      <p className="card-data stitched-card-data my-0">{product.name}</p>
-                      <p className="card-data stitched-card-data my-0">Rs.{product.price}</p>
-
+                      <p className="card-data stitched-card-data my-0">
+                        {product.name}
+                      </p>
+                      <p className="card-data stitched-card-data my-0">
+                        Rs.{product.price}
+                      </p>
                     </div>
                     {/* Button */}
                     <div className="stitched-card-body-button">
-                      <button className="btn stitched-card-body-button-btn" onClick={() => dispatch(addToCart(product))}>
+                      <button
+                        className="btn stitched-card-body-button-btn"
+                        onClick={() => dispatch(addToCart(product))}
+                      >
                         <i className="fa-solid fa-plus"></i>
                       </button>
                     </div>
@@ -308,59 +341,23 @@ const UnStitchedAllProducts = () => {
                 </div>
               </div>
             ))}
-
           </div>
         </div>
 
         {/* UnStitchedAllProducts -- PAGINATION */}
         <div className="container my-5">
-          <nav aria-label="Page navigation example">
-            <ul className="pagination d-flex justify-content-center align-items-center flex-wrap">
+          <nav aria-label="Page navigation example pagination-bar">
+            <ul className="pagination d-flex justify-content-center align-items-center">
               <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  Page
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  3
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  4
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  5
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  6
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link focus-ring focus-ring-light" href="#">
-                  7
+                <a className="page-link d-flex flex-row focus-ring focus-ring-light">
+                  {pages.map((page) => page)}
                 </a>
               </li>
             </ul>
           </nav>
         </div>
       </div>
-    </section >
+    </section>
   );
 };
 
