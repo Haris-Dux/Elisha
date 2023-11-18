@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MainPage from "./MainPage";
 import TopBar from "./TopBar";
 import ShopByType from "./ShopByType";
@@ -20,7 +20,7 @@ const HomePage = () => {
   const extractIds = () => {
     return categories.map((item) => item.id);
   };
-
+  const [limit, setLimit] = useState(20);
   // Effect for fetching category types
   useEffect(() => {
     if (categories && categories.length > 0) {
@@ -31,9 +31,9 @@ const HomePage = () => {
 
   // Effect for initial product and category fetch
   useEffect(() => {
-    dispatch(getProductAsync());
+    dispatch(getProductAsync({limit}));
     dispatch(getCategoryAsync());
-  }, [dispatch]);
+  }, [dispatch,limit]);
 
 
   return (

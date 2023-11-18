@@ -7,7 +7,7 @@ const Stitched = () => {
   return (
     <>
       <StitchedAllProducts />
-      {/* <PretStyles heading="PRET STYLE" slide={4} /> */}
+     
     </>
   );
 };

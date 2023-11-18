@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-// import stitchedData from "./StitchedData";
-import PretStyles from "../home/PretStyles";
+
 import NewArrivals from "../home/NewArrivals";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../features/WomenSlice";
@@ -108,13 +107,50 @@ const StitchedAllProducts = () => {
 
 
   // Sort the entries based on category type
-  const sortedGroupedProducts = Object.entries(groupedProductsByType).sort(([a], [b]) => {
+  let sortedGroupedProducts = Object.entries(groupedProductsByType).sort(([a], [b]) => {
     // Adjust the sorting logic based on your specific category type names
     if (a === "Stitched 1pc") return -1;
     if (b === "Stitched 1pc") return 1;
     return a.localeCompare(b);
   });
 
+  const [categoryType, selectedCategoryType] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [discountedProducts, setdiscountedProducts] = useState("");
+  const [price, setPrice] = useState("");
+
+
+  const filterbyPrice = (range) => {
+    setPrice(range);
+    console.log(range);
+    let productsByPrice;
+    if (range === "Low To High") {
+      productsByPrice = sortedGroupedProducts
+        .slice()
+        .sort((a, b) => a.price - b.price);
+    } else if (range === "High To Low") {
+      productsByPrice = sortedGroupedProducts
+        .slice()
+        .sort((a, b) => b.price - a.price);
+    }
+    console.log(productsByPrice);
+    setFilteredProducts(productsByPrice);
+  };
+
+  const filterbyDiscount = () => {
+    const discunted = sortedGroupedProducts.filter(
+      (item) => item.discount === true
+    );
+    //setdiscountedProducts(discunted);
+    //setFilteredProducts(discunted);
+  };
+
+   //sortedGroupedProducts = [];
+  if (filteredProducts.length > 0) {
+    sortedGroupedProducts = filteredProducts;
+  } else {
+    sortedGroupedProducts = sortedGroupedProducts;
+  }
 
 
 
@@ -140,11 +176,6 @@ const StitchedAllProducts = () => {
           <div className="unStitchedAllProducts-filter">
             <div className="filter">
               <div className="buttons-list d-flex justify-content-center align-items-center flex-wrap py-2 my-5">
-                {/* FILTER-BUTTON */}
-                <button className="btn buttons-list-btn">
-                  <i className="fa-solid fa-filter me-2"></i>
-                  <span>Filter</span>
-                </button>
                 {/* SIZE-BUTTON */}
                 <div className="dropdown my-2">
                   <a
@@ -172,58 +203,43 @@ const StitchedAllProducts = () => {
                 </div>
                 {/* PRICE-BUTTON */}
                 <div className="dropdown my-2">
-                  <a
-                    className="btn btn-secondary dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Price
-                  </a>
+                <a
+                  className="btn btn-secondary dropdown-toggle"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {price.length > 0 ? price : "Price"}
+                </a>
 
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                {/* DISCOUNT-BUTTON */}
-                <div className="dropdown my-2">
-                  <a
-                    className="btn btn-secondary dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Discount
-                  </a>
-
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                {/* SORT-BUTTON */}
-                <button className="btn buttons-list-btn my-2">
-                  <span> Sort By</span>
-                </button>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      onClick={() => filterbyPrice("Low To High")}
+                    >
+                      Low To High
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      onClick={() => filterbyPrice("High To Low")}
+                    >
+                      High To Low
+                    </a>
+                  </li>
+                </ul>
+              </div>
+               {/* DISCOUNT-BUTTON */}
+              <button
+                className="btn buttons-list-btn my-2"
+                onClick={filterbyDiscount}
+              >
+                On Discount
+              </button>
+               
+               
               </div>
             </div>
           </div>

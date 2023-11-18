@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 
 const TopBar = () => {
+
   const navigate = useNavigate();
-  const products = useSelector(state => state.product.products).slice(0, 12)
+  const products = useSelector(state => state.product.products).slice(0, 20)
 
   const handleItemClick = (itemId) => {
     navigate(`/selectedItem/${itemId}`);
