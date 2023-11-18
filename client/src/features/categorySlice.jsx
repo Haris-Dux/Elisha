@@ -11,13 +11,13 @@ const getAllCategoriesUrl = "http://localhost:3000/api/getAllCategories";
 
 // CATEGORIES-TYPE API
 const createCategoryTypeUrl = "http://localhost:3000/api/createCategoryType";
-const updateCategoryTypeUrl = "http://localhost:3000/api/updateCategoryType";   // This api is not added currently
+const updateCategoryTypeUrl = "http://localhost:3000/api/updateCategoryType";
 const deleteCategoryTypeUrl = "http://localhost:3000/api/deleteCategoryType";
 const getAllCategoryTypesUrl = "http://localhost:3000/api/getAllCategoryTypes";
 
 // SUB-CATEGORIES TYPE API
 const createSubCategoryUrl = "http://localhost:3000/api/createSubCategory";
-const updateSubCategoryUrl = "http://localhost:3000/api/updateSubCategory";  // This api is not added currently
+const updateSubCategoryUrl = "http://localhost:3000/api/updateSubCategory";
 const deleteSubCategoryUrl = "http://localhost:3000/api/deleteSubCategory";
 const getAllSubCategoriesUrl = "http://localhost:3000/api/getAllSubCategories";
 
@@ -62,7 +62,7 @@ export const deleteCategoryAsync = createAsyncThunk("category/delete", async (id
     }
 });
 
-// updateProductAsync
+// UPDATE ASYNC THUNK
 export const updateCategoryAsync = createAsyncThunk("category/update", async (data) => {
     try {
         const response = await axios.post(updateCategoryUrl, data);
@@ -76,7 +76,10 @@ export const updateCategoryAsync = createAsyncThunk("category/update", async (da
 });
 
 
-// CATEGORIES-TYPE API THUNK
+
+// ------------ CATEGORIES-TYPE API THUNK ------------ //
+
+// CREATE ASYNC THUNK
 export const createCategoryTypeAsync = createAsyncThunk("categoryType/create", async (categoryTypeData) => {
     try {
         const response = await axios.post(createCategoryTypeUrl, categoryTypeData);
@@ -90,6 +93,20 @@ export const createCategoryTypeAsync = createAsyncThunk("categoryType/create", a
     }
 });
 
+// GET ASYNC THUNK
+export const getCategoryTypeAsync = createAsyncThunk("categoryType/get", async (category) => {
+    try {
+        const response = await axios.post(getAllCategoryTypesUrl, category);
+        // toast.success(response.data.msg);
+        console.log(response.data);
+        return response.data;
+
+    } catch (error) {
+        toast.error(error.response.data.msg);
+    }
+});
+
+// UPDATE ASYNC THUNK
 export const updateCategoryTypeAsync = createAsyncThunk("categoryType/update", async (data) => {
     try {
         const response = await axios.post(updateCategoryTypeUrl, data);
@@ -103,22 +120,6 @@ export const updateCategoryTypeAsync = createAsyncThunk("categoryType/update", a
     }
 }
 );
-
-
-
-// Get CATEGORIES ASYNC THUNK
-export const getCategoryTypeAsync = createAsyncThunk("categoryType/get", async (category) => {
-    try {
-        const response = await axios.post(getAllCategoryTypesUrl, category);
-        // toast.success(response.data.msg);
-        console.log(response.data);
-        return response.data;
-
-    } catch (error) {
-        toast.error(error.response.data.msg);
-    }
-});
-
 
 // Delete CATEGORIES ASYNC THUNK
 export const deleteCategoryTypeAsync = createAsyncThunk("categoryType/delete", async (id) => {
@@ -134,7 +135,9 @@ export const deleteCategoryTypeAsync = createAsyncThunk("categoryType/delete", a
 });
 
 
-// SUB-CATEGORIES-TYPE API THUNK
+// ------------ SUB - CATEGORIES API THUNK ------------ //
+
+// CREATE ASYNC THUNK
 export const createSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/create", async (subcategoryTypeData) => {
     try {
         const response = await axios.post(createSubCategoryUrl, subcategoryTypeData);
@@ -147,8 +150,7 @@ export const createSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/crea
     }
 });
 
-
-// Get SUB-CATEGORIES ASYNC THUNK
+// GET ASYNC THUNK
 export const getSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/get", async (category) => {
     try {
         const response = await axios.post(getAllSubCategoriesUrl, category);
@@ -162,7 +164,21 @@ export const getSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/get", a
 });
 
 
-// Get SUB - CATEGORIES ASYNC THUNK
+// UPDATE ASYNC THUNK
+export const updateSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/update", async (data) => {
+    try {
+        const response = await axios.post(updateSubCategoryUrl, data);
+        toast.success(response.data.msg);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error.response.data.msg);
+        toast.error(error.response.data.msg);
+        throw error;
+    }
+});
+
+// Delete ASYNC THUNK
 export const deleteSubCategoryTypeAsync = createAsyncThunk("SubcategoryType/delete", async (id) => {
     try {
         const response = await axios.post(deleteSubCategoryUrl, id);
@@ -260,7 +276,7 @@ const categorySlice = createSlice({
                 state.categoriesType = action.payload.categoryTypesData;
             })
 
-            // UpdateProductAsync
+            // UpdateCategoryAsync
             .addCase(updateCategoryTypeAsync.rejected, (state, action) => {
                 state.loading = true;
             })
@@ -296,6 +312,15 @@ const categorySlice = createSlice({
             .addCase(getSubCategoryTypeAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.subcategoriesType = action.payload.subCategoryData;
+            })
+
+            // UpdateCategoryAsync
+            .addCase(updateSubCategoryTypeAsync.rejected, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(updateSubCategoryTypeAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.subcategoriesType = action.payload;
             })
 
             // deleteSubCategoryAsync

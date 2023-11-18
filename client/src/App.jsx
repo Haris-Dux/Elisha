@@ -29,7 +29,7 @@ import { useEffect } from "react";
 import { validateTokenAsync } from "./features/authSlice";
 import { getProductAsync } from "./features/ProductSlice";
 import AdminOrderList from "./admin/adminOrderList/AdminOrderList";
-import UpdateProduct from "./admin/updateProduct/updateProduct";
+import UpdateProduct from "./admin/updateProduct/UpdateProduct";
 import Category from "./admin/category/Category";
 import CategoryType from "./admin/category/CategoryType";
 import SubCategory from "./admin/category/SubCategory";
@@ -38,6 +38,9 @@ import ProductByCategory from "./components/home/ProductByCategory";
 import ProductsByFabric from "./components/home/ProductsByFabric";
 import AdminProtected from "./components/middleware/AdminProtected";
 import UserProtected from "./components/middleware/UserProtected";
+import UpdateCategoryType from "./admin/category/UpdateCategoryType";
+import UpdateSubCategoryType from "./admin/category/UpdateSubCategoryType";
+import ProductBySubCategory from "./components/women/ProductBySubCategory";
 
 
 
@@ -52,7 +55,7 @@ function App() {
 
   //GET CATEGORYTYPES
   const categories = useSelector((state) => state.category.categories);
-  console.log(categories)
+  // console.log(categories)
 
   useEffect(() => {
     const extractIds = () => {
@@ -91,6 +94,7 @@ function App() {
           <Route path="/selectedItem/:id" element={<SelectedItem />} />
           <Route path="/productbyfabric/:id" element={<ProductsByFabric />} />
           <Route path="/productbycategory/:id" element={<ProductByCategory />} />
+          <Route path="/productbysubcategory/:id" element={<ProductBySubCategory />} />
           <Route path="/cartpage" element={<CartPage />} />
           {/* USER PROTECTED PAGE */}
           <Route path="/checkout" element={<UserProtected><Checkout /></UserProtected>} />
@@ -109,6 +113,8 @@ function App() {
           <Route path="/category" element={<AdminProtected><Category /></AdminProtected>} />
           <Route path="/categorytype" element={<AdminProtected><CategoryType /></AdminProtected>} />
           <Route path="/subcategory" element={<AdminProtected><SubCategory /></AdminProtected>} />
+          <Route path="/updatecategorytype/:id" element={<AdminProtected><UpdateCategoryType /></AdminProtected>} />
+          <Route path="/updatesubcategorytype/:id" element={<AdminProtected><UpdateSubCategoryType /></AdminProtected>} />
         </Routes>
         <Footer />
       </BrowserRouter>
