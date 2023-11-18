@@ -36,6 +36,8 @@ import SubCategory from "./admin/category/SubCategory";
 import { getCategoryTypeAsync } from "./features/categorySlice";
 import ProductByCategory from "./components/home/ProductByCategory";
 import ProductsByFabric from "./components/home/ProductsByFabric";
+import AdminProtected from "./components/middleware/AdminProtected";
+import UserProtected from "./components/middleware/UserProtected";
 
 
 
@@ -87,23 +89,26 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/selectedItem/:id" element={<SelectedItem />} />
+          <Route path="/productbyfabric/:id" element={<ProductsByFabric />} />
+          <Route path="/productbycategory/:id" element={<ProductByCategory />} />
+          <Route path="/cartpage" element={<CartPage />} />
+          {/* USER PROTECTED PAGE */}
+          <Route path="/checkout" element={<UserProtected><Checkout /></UserProtected>} />
+          <Route path="/ordersuccess" element={<UserProtected><SuccessPage /></UserProtected>} />
+          <Route path="/orderlist" element={<UserProtected><OrderList /></UserProtected>} />
+          {/* SIGN PAGES */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/adminmainpage" element={<AdminMainPage />} />
-          <Route path="/cartpage" element={<CartPage />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/ordersuccess" element={<SuccessPage />} />
-          <Route path="/newproductform" element={<NewProductForm />} />
-          <Route path="/orderlist" element={<OrderList />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/user/resetPassword" element={<ResetPassword />} />
-          <Route path="/adminOrderList" element={<AdminOrderList />} />
-          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
-          <Route path="/category" element={<Category />} />
-          <Route path="/categorytype" element={<CategoryType />} />
-          <Route path="/subcategory" element={<SubCategory />} />
-          <Route path="/productbycategory/:id" element={<ProductByCategory />} />
-          <Route path="/productbyfabric/:id" element={<ProductsByFabric />} />
+          {/* ADMIN PROTECTED PAGES */}
+          <Route path="/adminmainpage" element={<AdminProtected><AdminMainPage /></AdminProtected>} />
+          <Route path="/adminOrderList" element={<AdminProtected><AdminOrderList /></AdminProtected>} />
+          <Route path="/newproductform" element={<AdminProtected><NewProductForm /></AdminProtected>} />
+          <Route path="/updateproduct/:id" element={<AdminProtected><UpdateProduct /></AdminProtected>} />
+          <Route path="/category" element={<AdminProtected><Category /></AdminProtected>} />
+          <Route path="/categorytype" element={<AdminProtected><CategoryType /></AdminProtected>} />
+          <Route path="/subcategory" element={<AdminProtected><SubCategory /></AdminProtected>} />
         </Routes>
         <Footer />
       </BrowserRouter>

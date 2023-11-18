@@ -18,7 +18,7 @@ const CategoryType = () => {
 
     useEffect(() => {
         dispatch(getCategoryAsync());
-        
+
     }, []);
 
 
@@ -115,6 +115,7 @@ const CategoryType = () => {
         }
     };
 
+    // HANDLE DELETE
     const handleDelete = (id) => {
         try {
             dispatch(deleteCategoryTypeAsync({ id: id }))
@@ -133,6 +134,13 @@ const CategoryType = () => {
         <>
             <div className="NewProductForm py-4 shadow">
                 <section className="container NewProductForm-cont py-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><Link to="/adminmainpage" className='text-decoration-none text-dark'>Admin Home</Link></li>
+                            <li class="breadcrumb-item"><Link to="/category" className='text-decoration-none text-dark'>Category</Link></li>
+                            <li class="breadcrumb-item active text-dark" aria-current="page">Category Type</li>
+                        </ol>
+                    </nav>
                     <h3 className='fs-1 text-center py-2'>Category Type</h3>
 
                     <div className="row mx-0">
@@ -238,7 +246,7 @@ const CategoryType = () => {
                                                     </td>
                                                     <td>
                                                         <div className="action_buttons">
-                                                            <i className="fa-solid fa-pen-to-square fs-5 px-2 mx-2"></i>
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"><i className="fa-solid fa-pen-to-square fs-5 px-2"></i></button>
                                                             <i className="fa-solid fa-trash fs-5 px-2 mx-2" onClick={() => handleDelete(categoryType.id)}></i>
                                                         </div>
                                                     </td>
@@ -252,6 +260,29 @@ const CategoryType = () => {
                             <div className="navigate-bar pt-2 d-flex justify-content-between align-item-center">
                                 <Link to="/category" className="px-3 fs-5 text-decoration-none text-dark">&#8672; Go to Category</Link>
                                 <Link to="/subcategory" className="px-3 fs-5 text-decoration-none text-dark">Go to Sub Categories &#8674;</Link>
+                            </div>
+                        </div>
+                    </div>
+                    {/* MODAL */}
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Category Type</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label fs-5">Category Type Name:</label>
+                                            <input type="text" class="form-control form-control-modal" id="recipient-name" />
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Update</button>
+                                </div>
                             </div>
                         </div>
                     </div>

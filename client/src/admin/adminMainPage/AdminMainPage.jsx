@@ -14,6 +14,19 @@ import { getCategoryAsync } from "../../features/categorySlice";
 const AdminMainPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    const checkAuthAndRedirect = async () => {
+      if (user && user.role === 'admin') {
+        navigate("/adminmainpage", { replace: true });
+      }
+    };
+
+    checkAuthAndRedirect();
+  }, [navigate, user]);
+
+
 
   useEffect(() => {
     dispatch(getCategoryAsync());
@@ -43,7 +56,7 @@ const AdminMainPage = () => {
   const handleLogout = () => {
     dispatch(logoutuserAsync()).then(() => {
       dispatch(clearUser());
-      navigate("/");
+      navigate("/", { replace: true });
       toast.success("Logout Successfully");
 
     });

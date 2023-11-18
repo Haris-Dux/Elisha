@@ -1,24 +1,30 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+
+
 
 const ProductByCategory = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
   const { id } = useParams();
   const product = useSelector((state) => state.product.products);
   const filterdProducts = product.filter((item) => item.categoryType === id);
 
+  
+
   const CategoriesType = useSelector((state) => state.category.categoriesType);
-  const filterdCategoriesType = CategoriesType.filter((item)=>item.id === id)
- 
+  const filterdCategoriesType = CategoriesType.filter((item) => item.id === id)
+
   return (
     <>
       <section>
         <div className="StitchedAllProducts-header pt-5 text-center">
-         {filterdCategoriesType.map((item)=>(
+          {filterdCategoriesType.map((item) => (
             <h1 className="StitchedAllProducts-header-subtitle fw-bold my-3">
-           {item.name}
+              {item.name}
             </h1>
-         )) }
+          ))}
         </div>
       </section>
       <section>

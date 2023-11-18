@@ -69,7 +69,7 @@ export const updateOrderAsync = createAsyncThunk("products/updateOrder", async (
 const initialState = {
     loading: false,
     createOrder: null,
-    allOrderForUsers: null,
+    allOrderForUsers: [],
     allOrderForAdmin: null,
     currentOrder: null
 };

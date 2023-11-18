@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import all_product_3 from "./all_product_3.jpg";
 import "./orderlist.css";
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllOrderForUserAsync } from '../../features/orderSlice';
 
 const OrderList = () => {
     const dispatch = useDispatch();
-    const orderList = useSelector((state) => [...state.order.allOrderForUsers].reverse());
-    console.log('orderList', orderList);
+    const user = useSelector((state) => state.auth.user);
+
+
+    const orderList = useSelector((state) => [...state.order.allOrderForUsers]).reverse();
+
+    useEffect(() => {
+        dispatch(getAllOrderForUserAsync({ userID: user.id }));
+    }, []);
 
 
 

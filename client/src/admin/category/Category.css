@@ -16,6 +16,26 @@
 }
 
 
+/* -------- MODEL -------- */
+
+.form-control-modal {
+    background-color: #fff !important;
+}
+
+.modal-content{
+    background-color: #E0D7CE;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 780px) {
     .table-container {
