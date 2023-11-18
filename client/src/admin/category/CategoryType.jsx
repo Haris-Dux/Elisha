@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import "../createNewProduct/NewProductForm.css";
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import "./Category.css";
-import { toast } from "react-toastify";
 import { getCategoryAsync, createCategoryTypeAsync, getCategoryTypeAsync, deleteCategoryTypeAsync } from '../../features/categorySlice';
-import { Link } from 'react-router-dom';
+import "../createNewProduct/NewProductForm.css";
+import "./Category.css";
 
 const CategoryType = () => {
     const dispatch = useDispatch();
     const fileInputRef = useRef(null);
+    const navigate = useNavigate();
 
     const [category, setCategory] = useState({
         category: '',
@@ -16,31 +16,33 @@ const CategoryType = () => {
         name: '',
     });
 
+
+    const handleItemClick = (itemId) => {
+        navigate(`/updatecategorytype/${itemId}`);
+        window.scrollTo(0, 0);
+    };
+
+    // CALL TO GET CATEGORIES HERE -->
     useEffect(() => {
         dispatch(getCategoryAsync());
-
     }, []);
 
 
-    //GET CATEGORY
+    //GET CATEGORY   &&   CATEGORY - TYPE
     const categories = useSelector((state) => state.category.categories);
-    // console.log("categories", categories)
+    const categoryTypes = useSelector((state) => state.category.categoriesType);
+    // console.log('categoryTypes', categoryTypes);
 
+
+    // HERE WE EXTRACT THE ID FROM CATEGORY AND GIVE TO CATEGORY-TYPE 
     useEffect(() => {
         const extractIds = () => {
             return categories.map((item) => item.id)
         }
-
         const categoryIds = extractIds(categories);
-        // console.log('categoryIds', categoryIds);
-
-        // HERE WE SEND ALL EXTRACT ID'S TO BACKEND
         dispatch(getCategoryTypeAsync({ category: categoryIds }))
     }, [dispatch])
 
-
-    const categoryTypes = useSelector((state) => state.category.categoriesType);
-    // console.log('categoryTypes', categoryTypes);
 
 
 
@@ -57,13 +59,13 @@ const CategoryType = () => {
     };
 
 
-
-
+    // HANDLE IMAGE CHANGE
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setFileToBase(file);
     };
 
+    // THIS FUNCTION CONVERT IMAGE TO BASE64
     const setFileToBase = (file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -72,10 +74,12 @@ const CategoryType = () => {
         };
     };
 
+    // HANDLE RESET IMAGE
     const resetImage = () => {
         setCategory({ ...category, image: '' });
         fileInputRef.current.value = '';
     };
+
 
     const handleInputChange = (event) => {
         setCategory({
@@ -135,10 +139,10 @@ const CategoryType = () => {
             <div className="NewProductForm py-4 shadow">
                 <section className="container NewProductForm-cont py-3">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><Link to="/adminmainpage" className='text-decoration-none text-dark'>Admin Home</Link></li>
-                            <li class="breadcrumb-item"><Link to="/category" className='text-decoration-none text-dark'>Category</Link></li>
-                            <li class="breadcrumb-item active text-dark" aria-current="page">Category Type</li>
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/adminmainpage" className='text-decoration-none text-dark'>Admin Home</Link></li>
+                            <li className="breadcrumb-item"><Link to="/category" className='text-decoration-none text-dark'>Category</Link></li>
+                            <li className="breadcrumb-item active text-dark" aria-current="page">Category Type</li>
                         </ol>
                     </nav>
                     <h3 className='fs-1 text-center py-2'>Category Type</h3>
@@ -246,7 +250,7 @@ const CategoryType = () => {
                                                     </td>
                                                     <td>
                                                         <div className="action_buttons">
-                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"><i className="fa-solid fa-pen-to-square fs-5 px-2"></i></button>
+                                                            <i onClick={() => handleItemClick(categoryType.id)} className="fa-solid fa-pen-to-square fs-5 px-2"></i>
                                                             <i className="fa-solid fa-trash fs-5 px-2 mx-2" onClick={() => handleDelete(categoryType.id)}></i>
                                                         </div>
                                                     </td>
@@ -260,29 +264,6 @@ const CategoryType = () => {
                             <div className="navigate-bar pt-2 d-flex justify-content-between align-item-center">
                                 <Link to="/category" className="px-3 fs-5 text-decoration-none text-dark">&#8672; Go to Category</Link>
                                 <Link to="/subcategory" className="px-3 fs-5 text-decoration-none text-dark">Go to Sub Categories &#8674;</Link>
-                            </div>
-                        </div>
-                    </div>
-                    {/* MODAL */}
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Category Type</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="recipient-name" class="col-form-label fs-5">Category Type Name:</label>
-                                            <input type="text" class="form-control form-control-modal" id="recipient-name" />
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Update</button>
-                                </div>
                             </div>
                         </div>
                     </div>

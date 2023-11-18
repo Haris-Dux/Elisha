@@ -51,7 +51,7 @@ const UnStitchedAllProducts = () => {
     infinite: true,
     speed: 500,
     slidesToScroll: 2,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     // autoplay: true,
