@@ -8,6 +8,12 @@ const ProductBySubCategory = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
 
+
+    const handleItemClick = (itemId) => {
+        navigate(`/selectedItem/${itemId}`);
+        window.scrollTo(0, 0);
+    };
+
     const product = useSelector((state) => state.product.products);
     // console.log('product', product);
     const filterdProducts = product.filter((item) => item.subCategory === id);
@@ -21,7 +27,7 @@ const ProductBySubCategory = () => {
             <section>
                 <div className="StitchedAllProducts-header pt-5 pb-3 text-center">
                     {filterdCategoriesType.map((item) => (
-                        <h1 className="StitchedAllProducts-header-subtitle fw-bold my-3">
+                        <h1 key={item.id} className="StitchedAllProducts-header-subtitle fw-bold my-3">
                             {item.name}
                         </h1>
                     ))}
@@ -56,7 +62,7 @@ const ProductBySubCategory = () => {
                                             <div className="stitched-card-body-button">
                                                 <button
                                                     className="btn stitched-card-body-button-btn"
-                                                    onClick={() => dispatch(addToCart(product))}
+                                                    onClick={() => handleItemClick(product.id)}
                                                 >
                                                     <i className="fa-solid fa-plus"></i>
                                                 </button>

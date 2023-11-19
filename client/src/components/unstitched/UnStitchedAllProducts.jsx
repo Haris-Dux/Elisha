@@ -165,7 +165,7 @@ const UnStitchedAllProducts = () => {
       setTotalPages(response.payload.productData.totalPages);
     });
   }, [dispatch, currentPage, limit, unStitchedId]);
-  
+
 
   // Function to handle page navigation
   const goToPage = (currentPage) => {
@@ -180,11 +180,10 @@ const UnStitchedAllProducts = () => {
       <li key={i}>
         <button
           onClick={() => goToPage(i)}
-          className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 ${
-            currentPage === i
-              ? "bg-[#E0D7CE] text-black"
-              : "hover:bg-[#E0D7CE] hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          }`}
+          className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 ${currentPage === i
+            ? "bg-[#E0D7CE] text-black"
+            : "hover:bg-[#E0D7CE] hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            }`}
         >
           {i}
         </button>
@@ -332,7 +331,7 @@ const UnStitchedAllProducts = () => {
                     <div className="stitched-card-body-button">
                       <button
                         className="btn stitched-card-body-button-btn"
-                        onClick={() => dispatch(addToCart(product))}
+                        onClick={() => handleItemClick(product.id)}
                       >
                         <i className="fa-solid fa-plus"></i>
                       </button>
@@ -348,11 +347,13 @@ const UnStitchedAllProducts = () => {
         <div className="container my-5">
           <nav aria-label="Page navigation example pagination-bar">
             <ul className="pagination d-flex justify-content-center align-items-center">
-              <li className="page-item">
-                <a className="page-link d-flex flex-row focus-ring focus-ring-light">
-                  {pages.map((page) => page)}
-                </a>
-              </li>
+              {pages.map((page) => (
+                <li className="page-item" key={page.key}>
+                  <a className="page-link page-link-btn d-flex flex-row focus-ring focus-ring-light">
+                    {page}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>

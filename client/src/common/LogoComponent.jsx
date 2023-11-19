@@ -64,7 +64,7 @@ const LogoComponent = () => {
             <div className="cart-buttons py-4 d-flex justify-content-center align-items-center">
 
               {/* SEARCH ICON */}
-              <i className="fa-solid fa-magnifying-glass mx-3 fs-4"></i>
+              {/* <i className="fa-solid fa-magnifying-glass mx-3 fs-4"></i> */}
 
               {/* USER PROFILE ICON*/}
               <Link to="/signup">

@@ -96,28 +96,14 @@
 
 /* StitchedAllProducts -- PAGINATION */
 
-.page-link {
+/* .page-link-btn {
     color: black;
     border: 1px solid #fff;
     outline: none;
     font-size: 1.7rem;
     font-weight: 600;
     padding: .4rem 1.2rem;
-}
-
-.page-link:hover {
-    color: black;
-    background-color: #fff;
-    border: 1px solid black;
-    outline: none;
-}
-
-.page-link:focus {
-    color: black;
-    background-color: #fff;
-    border: 1px solid black;
-    outline: none;
-}
+} */
 
 
 @media only screen and (max-width: 1200px) {
