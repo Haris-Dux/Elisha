@@ -1,20 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const ProductsByFabric = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const product = useSelector((state) => state.product.products);
   const filterdProducts = product.filter((item) => item.fabric === id);
+
+  const handleItemClick = (itemId) => {
+    navigate(`/selectedItem/${itemId}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
       <section>
-        <div className="StitchedAllProducts-header pt-5 text-center">       
-            <h1 className="StitchedAllProducts-header-subtitle fw-bold my-3">
-              {id}
-            </h1>
+        <div className="StitchedAllProducts-header pt-5 text-center">
+          <h1 className="StitchedAllProducts-header-subtitle fw-bold my-3">
+            {id}
+          </h1>
         </div>
       </section>
       <section>
@@ -46,7 +52,7 @@ const ProductsByFabric = () => {
                       <div className="stitched-card-body-button">
                         <button
                           className="btn stitched-card-body-button-btn"
-                          onClick={() => dispatch(addToCart(product))}
+                          onClick={() => handleItemClick(product.id)}
                         >
                           <i className="fa-solid fa-plus"></i>
                         </button>

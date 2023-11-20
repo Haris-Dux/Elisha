@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-import "./AdminMainPage.css";
-import logo from "./Logo.png";
-import adminData from "./AdminData";
 import { Link, useNavigate } from "react-router-dom";
-import { clearUser, logoutuserAsync } from "../../features/authSlice";
-import { clearCart } from "../../features/WomenSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
+import { clearUser, logoutuserAsync } from "../../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllOrderForAdminAsync } from "../../features/orderSlice";
 import { getProductAsync } from "../../features/ProductSlice";
 import { getCategoryAsync } from "../../features/categorySlice";
+import "./AdminMainPage.css";
+import logo from "./Logo.png";
 
 const AdminMainPage = () => {
   const dispatch = useDispatch();
@@ -22,11 +20,8 @@ const AdminMainPage = () => {
         navigate("/adminmainpage", { replace: true });
       }
     };
-
     checkAuthAndRedirect();
   }, [navigate, user]);
-
-
 
   useEffect(() => {
     dispatch(getCategoryAsync());
@@ -43,14 +38,12 @@ const AdminMainPage = () => {
   }, [dispatch]);
 
 
-
   useEffect(() => {
     dispatch(getAllOrderForAdminAsync())
   }, [])
 
 
   const Womendata = useSelector(state => state.product.products);
-  // console.log('Womendata', Womendata);
 
   // handle Logout
   const handleLogout = () => {
@@ -101,12 +94,6 @@ const AdminMainPage = () => {
 
                   <div className="navbar_icons">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex flex-row">
-                      <li className="nav-item">
-                        <i className="fa-solid fa-bell mx-3 fs-4 pt-2"></i>
-                      </li>
-                      <li className="nav-item">
-                        <i className="fa-solid fa-user mx-3 fs-4 pt-2"></i>
-                      </li>
                       <li className="nav-item">
                         <i className="fa-solid fa-right-from-bracket mx-3 fs-4 pt-2" onClick={handleLogout}></i>
                       </li>

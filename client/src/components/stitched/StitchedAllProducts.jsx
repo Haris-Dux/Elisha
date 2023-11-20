@@ -145,7 +145,7 @@ const StitchedAllProducts = () => {
     //setFilteredProducts(discunted);
   };
 
-   //sortedGroupedProducts = [];
+  //sortedGroupedProducts = [];
   if (filteredProducts.length > 0) {
     sortedGroupedProducts = filteredProducts;
   } else {
@@ -203,43 +203,43 @@ const StitchedAllProducts = () => {
                 </div>
                 {/* PRICE-BUTTON */}
                 <div className="dropdown my-2">
-                <a
-                  className="btn btn-secondary dropdown-toggle"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {price.length > 0 ? price : "Price"}
-                </a>
+                  <a
+                    className="btn btn-secondary dropdown-toggle"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {price.length > 0 ? price : "Price"}
+                  </a>
 
-                <ul className="dropdown-menu">
-                  <li>
-                    <a
-                      className="dropdown-item"
-                      onClick={() => filterbyPrice("Low To High")}
-                    >
-                      Low To High
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="dropdown-item"
-                      onClick={() => filterbyPrice("High To Low")}
-                    >
-                      High To Low
-                    </a>
-                  </li>
-                </ul>
-              </div>
-               {/* DISCOUNT-BUTTON */}
-              <button
-                className="btn buttons-list-btn my-2"
-                onClick={filterbyDiscount}
-              >
-                On Discount
-              </button>
-               
-               
+                  <ul className="dropdown-menu">
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        onClick={() => filterbyPrice("Low To High")}
+                      >
+                        Low To High
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        onClick={() => filterbyPrice("High To Low")}
+                      >
+                        High To Low
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                {/* DISCOUNT-BUTTON */}
+                <button
+                  className="btn buttons-list-btn my-2"
+                  onClick={filterbyDiscount}
+                >
+                  On Discount
+                </button>
+
+
               </div>
             </div>
           </div>
@@ -317,7 +317,7 @@ const StitchedAllProducts = () => {
                             <div className="stitched-card-body-button">
                               <button
                                 className="btn stitched-card-body-button-btn"
-                                onClick={() => dispatch(addToCart(product))}
+                                onClick={() => handleItemClick(product.id)}
                               >
                                 <i className="fa-solid fa-plus"></i>
                               </button>

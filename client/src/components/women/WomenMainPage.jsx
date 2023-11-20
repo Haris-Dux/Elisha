@@ -21,7 +21,7 @@ const WomenMainPage = () => {
   const categoryTypeIds = extractIds(categoriesType);
 
   const subCategoriesType = useSelector((state) => state.category.subcategoriesType);
-  console.log('subCategoriesType', subCategoriesType);
+  // console.log('subCategoriesType', subCategoriesType);
 
 
   // CALL TO GET ALL CATEGORIES-TYPES

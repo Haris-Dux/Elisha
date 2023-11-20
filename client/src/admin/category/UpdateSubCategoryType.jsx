@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import '../createNewProduct/NewProductForm.css';
 import {
     getCategoryAsync,
@@ -9,6 +8,7 @@ import {
     getSubCategoryTypeAsync,
     updateSubCategoryTypeAsync,
 } from '../../features/categorySlice';
+
 
 const UpdateSubCategoryType = () => {
     const { id: subCategoryId } = useParams();
@@ -39,16 +39,16 @@ const UpdateSubCategoryType = () => {
 
 
     useEffect(() => {
-        const subCategoryById = subCategories.find((item) => item.id === subCategoryId);
-        if (subCategoryById) {
-            setCategory({
-                ...subCategoryById,
-            });
-            dispatch(getCategoryTypeAsync({ category: subCategoryById.category }));
+        if (Array.isArray(subCategories) && subCategories.length > 0) {
+            const subCategoryById = subCategories.find((item) => item.id === subCategoryId);
+            if (subCategoryById) {
+                setCategory({
+                    ...subCategoryById,
+                });
+                dispatch(getCategoryTypeAsync({ category: subCategoryById.category }));
+            }
         }
     }, [subCategoryId, subCategories]);
-
-
 
 
 
@@ -63,6 +63,7 @@ const UpdateSubCategoryType = () => {
         setCategory({ ...category, categoryType: selectedOption.value });
     };
 
+    // HANDLE INPUT CHANGE
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setCategory({
@@ -71,14 +72,11 @@ const UpdateSubCategoryType = () => {
         });
     };
 
+    // HANDLE UPDATE
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
             dispatch(updateSubCategoryTypeAsync(category))
-            .then(()=>{
-                
-            })
-            console.log(category);
         } catch (error) {
             console.error(error);
         }

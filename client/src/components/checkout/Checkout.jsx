@@ -15,7 +15,7 @@ const Checkout = () => {
     );
 
     const user = useSelector((state) => state.auth.user);
-    console.log('checkout-user', user);
+    // console.log('checkout-user', user);
 
     // Create state to manage form data and address added status
     const [formData, setFormData] = useState({
@@ -117,14 +117,13 @@ const Checkout = () => {
 
 
         dispatch(createOrderAsync(order))
-            .then(() => {
+            .then((response) => {
+                console.log('response', response);
                 dispatch(currentOrder())
                 dispatch(clearCart())
-                toast.success('Order placed successfully!');
                 navigate("/ordersuccess");
             })
             .catch((error) => {
-                toast.error('Failed to place the order. Please try again.');
                 console.error('Error placing the order:', error);
             });
     };

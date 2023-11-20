@@ -11,7 +11,12 @@ const ProductByCategory = () => {
   const product = useSelector((state) => state.product.products);
   const filterdProducts = product.filter((item) => item.categoryType === id);
 
-  
+
+  const handleItemClick = (itemId) => {
+    navigate(`/selectedItem/${itemId}`);
+    window.scrollTo(0, 0);
+  };
+
 
   const CategoriesType = useSelector((state) => state.category.categoriesType);
   const filterdCategoriesType = CategoriesType.filter((item) => item.id === id)
@@ -56,7 +61,7 @@ const ProductByCategory = () => {
                       <div className="stitched-card-body-button">
                         <button
                           className="btn stitched-card-body-button-btn"
-                          onClick={() => dispatch(addToCart(product))}
+                          onClick={() => handleItemClick(product.id)}
                         >
                           <i className="fa-solid fa-plus"></i>
                         </button>

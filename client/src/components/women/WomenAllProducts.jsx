@@ -198,7 +198,10 @@ const WomenAllProducts = () => {
                       </div>
                       {/* Button */}
                       <div className="stitched-card-body-button">
-                        <button className="btn stitched-card-body-button-btn" onClick={() => dispatch(addToCart(product))}>
+                        <button
+                          className="btn stitched-card-body-button-btn"
+                          onClick={() => handleItemClick(product.id)}
+                        >
                           <i className="fa-solid fa-plus"></i>
                         </button>
                       </div>

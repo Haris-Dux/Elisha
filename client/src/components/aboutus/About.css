@@ -1,3 +1,7 @@
+/* font-family: 'Gotu', sans-serif;
+font-family: 'Italiana', sans-serif;
+font-family: 'Lato', sans-serif; */
+
 /* ------------ SHOP-BY-TYPE ------------ */
 .shop-by-type {
     padding-block: 3rem;
@@ -31,11 +35,12 @@
 .shop-by-type-content-cont {
     text-align: center;
     margin: auto;
+    padding-inline: 2rem;
 }
 
 .aboutus-card {
     border: none;
-    width: 15rem;
+    /* width: 15rem; */
     text-align: center;
 }
 
@@ -56,9 +61,15 @@
     margin-top: 1rem;
 }
 
-.child-box-img-cont {
+.child-box-text-cont {
     width: 5rem;
     height: 4rem;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #55524f;
+    margin-top: 1.8rem;
+    font-family: 'Italiana', sans-serif;
+
 }
 
 .child-box_img {
@@ -67,13 +78,13 @@
     border-radius: 100%;
 }
 
-aboutus-card-title {
-    font-size: 1.2rem;
+.aboutus-card-title {
+    font-size: 1.1rem !important;
 }
 
 .aboutus-cards-buttons {
     background-color: #E1D9CF;
-    padding: .6rem 1.5rem;
+    padding: .6rem 1.1rem;
     border-radius: 20px;
     font-size: 1rem;
     font-weight: 500;

@@ -7,7 +7,7 @@ import {
 import "./SuccessPage.css";
 
 const SuccessPage = () => {
-    const { cart, totalPrice, totalQuantity } = useSelector(
+    const { cart, totalPrice, totalQuantity, shippingCost } = useSelector(
         (state) => state.womenData
     );
     return (
@@ -58,12 +58,12 @@ const SuccessPage = () => {
                                         <div className="row g-0 border-bottom">
                                             <div className="col-md-6">
                                                 <div className="p-3 d-flex justify-content-center align-items-center">
-                                                    <span className='fs-5'>Subtotal</span>
+                                                    <span className='fs-5'>Total Items</span>
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="p-3 d-flex justify-content-center align-items-center">
-                                                    <span className='fs-5'>{totalPrice}</span>
+                                                    <span className='fs-5'>{totalQuantity}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@ const SuccessPage = () => {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="p-3 d-flex justify-content-center align-items-center">
-                                                    <span className='fs-5'>0</span>
+                                                    <span className='fs-5'>{shippingCost}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@ const SuccessPage = () => {
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="p-3 d-flex justify-content-center align-items-center">
-                                                    <span className="fs-5 fw-bold">{totalPrice}</span>
+                                                    <span className="fs-5 fw-bold">{totalPrice + shippingCost}</span>
                                                 </div>
                                             </div>
                                         </div>

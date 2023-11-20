@@ -74,7 +74,7 @@ const PretStyles = ({ heading, slide }) => {
 
 
   const category = useSelector(state => state.category.categories);
-  console.log("category", category)
+  // console.log("category", category)
 
   const categoryTypes = useSelector((state) => state.category.categoriesType);
 
