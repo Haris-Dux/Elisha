@@ -135,4 +135,9 @@ i {
     }
 }
 
-@media only screen and (max-width: 576px) {}
+@media only screen and (max-width: 576px) {
+    .username-dropdown {
+        width: 0;
+        margin: 0;
+    }
+}
