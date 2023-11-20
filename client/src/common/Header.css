@@ -32,7 +32,8 @@ i {
     text-decoration-line: underline;
     text-decoration-style: "solid";
     text-decoration-color: #4E4D49;
-    text-decoration-thickness: 4px;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
 }
 
 .badge {
