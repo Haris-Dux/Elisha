@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 
 //API URL
 const signupUrl = "http://localhost:3000/api/signup";
+const getUserUrl = "http://localhost:3000/api/getUser";
 const loginUrl = "http://localhost:3000/api/login";
 const logoutUrl = "http://localhost:3000/api/logout";
 const updateUserUrl = "http://localhost:3000/api/updateUser";
@@ -24,6 +25,20 @@ export const createuserAsync = createAsyncThunk("user/create", async (formDataTo
         return response.data;
 
     } catch (error) {
+        toast.error(error.response.data.msg);
+    }
+});
+
+//GET ASYNC THUNK
+export const getuserAsync = createAsyncThunk("user/get", async (id) => {
+    try {
+        const response = await axios.post(getUserUrl, id);
+        //toast.success(response.data.msg);
+        console.log('response', response);
+        return response.data;
+
+    } catch (error) {
+        console.log('error', error);
         toast.error(error.response.data.msg);
     }
 });
@@ -141,7 +156,7 @@ const authSlice = createSlice({
             state.user = null;
             state.isAuthenticated = false;
             Cookies.remove("token");
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -153,6 +168,15 @@ const authSlice = createSlice({
             .addCase(createuserAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.createUser = action.payload;
+            })
+
+            // getuserAsync
+            .addCase(getuserAsync.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(getuserAsync.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload;
             })
 
             // loginuserAsync

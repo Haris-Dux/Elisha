@@ -11,7 +11,9 @@ const LogoComponent = () => {
   const navigate = useNavigate();
 
   // GET USER DATA
+
   const user = useSelector((state) => state.auth.user);
+  // console.log('user', user);
 
   const { cart, totalQuantity } = useSelector((state) => state.womenData);
 
@@ -61,7 +63,7 @@ const LogoComponent = () => {
           </div>
           {/* LOGOCOMPONENT LEFT */}
           <div className="col-md-3 logoComponent-right d-flex justify-content-center align-items-center">
-            <div className="cart-buttons py-4 d-flex justify-content-center align-items-center">
+            <div className="cart-buttons py-4">
 
               {/* USER PROFILE ICON*/}
               <Link to="/signup">
@@ -79,7 +81,7 @@ const LogoComponent = () => {
                     </div>
                   </>
                 ) : (
-                  <i className="fa-solid fa-user mx-3 fs-4"></i>
+                  <i className="user fa-solid fa-user mx-3 fs-4"></i>
                 )}
 
 
