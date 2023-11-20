@@ -63,18 +63,15 @@ const LogoComponent = () => {
           <div className="col-md-3 logoComponent-right d-flex justify-content-center align-items-center">
             <div className="cart-buttons py-4 d-flex justify-content-center align-items-center">
 
-              {/* SEARCH ICON */}
-              {/* <i className="fa-solid fa-magnifying-glass mx-3 fs-4"></i> */}
-
               {/* USER PROFILE ICON*/}
               <Link to="/signup">
-
                 {user ? (
                   <>
                     <div className="dropdown username-dropdown">
                       <button className="btn dropdown-toggle username-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {user.name.charAt(0)}
                       </button>
+
                       <ul className="dropdown-menu">
                         <li><button onClick={handleOrderList} className="dropdown-item">Order List</button></li>
                         <li><h5 className="dropdown-item" onClick={handleLogout}>Logout</h5></li>
