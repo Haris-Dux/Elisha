@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../features/WomenSlice";
 import { getProductAsync } from "../../features/ProductSlice";
 import { getCategoryAsync, getCategoryTypeAsync } from "../../features/categorySlice";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import WomenNewArrival from "./WomenNewArrival";
 
 const NextArrow = (props) => {
   const { onClick } = props;
@@ -84,15 +84,12 @@ const WomenAllProducts = () => {
   const womenCategoryId = useSelector(state => state.category.categories.find(category => category.name === "Women")?.id);
 
   // Filter products that belong to the "Women" category
-  const womenProducts = allProducts.filter(product =>
-    product.category === womenCategoryId
-  );
-
+ 
   let products = [];
   if (filteredProducts.length > 0) {
     products = filteredProducts;
   } else {
-    products = womenProducts;
+    products = allProducts;
   }
 
   useEffect(() => {
@@ -108,11 +105,6 @@ const WomenAllProducts = () => {
     window.scrollTo(0, 0);
   };
 
-  useEffect(() => {
-    dispatch(getProductAsync());
-  }, [dispatch]);
-
-
   const handleCategoyFiltering = (id) => {
     selectedCategoryType(id);
     const filteredProducts = allProducts.filter((product) => {
@@ -120,6 +112,40 @@ const WomenAllProducts = () => {
     });
     setFilteredProducts(filteredProducts);
   };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(4);
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    dispatch(
+      getProductAsync({ currentPage, limit, category: womenCategoryId })
+    ).then((response) => {
+      setTotalPages(response.payload.productData.totalPages);
+    });
+  }, [dispatch, currentPage, limit, womenCategoryId]);
+
+  const goToPage = (currentPage) => {
+    setCurrentPage(currentPage);
+    window.scrollTo({top:0,behavior:"smooth"})
+  };
+
+  let pages = [];
+   for(let i = 1 ; i <= totalPages ; i++){
+    pages.push(
+      <li key={i}>
+        <button onClick={()=>{goToPage(i)}}
+         className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 ${currentPage === i
+          ? "bg-[#E0D7CE] text-black "
+          : "hover:bg-[#E0D7CE] hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          }`}
+        >
+       {i}
+        </button>
+
+      </li>
+    )
+   }
 
   return (
     <>
@@ -211,6 +237,21 @@ const WomenAllProducts = () => {
               ))}
             </div>
           </div>
+        </div>
+        <WomenNewArrival/>
+         {/* PAGINATION */}
+         <div className="container my-5">
+          <nav aria-label="Page navigation example pagination-bar">
+            <ul className="pagination d-flex justify-content-center align-items-center">
+              {pages.map((page) => (
+                <li className="page-item" key={page.key}>
+                  <a className="page-link page-link-btn d-flex flex-row focus-ring focus-ring-light">
+                    {page}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </section>
     </>
