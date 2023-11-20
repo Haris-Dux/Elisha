@@ -239,7 +239,7 @@ const WomenAllProducts = () => {
           </div>
         </div>
         <WomenNewArrival/>
-         {/* PAGINATION */}
+         {/* PAGINATION --  Compi*/}
          <div className="container my-5">
           <nav aria-label="Page navigation example pagination-bar">
             <ul className="pagination d-flex justify-content-center align-items-center">
