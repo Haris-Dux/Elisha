@@ -47,11 +47,18 @@ i {
     align-items: center;
 }
 
+.cart-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .username-dropdown {
     background-color: transparent !important;
     color: #4E4D49 !important;
     padding-inline: 0rem;
     margin-left: 1.3rem !important;
+    width: max-content !important;
 
 }
 
@@ -136,8 +143,14 @@ i {
 }
 
 @media only screen and (max-width: 576px) {
-    .username-dropdown {
-        width: 0;
-        margin: 0;
+
+    .cart-buttons .dropdown {
+        width: 0 !important;
     }
+
+    .username-dropdown {
+        padding-right: 3rem !important;
+    }
+
+
 }

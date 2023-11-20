@@ -15,6 +15,8 @@ const Checkout = () => {
     );
 
     const user = useSelector((state) => state.auth.user);
+    const userID = user.id;
+    console.log('userID', userID);
     // console.log('checkout-user', user);
 
     // Create state to manage form data and address added status
@@ -67,12 +69,12 @@ const Checkout = () => {
 
             dispatch(updateuserAsync(userData))
                 .then(() => {
-                    toast.success('Address Added, Select Payment Method');
+                    // dispatch(updatedUser({ ...user, phone: formData.phone, address: formattedAddress }))
                     setIsAddressAdded(true);
                     console.log('userData', userData);
                 })
                 .catch((error) => {
-                    toast.error(error.message);
+                    console.log('error', error);
                 });
         } else {
             toast.warn('Fill all details in forms before adding an address.');

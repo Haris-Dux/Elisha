@@ -13,11 +13,11 @@ const SuccessPage = () => {
     return (
         <>
             <section className="successpage">
-                <div className="container mt-4 mb-4 py-4">
+                <div className="container mt-4 mb-4 py-5">
                     <div className="row d-flex cart justify-content-center">
-                        <div className="col-md-10">
+                        <div className="col-md-6">
                             <div className="card">
-                                <div className="d-flex justify-content-center border-bottom">
+                                <div className="d-flex justify-content-center border-bottom" style={{ backgroundColor: "#E0D7CE" }}>
                                     <div className="p-3">
                                         <div className="progresses">
                                             <div className="steps"> <span><i className="fa fa-check"></i></span> </div> <span className="line"></span>
@@ -27,22 +27,22 @@ const SuccessPage = () => {
                                     </div>
                                 </div>
                                 <div className="row g-0">
-                                    <div className="col-md-6 border-right p-5">
+                                    <div className="col-md-12 border-right p-5" >
                                         <div className="text-center order-details">
                                             <div className="d-flex justify-content-center mb-5 flex-column align-items-center">
                                                 <span className="check1"><i className="fa fa-check fs-4 text-light"></i></span>
                                                 <span className="font-weight-bold fs-2">Order Confirmed</span>
-                                                <small className="mt-2 fs-5">Your items will go to you soon</small>
-                                                <small className="mt-2 fs-5 fw-bold text-danger">Thank You</small>
+                                                <small className="my-2 fs-5">Your Order will be delivered Soon</small>
+                                                <small className="my-2 fs-5 fw-bold text-danger">Thank You</small>
+                                                <Link to="/orderlist" className="my-2 fs-5 fw-bold text-decoration-none">Check Your Order List</Link>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-6 background-muted">
+                                    {/* <div className="col-md-6 background-muted">
                                         <div className="p-3">
 
                                             <div className="d-flex justify-content-between align-items-center">
                                                 <span className='fs-5'><i className="fa fa-clock-o text-muted"></i> 3 days delivery</span>
-                                                {/* <span className='fs-5'><i className="fa fa-refresh text-muted"></i> 2 Max Revisions</span> */}
                                             </div>
 
                                             <div className="mt-3 text-center">
@@ -91,7 +91,7 @@ const SuccessPage = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div> </div>
 
