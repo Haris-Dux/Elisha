@@ -91,18 +91,3 @@
 
 /* StitchedAllProducts -- PAGINATION */
 
-.page-link {
-    color: black;
-    border: transparent;
-    background-color: #FAF9F9;
-    outline: none;
-    font-size: 1.7rem;
-    font-weight: 600;
-    padding: 0;
-    transition: .4s ease;
-}
-
-
-.page-link:hover {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-}
