@@ -35,8 +35,9 @@ li {
 .women-mainpage-box-cont {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
+    padding-top: 3rem;
 }
 
 .women-mainpage-box-left ul li {

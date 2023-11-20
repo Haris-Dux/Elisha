@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryTypeAsync, getSubCategoryTypeAsync } from "../../features/categorySlice";
@@ -18,7 +18,7 @@ const WomenMainPage = () => {
     return categoriesType.map((item) => item.id)
   }
 
-  const categoryTypeIds = extractIds(categoriesType);
+  const categoryTypeIds = useMemo(() => extractIds(categoriesType), [categoriesType]);
 
   const subCategoriesType = useSelector((state) => state.category.subcategoriesType);
   // console.log('subCategoriesType', subCategoriesType);
@@ -27,8 +27,12 @@ const WomenMainPage = () => {
   // CALL TO GET ALL CATEGORIES-TYPES
   useEffect(() => {
     dispatch(getCategoryTypeAsync({ category: womenCategoryId }));
-    dispatch(getSubCategoryTypeAsync({ category: womenCategoryId, categoryType: categoryTypeIds }));
   }, [womenCategoryId, dispatch]);
+
+  useEffect(()=>{
+    
+      dispatch(getSubCategoryTypeAsync({ categoryType: categoryTypeIds }));
+  },[dispatch,categoryTypeIds])
 
 
   const handleItemClick = (item) => {
@@ -75,8 +79,6 @@ const WomenMainPage = () => {
                     <div className=" col-sm-12 col-md-4 col-lg-5 women-mainpage-box mx-3 my-4 shadow" style={{ backgroundImage: `url(${data.image.secure_url})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }} >
 
                       <div className="row mx-0 women-mainpage-box-cont">
-                        {/* <div className="col-xs-0 col-sm-5 col-md-5 col-lg-4 women-mainpage-box-left">
-                        </div> */}
                         <div className="col-xs-12 col-sm-7 col-md-7 col-lg-12 women-mainpage-box-right">
                           <div className="women-mainpage-box-1">
                             <h4 className="fw-bold ps-4 text-light fs-1">{data.name}</h4>

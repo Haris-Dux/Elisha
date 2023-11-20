@@ -102,7 +102,7 @@ export const getCategoryTypeAsync = createAsyncThunk("categoryType/get", async (
         return response.data;
 
     } catch (error) {
-        toast.error(error.response.data.msg);
+        //toast.error(error.response.data.msg);
     }
 });
 

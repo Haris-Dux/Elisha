@@ -181,8 +181,8 @@ const UnStitchedAllProducts = () => {
         <button
           onClick={() => goToPage(i)}
           className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 ${currentPage === i
-            ? "bg-[#E0D7CE] text-black"
-            : "hover:bg-[#E0D7CE] hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            ? "active"
+            : "page-link"
             }`}
         >
           {i}

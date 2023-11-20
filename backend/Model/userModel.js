@@ -184,5 +184,18 @@ usersSchema.statics.updateUser = async function (data) {
   return user;
 };
 
+usersSchema.statics.getUser = function (data) {
+  const { id } = data;
+
+  if (!id) {
+    throw new Error("ID Not Provided");
+  }
+
+  const user = this.findById(id);
+
+  return user;
+};
+
+
 
 module.exports = mongoose.model("users",usersSchema);
