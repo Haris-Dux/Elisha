@@ -51,9 +51,9 @@ const SelectedItem = () => {
               <>
                 <div className="row mx-0 d-flex justify-content-evenly py-3" key={item.id}>
                   {/* Image Side */}
-                  <div className="col-md-5 col-lg-6 my-2 selectedItem-img-cont">
-                    <div className="selectedItem-img-cont-box">
-                      <img src={item.image.secure_url} alt="" width="375px" />
+                  <div className="col-sm-12 col-md-6 col-lg-6 px-1 selectedItem-img-cont">
+                    <div className="selectedItem-img-cont-box px-0">
+                      <img src={item.image.secure_url} alt="" width="100%" />
                     </div>
                   </div>
 

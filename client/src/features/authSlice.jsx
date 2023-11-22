@@ -177,6 +177,7 @@ const authSlice = createSlice({
             .addCase(getuserAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.user = action.payload;
+                localStorage.setItem('user', JSON.stringify(action.payload));
             })
 
             // loginuserAsync
@@ -197,7 +198,10 @@ const authSlice = createSlice({
             .addCase(logoutuserAsync.fulfilled, (state, action) => {
                 state.loading = false;
                 state.logoutUser = action.payload;
+                state.user = null; // Clear user state
+                state.isAuthenticated = false;
                 localStorage.removeItem('user');
+                Cookies.remove('token');
             })
 
             // updateuserAsync

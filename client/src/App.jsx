@@ -41,6 +41,9 @@ import UserProtected from "./components/middleware/UserProtected";
 import UpdateCategoryType from "./admin/category/UpdateCategoryType";
 import UpdateSubCategoryType from "./admin/category/UpdateSubCategoryType";
 import ProductBySubCategory from "./components/women/ProductBySubCategory";
+import Delivery from "./components/footer/Delivery";
+import Exchange from "./components/footer/Exchange";
+import PrivacyPolicy from "./components/footer/PrivacyPolicy";
 
 
 
@@ -96,6 +99,9 @@ function App() {
           <Route path="/productbycategory/:id" element={<ProductByCategory />} />
           <Route path="/productbysubcategory/:id" element={<ProductBySubCategory />} />
           <Route path="/cartpage" element={<CartPage />} />
+          <Route path="/delivery" element={<Delivery />} />
+          <Route path="/exchange" element={<Exchange />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           {/* USER PROTECTED PAGE */}
           <Route path="/checkout" element={<UserProtected><Checkout /></UserProtected>} />
           <Route path="/ordersuccess" element={<UserProtected><SuccessPage /></UserProtected>} />

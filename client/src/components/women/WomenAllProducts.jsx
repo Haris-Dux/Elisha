@@ -44,7 +44,7 @@ const WomenAllProducts = () => {
     speed: 500,
     // slidesToShow: 4,
     slidesToScroll: 2,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     // autoplay: true,
@@ -209,7 +209,7 @@ const WomenAllProducts = () => {
       </div>
 
       <section className="all-product">
-        <div className="container">
+        <div className="all-product-cont">
           <div className="all-product-header text-center my-3 py-2">
             <h2 className="fs-2 fw-bold">PRODUCTS</h2>
           </div>

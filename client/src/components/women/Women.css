@@ -17,9 +17,11 @@ li {
 }
 
 .women-mainpage-header-text {
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     font-weight: 500 !important;
     line-height: 1.5;
+    color: #222222 !important;
+    font-family: 'Lato', sans-serif
 }
 
 .women-mainpage-body-title {
@@ -63,6 +65,10 @@ li {
 }
 
 /* --------- ALL PRODUCT ---------*/
+.all-product-cont {
+    width: 95%;
+    margin-inline: auto;
+}
 
 .all-product-body-card {
     margin-inline: .6rem;

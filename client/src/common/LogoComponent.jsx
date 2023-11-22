@@ -14,6 +14,7 @@ const LogoComponent = () => {
 
   const user = useSelector((state) => state.auth.user);
   // console.log('user', user);
+  console.log('User from Redux:', user);
 
   const { cart, totalQuantity } = useSelector((state) => state.womenData);
 
@@ -63,29 +64,40 @@ const LogoComponent = () => {
           </div>
           {/* LOGOCOMPONENT LEFT */}
           <div className="col-md-3 logoComponent-right d-flex justify-content-center align-items-center">
-            <div className="cart-buttons py-4">
+            <div className="cart-buttons py-3">
 
               {/* USER PROFILE ICON*/}
               <Link to="/signup">
                 {user ? (
                   <>
                     <div className="dropdown username-dropdown">
-                      <button className="btn dropdown-toggle username-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {user.name.charAt(0)}
+                      <button
+                        className="btn dropdown-toggle username-dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        {user.name ? user.name.charAt(0) : 'Loading...'}
                       </button>
-
                       <ul className="dropdown-menu">
-                        <li><button onClick={handleOrderList} className="dropdown-item">Order List</button></li>
-                        <li><h5 className="dropdown-item" onClick={handleLogout}>Logout</h5></li>
+                        <li>
+                          <button onClick={handleOrderList} className="dropdown-item">
+                            Order List
+                          </button>
+                        </li>
+                        <li>
+                          <h5 className="dropdown-item" onClick={handleLogout}>
+                            Logout
+                          </h5>
+                        </li>
                       </ul>
                     </div>
                   </>
                 ) : (
                   <i className="user fa-solid fa-user mx-3 fs-4"></i>
                 )}
-
-
               </Link>
+
 
               {/* CART ICON */}
               <Link to="/cartpage" type="button" className="btn cart-button ps-0 position-relative">

@@ -4,6 +4,11 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/* font-family: 'Gotu', sans-serif;
+font-family: 'Italiana', sans-serif;
+font-family: 'Lato', sans-serif; */
+
+
 .shopping-cart {
     background-color: #faf9f9 !important;
     padding-bottom: 50px;
@@ -53,11 +58,11 @@ input::-webkit-inner-spin-button {
     margin: auto;
 }
 
-.shopping-cart .items .product {
+/* .shopping-cart .items .product {
     margin-bottom: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-}
+} */
 
 .shopping-cart .items .product .info {
     padding-top: 0px;
@@ -210,31 +215,105 @@ input::-webkit-inner-spin-button {
 .summary-details {
     font-size: 1rem !important;
 
-    .summary-item span{
+    .summary-item span {
         font-size: 1.05rem !important;
     }
 }
 
 
 
+.product_details {
+    display: flex;
+    justify-content: flex-start;
+    text-align: start;
+    flex-direction: column;
+    padding-left: 1.5rem;
+
+
+    .value {
+        font-weight: 400;
+        font-size: 1.3rem !important;
+    }
+}
+
+.cart-functions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.cart-form-label {
+    font-size: 1.5rem !important;
+    color: #867768;
+    font-family: 'Gotu', sans-serif;
+}
+
+
+.cart-content {
+    margin-block: auto;
+}
+
+.cartPage-img-cont {
+    margin-left: 1rem;
+    margin-top: .8rem;
+}
 
 
 
 
 
+@media only screen and (max-width: 768px) {
+    .product_details {
+        justify-content: center !important;
+        flex-direction: column;
+        padding-left: 1rem;
+
+
+        .value {
+            font-weight: 400;
+            font-size: 1.3rem !important;
+        }
+    }
+
+    .cart-image {
+        width: 100% !important;
+        height: 100% !important;
+        margin: auto !important;
+    }
+}
+
+
+@media only screen and (max-width: 576px) {
+    .cart-details-cont {
+        flex-direction: row !important;
+    }
+
+    .cart-content {
+        flex-direction: column !important;
+        padding-top: 0 !important;
+    }
+
+    .cart-image {
+        /* width: 50% !important;
+        height: 50% !important; */
+        margin: auto !important;
+    }
+
+    .cartPage-img-cont {
+        margin-left: 0rem !important;
+    }
+
+    .cartPage-img-cont {
+        margin-top: 0rem;
+    }
+}
 
 
 
 
-
-
-
-
-
-
-
-
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .shopping-cart .items .product .info {
         padding-top: 25px;
         text-align: left;
@@ -254,4 +333,6 @@ input::-webkit-inner-spin-button {
         padding: 4px 10px;
         text-align: center;
     }
-}
+
+
+} */

@@ -104,7 +104,7 @@ const ShopByType = ({ heading, slide }) => {
             <div className="row mx-0 shop-by-type-content-cont d-flex justify-content-center align-item-center">
               <Slider {...settings}>
                 {filterdNames.map((item) => (
-                  <div className="col-xs-12 col-sm-4 col-md-4 col-lg-2 mx-3 my-2">
+                  <div className="col-xs-12 col-sm-4 col-md-4 col-lg-2 my-2">
                     <div className="card shop-by-type-card">
                       <div className="parent-box">
                         <div className="child-box d-flex justify-content-center align-item-center">

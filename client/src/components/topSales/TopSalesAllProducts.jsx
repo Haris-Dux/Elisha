@@ -32,7 +32,7 @@ const PrevArrow = (props) => {
 };
 
 const TopSalesAllProducts = () => {
-  const [slidesToShow, setSlidesToShow] = useState(3);
+  const [slidesToShow, setSlidesToShow] = useState(4);
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
   const [size, selectedSize] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -51,7 +51,7 @@ const TopSalesAllProducts = () => {
     infinite: true,
     speed: 500,
     slidesToScroll: 2,
-    slidesToShow: 4,
+    slidesToShow: slidesToShow,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     // autoplay: true,
@@ -147,7 +147,7 @@ const TopSalesAllProducts = () => {
   return (
     <>
       <section className="StitchedAllProducts py-4 my-3">
-        <div className="container">
+        <div className="StitchedAllProducts-cont">
           {/* StitchedAllProducts -- HEADER */}
           <div className="StitchedAllProducts-header text-center">
             <h3 className="fs-3 fw-bold AllProducts-heading">WOMEN'S</h3>

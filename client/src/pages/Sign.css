@@ -132,4 +132,8 @@
     .sign-left {
         display: none;
     }
+
+    .sign-right {
+        padding-inline: 0;
+    }
 }

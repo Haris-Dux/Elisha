@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+.UnstitchedAllProducts-cont {
+    width: 95%;
+    margin-inline: auto;
+}
+
 .AllProducts-heading {
     font-family: 'Italiana', sans-serif;
 }

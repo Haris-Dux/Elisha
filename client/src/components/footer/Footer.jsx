@@ -1,8 +1,15 @@
 import React from "react";
 import logo from "./Logo.png";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+
+  const handleLinkClick = (itemId) => {
+    window.scrollTo(0, 0);
+  };
+
+
   return (
     <>
       <section className="footer align-item-center">
@@ -14,14 +21,12 @@ const Footer = () => {
           {/* SECOND COLUMN */}
           <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 my-2 customer-service-list">
             <h5 className="fs-4">CUSTOMER SERVICE</h5>
-            <ul>
-              <li className="fs-6">Contact Us</li>
-              <li className="fs-6">Delivery & Order</li>
-              <li className="fs-6">Returns & Exchanges</li>
-              <li className="fs-6">Terms & Conditions</li>
-              <li className="fs-6">Privacy Policy</li>
-              <li className="fs-6">Track My Order</li>
-              <li className="fs-6">Payment Guide</li>
+            <ul className="d-flex flex-column lists">
+              <Link to="/contactus" onClick={handleLinkClick} className="fs-6 text-decoration-none text-dark py-1">Contact Us</Link>
+              <Link to="/delivery" onClick={handleLinkClick} className="fs-6 text-decoration-none text-dark py-1">Delivery & Order</Link>
+              <Link to="/exchange" onClick={handleLinkClick} className="fs-6 text-decoration-none text-dark py-1">Returns & Exchanges</Link>
+              <Link to="/privacypolicy" onClick={handleLinkClick} className="fs-6 text-decoration-none text-dark py-1">Privacy Policy</Link>
+              <Link to="/orderlist" onClick={handleLinkClick} className="fs-6 text-decoration-none text-dark py-1">Track My Order</Link>
             </ul>
           </div>
           {/* THIRD COLUMN */}
@@ -39,14 +44,10 @@ const Footer = () => {
           </div>
           {/* FORTH COLUMN */}
           <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 my-2">
-            <h5 className="fs-4">CURRENCY</h5>
-            <p>PKR</p>
             <h5 className="fs-4">COMPANY</h5>
-            <ul className="company-detail">
-              <li className="fs-6">About Us</li>
-              <li className="fs-6">Careers</li>
-              <li className="fs-6">Store Locator</li>
-              <li className="fs-6">Store addressess</li>
+            <ul className="company-detail d-flex flex-column">
+              <Link to="/aboutus" onClick={handleLinkClick} className="fs-6 text-decoration-none text-dark py-1">About Us</Link>
+              <Link to="/contactus" onClick={handleLinkClick} className="fs-6 text-decoration-none text-dark py-1">Contact Us</Link>
             </ul>
           </div>
         </div>
