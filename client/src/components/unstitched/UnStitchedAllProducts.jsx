@@ -120,6 +120,7 @@ const UnStitchedAllProducts = () => {
       });
     }
   });
+
   const categoriesType = useSelector((state) => state.category.categoriesType);
 
   const handleCategoyFiltering = (id) => {
@@ -129,6 +130,12 @@ const UnStitchedAllProducts = () => {
     });
     setFilteredProducts(filteredProducts);
   };
+
+
+
+
+
+
 
   const filterbyDiscount = () => {
     const discunted = unStitchedProducts.filter(
@@ -158,7 +165,6 @@ const UnStitchedAllProducts = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-
     dispatch(
       getProductAsync({ currentPage, limit, category: unStitchedId })
     ).then((response) => {
@@ -193,7 +199,7 @@ const UnStitchedAllProducts = () => {
 
   return (
     <section className="UnstitchedAllProducts py-4 my-3">
-      <div className="container">
+      <div className="UnstitchedAllProducts-cont">
         {/* StitchedAllProducts -- HEADER */}
         <div className="StitchedAllProducts-header text-center">
           <h3 className="fs-3 fw-bold AllProducts-heading">WOMEN'S</h3>
@@ -318,7 +324,6 @@ const UnStitchedAllProducts = () => {
                   </div>
 
                   <div className="card-body d-flex justify-content-between pt-3 px-0">
-                    {/* ITEM DETAILS */}
                     <div className="card-body-details">
                       <p className="card-data stitched-card-data my-0">
                         {product.name}
@@ -327,7 +332,6 @@ const UnStitchedAllProducts = () => {
                         Rs.{product.price}
                       </p>
                     </div>
-                    {/* Button */}
                     <div className="stitched-card-body-button">
                       <button
                         className="btn stitched-card-body-button-btn"

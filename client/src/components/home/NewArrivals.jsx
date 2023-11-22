@@ -23,7 +23,7 @@ const NewArrivals = ({ heading }) => {
         <h3 className="new-arrivals-title text-center mt-1 mb-4 fw-bold fs-1 ">
           {heading}
         </h3>
-        <div className="container new-arrivals-cont">
+        <div className="new-arrivals-cont">
           <div className="row mx-0">
             {/* FIRST IMAGE  */}
             {Womendata && Womendata.length > 0 ? (

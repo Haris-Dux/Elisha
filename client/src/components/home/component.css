@@ -4,7 +4,7 @@
 
 /* ------------ MAIN-PAGE ------------ */
 .main_page_img {
-    width: 98%;
+    width: 100%;
     margin: auto;
     background-position: center;
     background-repeat: no-repeat;
@@ -12,6 +12,10 @@
 }
 
 /* ------------ TOPBAR ------------ */
+.topbar-cont {
+    width: 95%;
+    margin-inline: auto;
+}
 
 .topbar-card {
     width: 100%;
@@ -22,11 +26,10 @@
 }
 
 .topbar-card-body {
-    font-size: 0.9rem;
-    color: #333333cc;
+    font-size: 1.05rem;
     font-weight: 600;
-    /* margin: auto; */
-    /* text-align: center; */
+    color: #202020cc;
+    text-transform: capitalize;
 }
 
 /* ------------ SHOP-BY-TYPE ------------ */
@@ -38,7 +41,6 @@
 
 .shop-by-type-header {
     margin: auto;
-    width: max-content;
     padding: 1rem 2rem;
     background-color: var(--brown-color);
     color: #fff;
@@ -49,7 +51,6 @@
 
 .shop-by-type-title {
     font-size: 2rem;
-
 }
 
 /* BODY */
@@ -131,8 +132,10 @@
 
 .new-arrivals-cont {
     background-color: #BFC2BB;
-    border-radius: 9px;
+    border-radius: 7 px;
     padding: 2rem 4rem;
+    width: 91%;
+    margin-inline: auto;
 }
 
 .new-arrivals-card {
@@ -179,7 +182,9 @@
 }
 
 .DealsByCategory-cont {
+    width: 92%;
     padding-block: 3rem;
+    margin-inline: auto;
 }
 
 .DealsByCategory-header {
@@ -326,5 +331,46 @@
         background-color: #BFC2BB;
         border-radius: 10px;
         padding: 2rem 2rem;
+    }
+}
+
+@media only screen and (max-width: 476px) {
+    .shop-by-type-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media only screen and (max-width: 385px) {
+    .shop-by-type-title {
+        font-size: 1.5rem;
+    }
+
+    .parent-box {
+        margin: auto;
+        width: 9rem;
+        height: 9rem;
+        background-color: var(--brown-color);
+        border-radius: 50%;
+    }
+
+    .child-box {
+        width: 7rem;
+        height: 7em;
+        background-color: #E1D9CF;
+        border-radius: 50%;
+        margin: auto;
+        margin-top: 1rem;
+    }
+
+    .child-box-img-cont {
+        width: 4.2rem;
+        height: 4.8rem;
+    }
+}
+
+
+@media only screen and (max-width: 340px) {
+    .shop-by-type-title {
+        font-size: 1.3rem;
     }
 }

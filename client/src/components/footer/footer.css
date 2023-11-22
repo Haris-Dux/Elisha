@@ -33,6 +33,94 @@ h5 {
     margin-right: 1.4rem;
 }
 
+/* --------- DELIVERY --------- */
+.delivery {
+    padding-block: 2.5rem;
+}
+
+.delivery_left,
+.delivery_right {
+    width: 50%;
+    padding-inline: 2rem;
+}
+
+.delivery_headings {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #85684b;
+}
+
+.delivery_headings:hover {
+    text-decoration: underline;
+    text-underline-offset: 9px;
+}
+
+.delivery_text {
+    font-size: 1.rem;
+    line-height: 1.5;
+    color: #5f5f5f;
+    padding-top: .7rem;
+}
+
+/* --------- EXCHANGE --------- */
+
+.exchange_headings {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #85684b;
+}
+
+.exchange_headings:hover {
+    text-decoration: underline;
+    text-underline-offset: 9px;
+}
+
+
+.exchange_text {
+    font-size: 1.rem;
+    line-height: 1.5;
+    color: #464646;
+    padding-top: .7rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 768px) {
     .footer {
         margin: auto;

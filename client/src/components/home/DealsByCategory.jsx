@@ -16,7 +16,7 @@ const DealsByCategory = () => {
         <div className="DealsByCategory-header text-center">
           <h5 className="DealsByCategory-title">Deals By Category</h5>
         </div>
-        <div className="container DealsByCategory-cont">
+        <div className=" DealsByCategory-cont">
           <div className="row mx-0 topbar-content">
             <div className="col-md-4 my-2">
               <div className="card DealsByCategory-card">

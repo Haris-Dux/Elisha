@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, getCartTotal } from '../../features/WomenSlice';
 import { toast } from 'react-toastify';
 import './checkout.css';
-import { updateuserAsync } from '../../features/authSlice';
+import { getuserAsync, updateuserAsync } from '../../features/authSlice';
 import { createOrderAsync, currentOrder } from '../../features/orderSlice';
 
 const Checkout = () => {
@@ -16,8 +16,6 @@ const Checkout = () => {
 
     const user = useSelector((state) => state.auth.user);
     const userID = user.id;
-    console.log('userID', userID);
-    // console.log('checkout-user', user);
 
     // Create state to manage form data and address added status
     const [formData, setFormData] = useState({
@@ -69,9 +67,9 @@ const Checkout = () => {
 
             dispatch(updateuserAsync(userData))
                 .then(() => {
-                    // dispatch(updatedUser({ ...user, phone: formData.phone, address: formattedAddress }))
+                    dispatch(getuserAsync({ id: userID }));
                     setIsAddressAdded(true);
-                    console.log('userData', userData);
+                    // console.log('userData', userData);
                 })
                 .catch((error) => {
                     console.log('error', error);
