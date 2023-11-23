@@ -1,12 +1,34 @@
 import React from "react";
-import topbar_img1 from "./topbar_img1.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+// Import fabric images
+import SilkImage from "./fabric_images/Silk.jpg";
+import JamawarImage from "./fabric_images/Jamawar.jpg";
+import CottonImage from "./fabric_images/Cotton.jpg";
+import KhaddarImage from "./fabric_images/Khaddar.jpg";
+import WoolImage from "./fabric_images/Wool.jpg";
+import LinenImage from "./fabric_images/Linen.jpg";
+import LawnImage from "./fabric_images/Lawn.jpg";
+import ChiffonImage from "./fabric_images/Chiffon.jpg";
+import FleeceImage from "./fabric_images/Fleece.jpg";
+
+const fabricData = [
+  { id: 1, image: SilkImage, name: "Silk" },
+  { id: 2, image: JamawarImage, name: "Jamawar" },
+  { id: 3, image: CottonImage, name: "Cotton" },
+  { id: 4, image: KhaddarImage, name: "Khaddar" },
+  { id: 5, image: WoolImage, name: "Wool" },
+  { id: 6, image: LinenImage, name: "Linen" },
+  // { id: 7, image: VelvetImage, name: "Velvet" },
+  { id: 8, image: LawnImage, name: "Lawn" },
+  // { id: 9, image: SatinImage, name: "Satin" },
+  { id: 10, image: ChiffonImage, name: "Chiffon" },
+  { id: 11, image: FleeceImage, name: "Fleece" },
+];
 
 const NextArrow = (props) => {
   const { onClick } = props;
@@ -30,15 +52,11 @@ const PrevArrow = (props) => {
   );
 };
 
-
 const ShopByType = ({ heading, slide }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [slidesToShow, setSlidesToShow] = useState(slide);
-  const allProducts = useSelector(state => state.product.products)
+  const allProducts = useSelector((state) => state.product.products);
+  const [slidesToShow, setSlidesToShow] = React.useState(slide);
 
-  // Filter only top sales products
-  const filterdNames = allProducts.map((item) => item.fabric);
   const handleItemClick = (item) => {
     navigate(`/productbyfabric/${item}`);
     window.scrollTo(0, 0);
@@ -48,16 +66,13 @@ const ShopByType = ({ heading, slide }) => {
     dots: false,
     infinite: true,
     speed: 500,
-    // slidesToShow: 4,
     slidesToScroll: 1,
     slidesToShow: slidesToShow,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-    // autoplay: true,
   };
 
-  // Update the number of slides based on screen size
-  useEffect(() => {
+  React.useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1200) {
         setSlidesToShow(4); // Full Desktop view
@@ -81,47 +96,29 @@ const ShopByType = ({ heading, slide }) => {
     };
   }, []);
 
-
-
-
-
-
-
-
-
-
   return (
     <>
       <section className="shop-by-type">
         <div className="container">
-          {/* SHOP-BY-TYPE HEADER */}
           <div className="shop-by-type-header text-center">
-            <h5 className="shop-by-type-title">SHOP BY FABRIC TYPE</h5>
+            <h5 className="shop-by-type-title">{heading}</h5>
           </div>
-
-          {/* SHOP-BY-TYPE BODY */}
           <div className="shop-by-type-content px-3">
             <div className="row mx-0 shop-by-type-content-cont d-flex justify-content-center align-item-center">
               <Slider {...settings}>
-                {filterdNames.map((item) => (
-                  <div className="col-xs-12 col-sm-4 col-md-4 col-lg-2 my-2">
+                {fabricData.map((item) => (
+                  <div key={item.id} className="col-xs-12 col-sm-4 col-md-4 col-lg-2 my-2">
                     <div className="card shop-by-type-card">
-                      <div className="parent-box">
-                        <div className="child-box d-flex justify-content-center align-item-center">
-                          <div className="child-box-img-cont">
-                            <img
-                              className="child-box_img"
-                              src={topbar_img1}
-                              alt=""
-                              width="100%"
-                              height="100%"
-                            />
-                          </div>
-                        </div>
+                      <div className="parent-box ">
+                        {/* <div className="child-box d-flex justify-content-center align-item-center"> */}
+                        {/* <div className="child-box-img-cont"> */}
+                        <img className="child-box_img1" src={item.image} alt={item.name} width="100%" height="100%" />
+                        {/* </div> */}
+                        {/* </div> */}
                       </div>
                       <div className="card-body shop-by-type-card-body">
-                        <h5 className="card-title shop-by-type-card-title text-center">{item}</h5>
-                        <a onClick={() => handleItemClick(item)} className="btn shop-by-type-cards-buttons">
+                        <h5 className="card-title shop-by-type-card-title text-center">{item.name}</h5>
+                        <a onClick={() => handleItemClick(item.name)} className="btn shop-by-type-cards-buttons">
                           SHOP NOW
                         </a>
                       </div>

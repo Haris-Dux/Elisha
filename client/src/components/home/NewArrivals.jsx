@@ -10,12 +10,8 @@ const NewArrivals = ({ heading }) => {
     window.scrollTo(0, 0);
   };
 
-
   // const item = useSelector(state => state.womenData.item).slice(12, 16)
   const Womendata = useSelector(state => state.product.products).slice(0, 4)
-  // console.log("New Arrivals", Womendata);
-
-
 
   return (
     <>
@@ -29,7 +25,7 @@ const NewArrivals = ({ heading }) => {
             {Womendata && Womendata.length > 0 ? (
               Womendata.map((item) => {
                 return (
-                  <div key={item.id} className="col-sm-6 col-md-4 col-lg-3 my-2">
+                  <div key={item.id} className="new-arrival-box col-sm-6 col-md-4 col-lg-3 my-2">
                     <div className="card new-arrivals-card">
                       <div onClick={() => handleItemClick(item.id)}>
                         <img

@@ -91,3 +91,21 @@
 
 /* StitchedAllProducts -- PAGINATION */
 
+@media only screen and (max-width: 1200px) {
+    .topsale-header-text {
+        width: 70% !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .topsale-header-text {
+        width: 75% !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .topsale-header-text {
+        width: 90% !important;
+        font-size: 1.3rem !important;
+    }
+}

@@ -3,9 +3,17 @@
 }
 
 /* ------------ MAIN-PAGE ------------ */
-.main_page_img {
-    width: 100%;
+
+.img-cont {
+    width: 100% !important;
     margin: auto;
+    overflow-x: hidden !important;
+}
+
+.main_page_img {
+    background-image: url("image.png");
+    margin: auto;
+    width: 100% !important;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -91,6 +99,13 @@
 
 .child-box_img {
     margin-top: 1.3rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.child-box_img1 {
+    margin-top: 0;
     width: 100%;
     height: 100%;
     border-radius: 100%;
@@ -320,11 +335,17 @@
 
 @media only screen and (max-width: 992px) {
     .topbar-card-body {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        font-weight: 600;
     }
 }
 
-@media only screen and (max-width: 768px) {}
+@media only screen and (max-width: 768px) {
+    .topbar-card-body {
+        font-size: 1.2rem;
+        flex-direction: column;
+    }
+}
 
 @media only screen and (max-width: 576px) {
     .new-arrivals-cont {
@@ -332,13 +353,51 @@
         border-radius: 10px;
         padding: 2rem 2rem;
     }
+
+    .topbar-card-body {
+        font-size: 1.2rem;
+    }
 }
 
 @media only screen and (max-width: 476px) {
     .shop-by-type-title {
         font-size: 1.7rem;
     }
+
+    .new-arrivals-cont {
+        background-color: #BFC2BB;
+        border-radius: 0px;
+        padding: 1rem 0rem;
+        width: 100%;
+        margin-inline: auto;
+    }
+
+    .topbar-box,
+    .new-arrival-box {
+        width: 50%;
+    }
+
+    .topbar-card-body {
+        font-size: 1rem;
+        font-weight: 600;
+        flex-direction: column;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 385px) {
     .shop-by-type-title {

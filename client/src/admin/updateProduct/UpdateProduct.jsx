@@ -65,10 +65,15 @@ const UpdateProduct = () => {
     const categories = useSelector((state) => state.category.categories);
     const categoriesType = useSelector((state) => state.category.categoriesType);
 
+
+    
     useEffect(() => {
         const categoryIds = categories.map((item) => item.id);
         dispatch(getCategoryTypeAsync({ category: categoryIds }));
     }, [dispatch, categories]);
+
+
+
 
     useEffect(() => {
         if (product.category && product.categoryType) {

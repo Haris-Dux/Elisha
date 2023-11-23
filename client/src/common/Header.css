@@ -1,7 +1,7 @@
 .head {
     background-color: #4E4D49;
     color: #dbdbdb;
-    font-size: .9rem;
+    font-size: .8rem;
     letter-spacing: 1px;
 }
 
@@ -13,24 +13,28 @@ i {
     margin-bottom: 0;
 }
 
+
+/* ----------- LOGO COMPONENT ----------- */
+
 .logoComponent {
     background-color: #faf9f9;
-    /* height: 8rem !important; */
 }
 
 .logo-img-cont-img {
     margin-left: 19rem;
 }
 
+/* ----------- NAVBAR ----------- */
+
 .nav-link {
-    font-size: 1.1rem !important;
+    font-size: 1.05rem !important;
     font-weight: 500;
+    transition: all 0.6s ease-in-out !important;
 }
 
 .nav-link:hover {
-    transition: transform .4s;
+    transition: all .6s ease-in-out !important;
     text-decoration-line: underline;
-    text-decoration-style: "solid";
     text-decoration-color: #4E4D49;
     text-decoration-thickness: 3px;
     text-underline-offset: 4px;
@@ -59,27 +63,29 @@ i {
     padding-inline: 0rem;
     margin-left: 1.3rem !important;
     width: max-content !important;
-
 }
 
 .username-dropdown-toggle {
+    font-size: 1.6rem !important;
     background-color: transparent !important;
     font-family: 'Italiana', sans-serif;
     color: #4E4D49 !important;
     padding-inline: 0rem !important;
-    font-size: 1.8rem !important;
     font-weight: 700 !important;
     text-transform: capitalize;
 }
 
 .dropdown-menu.show {
     padding: 0 !important;
+    font-size: 1.1rem !important;
 }
 
 .dropdown-item {
+    font-size: 1.1rem !important;
     padding-block: .5rem !important;
     padding-inline: 0 !important;
     margin-bottom: 0 !important;
+
 }
 
 .dropdown-item:hover {

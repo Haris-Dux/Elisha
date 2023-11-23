@@ -84,7 +84,7 @@ const WomenAllProducts = () => {
   const womenCategoryId = useSelector(state => state.category.categories.find(category => category.name === "Women")?.id);
 
   // Filter products that belong to the "Women" category
- 
+
   let products = [];
   if (filteredProducts.length > 0) {
     products = filteredProducts;
@@ -127,11 +127,11 @@ const WomenAllProducts = () => {
 
   const goToPage = (currentPage) => {
     setCurrentPage(currentPage);
-    window.scrollTo({top:0,behavior:"smooth"})
+    window.scrollTo({ top: 0, behavior: "smooth" })
   };
 
   let pages = [];
-   for(let i = 1 ; i <= totalPages ; i++){
+  for (let i = 1; i <= totalPages; i++) {
     pages.push(
       <li key={i}>
         <button
@@ -145,9 +145,9 @@ const WomenAllProducts = () => {
         </button>
       </li>
     )
-   }
+  }
 
-   useEffect(() => {
+  useEffect(() => {
     if (categoryType.length > 0 && productsref.current) {
       productsref.current.scrollIntoView({
         behaviour: "smooth",
@@ -217,7 +217,7 @@ const WomenAllProducts = () => {
           <div ref={productsref} className="all-product-body">
             <div className="row mx-0">
               {products.map((product) => (
-                <div key={product.id} className="col-sm-6 col-md-4 col-lg-3">
+                <div key={product.id} className="phone-width col-sm-6 col-md-4 col-lg-3">
                   <div className="card all-product-body-card my-2">
                     <div onClick={() => handleItemClick(product.id)}>
                       <img src={product.image.secure_url} className="card-img-top shadow" alt="..." />
@@ -247,9 +247,9 @@ const WomenAllProducts = () => {
             </div>
           </div>
         </div>
-        <WomenNewArrival/>
-         {/* PAGINATION --  Compi*/}
-         <div className="container my-5">
+        <WomenNewArrival />
+        {/* PAGINATION --  Compi*/}
+        <div className="container my-5">
           <nav aria-label="Page navigation example pagination-bar">
             <ul className="pagination d-flex justify-content-center align-items-center">
               {pages.map((page) => (

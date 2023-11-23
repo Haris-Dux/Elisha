@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import logo from "../components/contact/logo.png";
-import { toast } from "react-toastify";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginuserAsync } from "../features/authSlice";
@@ -12,8 +11,10 @@ const Login = () => {
   const location = useLocation();
   const user = useSelector((state) => state.auth.user);
 
+  const [showPassword, setShowPassword] = useState(false);
 
-  
+
+
   useEffect(() => {
     if (user && user.role === 'user') {
       navigate("/");
@@ -25,17 +26,20 @@ const Login = () => {
 
 
 
-
   // SCROLL TO TOP FUNCTION
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
+
 
   // Initialize state variables for form inputs
   const [logData, setLogData] = useState({
     email: "",
     password: "",
   });
+
+
+
 
   // HANDLE INPUT CHANGE
   const handleInputChange = (e) => {
@@ -45,6 +49,13 @@ const Login = () => {
       [name]: value,
     });
   };
+
+
+  // TOGGLE PASSWORD VISIBILITY
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
 
   // HANDLE FORM SUBMISSION
   const handleSubmit = async (e) => {
@@ -97,31 +108,41 @@ const Login = () => {
                 </div>
 
                 <div className="mb-3">
-                  <input
-                    type="password"
-                    className="form-control form-control-inputs"
-                    placeholder="Password"
-                    name="password"
-                    value={logData.password}
-                    onChange={handleInputChange}
-                    autoComplete="password"
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control form-control-inputs"
+                      placeholder="Password"
+                      name="password"
+                      value={logData.password}
+                      onChange={handleInputChange}
+                      autoComplete="password"
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={togglePasswordVisibility}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {showPassword ? (
+                          <i className="far fa-eye"></i>
+                        ) : (
+                          <i className="far fa-eye-slash"></i>
+                        )}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="mb-2 form-check d-flex justify-content-between">
-                  <Link to="/forgetpassword" className="form-forget-password">
-                    Forgot Password?
-                  </Link>
+                  <Link to="/forgetpassword" className="form-forget-password">Forgot Password?</Link>
                 </div>
-                <button type="submit" className="btn sign-btn">
-                  Login
-                </button>
 
-                <p className="mt-3">
-                  Create an Account?{" "}
-                  <Link className="signup-link" to="/signup">
-                    Sign Up
-                  </Link>
+                <button type="submit" className="btn sign-btn">Login</button>
+
+                <p className="mt-5">
+                  Create an Account?
+                  <Link className="signup-link" to="/signup">Sign Up</Link>
                 </p>
               </form>
             </div>

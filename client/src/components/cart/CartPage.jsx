@@ -31,9 +31,11 @@ const CartPage = () => {
     const handleCheck = () => {
         if (user) {
             navigate("/checkout");
+            window.scrollTo(0, 0);
         }
         else {
             navigate("/login?from=cart");
+            window.scrollTo(0, 0);
         }
     }
 
@@ -163,7 +165,7 @@ const CartPage = () => {
                 <div className="container">
                     <div className="row mx-0 text-center">
                         <div className="col-md-12 py-5">
-                            <img src={cartImg} alt="No Item In Cart" width="300px" height="300px" />
+                            <img src={cartImg} alt="No Item In Cart" width="170px" height="170px" />
                             <h3 className="no-item-in-cart ">
                                 No Item In Cart: <br />
                                 <span>Shop Now</span>

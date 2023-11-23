@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import RelatedProducts from "./RelatedProducts";
 import { addToCart } from "../../features/WomenSlice";
@@ -10,15 +10,13 @@ import "./SelectedItem.css";
 const SelectedItem = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedSize, setSelectedSize] = useState(null);
 
-  // Getting all data from slice
+
   const productData = useSelector(state => state.product.products);
 
-
-  // filter given id's data in from all data 
   const product = productData.filter((item) => item.id === id);
-  // console.log("filter", product);
 
 
   // HANDLE TO CART FUNCTION
@@ -28,11 +26,9 @@ const SelectedItem = () => {
         ...product[0],
         selectedSize: selectedSize
       };
-
-      dispatch(addToCart({ productWithSize: productWithSize }));
-
-      console.log('productWithSize', productWithSize);
-
+      dispatch(addToCart({ productWithSize: productWithSize }))
+      navigate("/cartpage")
+      window.scrollTo(0, 0);
       toast.success('Product Added Successfully');
     } else {
       toast.error('Please select a size before adding to the cart.');
@@ -49,9 +45,9 @@ const SelectedItem = () => {
           {product.map((item) => {
             return (
               <>
-                <div className="row mx-0 d-flex justify-content-evenly py-3" key={item.id}>
+                <div className="row mx-0 d-flex justify-content-center py-3" key={item.id}>
                   {/* Image Side */}
-                  <div className="col-sm-12 col-md-6 col-lg-6 px-1 selectedItem-img-cont">
+                  <div className="col-sm-12 col-md-6 col-lg-6 px-1 my-2 selectedItem-img-cont">
                     <div className="selectedItem-img-cont-box px-0">
                       <img src={item.image.secure_url} alt="" width="100%" />
                     </div>
@@ -75,10 +71,9 @@ const SelectedItem = () => {
                           {item.size.map((item, index) => (
                             <li
                               key={index}
-                              className={`size-button`}
+                              className={`size-button ${selectedSize === item ? 'selectedSizeButton' : ''}`}
                               onClick={() => {
                                 setSelectedSize(item);
-                                toast.success("Size Selected");
                               }}
                             >
                               {item}

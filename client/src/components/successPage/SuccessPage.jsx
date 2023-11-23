@@ -13,7 +13,7 @@ const SuccessPage = () => {
     return (
         <>
             <section className="successpage">
-                <div className="container mt-4 mb-4 py-5">
+                <div className="container py-5">
                     <div className="row d-flex cart justify-content-center">
                         <div className="col-md-6">
                             <div className="card">

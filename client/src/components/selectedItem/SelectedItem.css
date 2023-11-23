@@ -1,7 +1,7 @@
 .selectedItem-img-cont-box {
     max-height: max-content;
-    /* width: 30rem !important; */
-    /* margin: auto !important; */
+    width: 25rem !important;
+    margin: auto !important;
 }
 
 .selectedItem-img-cont-box {
@@ -75,10 +75,10 @@
 }
 
 .size-button {
-    height: 2.9rem;
+    height: 2.85rem;
     width: 2.9rem;
     margin-inline: .8rem;
-    line-height: 2.9rem;
+    line-height: 3rem;
     background-color: #f8f8f8;
     border-radius: 50%;
     text-align: center;
@@ -95,6 +95,10 @@
     transform: translateY(-2px);
 }
 
+.selectedSizeButton {
+    background-color: #707070;
+    color: white;
+}
 
 /* --------- Add to Bag ---------  */
 
@@ -184,6 +188,12 @@
 }
 
 @media only screen and (max-width: 450px) {
+    .selectedItem-img-cont-box {
+        max-height: max-content;
+        width: 100% !important;
+        margin: auto !important;
+    }
+
     .selectedItem-img-details {
         background-color: #E0D7CE;
         padding-inline: .7rem !important;

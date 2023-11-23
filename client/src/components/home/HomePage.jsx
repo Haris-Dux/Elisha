@@ -31,16 +31,16 @@ const HomePage = () => {
 
   // Effect for initial product and category fetch
   useEffect(() => {
-    dispatch(getProductAsync({limit}));
+    dispatch(getProductAsync({ limit }));
     dispatch(getCategoryAsync());
-  }, [dispatch,limit]);
+  }, [dispatch, limit]);
 
 
   return (
     <>
       <MainPage />
       <TopBar />
-      <ShopByType  heading="PRET STYLE" slide={3}/>
+      <ShopByType heading="SHOP BY TYPE" slide={3} />
       <NewArrivals heading="NEW ARRIVALS" />
       <BrandNameLogo />
       <DealsByCategory />
