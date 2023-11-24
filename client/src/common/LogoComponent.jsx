@@ -77,7 +77,7 @@ const LogoComponent = () => {
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                        {user.name ? user.name.charAt(0) : 'Loading...'}
+                        {user.name.charAt(0)}
                       </button>
                       <ul className="dropdown-menu">
                         <li>
