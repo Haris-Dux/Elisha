@@ -27,11 +27,30 @@
     width: 68%;
 }
 
+.input-group {
+    background-color: #4F4E4A !important;
+    border-radius: 10px;
+}
+
+.input-group-text {
+    background-color: #4F4E4A !important;
+    border: none;
+    outline: none;
+}
+
+.input-group-text i {
+    font-size: 1.05rem;
+    width: 1.4rem;
+    margin-right: .5rem !important;
+    padding-block: .55rem;
+    color: #CEB499 !important;
+}
+
 .form-control-inputs {
     font-size: 1rem !important;
     background-color: #4F4E4A !important;
     color: #CEB499 !important;
-    padding: .65rem 1rem !important;
+    padding: .55rem 1rem !important;
     border-radius: 10px;
     border: none !important;
     outline: none !important;
@@ -39,7 +58,7 @@
 
 .form-control-inputs::placeholder {
     color: #CEB499 !important;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .form-control-inputs:hover {

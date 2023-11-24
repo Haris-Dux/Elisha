@@ -9,7 +9,6 @@ import { getCategoryTypeAsync } from "../../features/categorySlice";
 import { useNavigate } from "react-router-dom";
 
 const NextArrow = (props) => {
-
   const { onClick } = props;
   return (
     <div className="control-btn" onClick={onClick}>
@@ -33,8 +32,10 @@ const PrevArrow = (props) => {
 
 const PretStyles = ({ heading, slide }) => {
   const navigate = useNavigate()
-  const [slidesToShow, setSlidesToShow] = useState(slide);
   const dispatch = useDispatch();
+  const [slidesToShow, setSlidesToShow] = useState(slide);
+
+
   const settings = {
     dots: false,
     infinite: true,

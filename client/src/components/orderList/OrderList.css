@@ -1,5 +1,10 @@
+.orderList-cont {
+    width: 90%;
+    margin: auto;
+}
+
 .orderList-body-cont {
-    padding-inline: 1rem 1.5rem;
+    padding-inline: 1rem;
     border-radius: 10px;
     background-color: #E0D7CE;
     border: none;
@@ -9,7 +14,6 @@
     font-size: 2rem;
     font-weight: 600;
     text-align: center;
-    /* color: #9E9388; */
     font-family: 'Gotu', sans-serif;
 }
 
@@ -25,15 +29,23 @@
     border-radius: 10px;
     resize: none;
     font-size: 1rem !important;
+    color: #3a3a3a;
+    background-color: #FAF9F9 !important;
 }
 
 .shipping-address-bar::placeholder {
     color: rgb(145, 145, 145) !important;
+
 }
 
 .order_id {
     font-size: 1.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+
 
 .order_status {
     font-size: 1.3rem !important;
@@ -46,4 +58,59 @@
 .orders-total {
     font-size: 1.2rem;
     font-weight: 700;
+}
+
+.divider {
+    display: none;
+}
+
+
+
+@media only screen and (max-width: 576px) {
+    .order_list_details-left {
+        margin-right: 1rem !important;
+    }
+
+    .orderList-body-cont {
+        padding: 0rem 1rem !important;
+    }
+
+    .order_list_box {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .divider {
+        display: block;
+    }
+}
+
+
+@media only screen and (max-width: 480px) {
+    .orderList-cont {
+        width: 100%;
+        margin: auto;
+    }
+
+    .order_id {
+        font-size: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 377px) {
+
+    .orderList-body-cont {
+        padding-inline: .5rem !important;
+    }
+
+    .order_id {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+    }
+
+    .order-id-text {
+        font-size: 1.25rem !important;
+        font-weight: 500;
+    }
 }

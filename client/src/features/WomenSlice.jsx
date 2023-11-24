@@ -20,19 +20,15 @@ export const WomenSlice = createSlice({
         },
 
         addToCart: (state, action) => {
-            const { productWithSize } = action.payload; // Use productWithSize
-            console.log('productWithSize', productWithSize);
+            const { productWithSize } = action.payload;
 
-            // Check if the item with the same product and selectedSize exists in the cart
             const existingItemIndex = state.cart.findIndex(
                 (item) => item.id === productWithSize.id && item.selectedSize === productWithSize.selectedSize
             );
 
             if (existingItemIndex !== -1) {
-                // If the item exists, update its quantity
                 state.cart[existingItemIndex].quantity += 1;
             } else {
-                // If the item doesn't exist, add it to the cart
                 state.cart.push({
                     ...productWithSize,
                     quantity: 1,
@@ -73,7 +69,7 @@ export const WomenSlice = createSlice({
             const { id, selectedSize } = action.payload;
             state.cart = state.cart.filter(
                 (item) => !(item.id === id && item.selectedSize === selectedSize)
-            );
+            );  
         },
 
         increaseItemQuantity: (state, action) => {
@@ -108,7 +104,6 @@ export const WomenSlice = createSlice({
                 );
             }
         },
-
     },
 });
 

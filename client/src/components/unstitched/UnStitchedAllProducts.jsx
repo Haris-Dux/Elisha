@@ -313,7 +313,7 @@ const UnStitchedAllProducts = () => {
         <div ref={productsref} className="all-product-body">
           <div className="row mx-0">
             {products.map((product) => (
-              <div key={product.id} className="col-md-3">
+              <div key={product.id} className="phone-width col-sm-4 col-md-3">
                 <div className="card all-product-body-card my-2">
                   <div onClick={() => handleItemClick(product.id)}>
                     <img

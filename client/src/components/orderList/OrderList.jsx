@@ -20,7 +20,7 @@ const OrderList = () => {
     return (
         <>
             <section className="orderList py-4">
-                <div className="container">
+                <div className="orderList-cont">
                     <div className="orderList-header">
                         <h2 className='orderList-header-title py-2'>Orders Lists</h2>
                     </div>
@@ -30,14 +30,22 @@ const OrderList = () => {
                             return (
                                 <div className="row mx-0 my-4 orderList-body-cont" key={order.id}>
                                     <div className="col-md-12 py-4">
-                                        <h2 className='mb-3 order_id'><span className="fw-bold">Order Id: </span>{order.id}</h2>
-                                        <h4 className='fs-4 order_status'><span className="fw-bold">Order Status: </span>{order.status}</h4>
+
+                                        <h2 className='mb-3 order_id'>
+                                            <span className="fw-bold">Order Id: </span>
+                                            <p className="order-id-text pt-2">{order.id}</p>
+                                        </h2>
+
+                                        <h4 className='fs-4 order_status'>
+                                            <span className="fw-bold">Order Status: </span>
+                                            {order.status}
+                                        </h4>
 
                                         <div className="orderList-displayer">
                                             {order.items.map((item) => {
                                                 return (
                                                     <>
-                                                        <div className="d-flex justify-content-start py-2">
+                                                        <div className="order_list_box d-flex justify-content-start py-2">
                                                             {/* IMAGE DISPLAY HERE */}
                                                             <div className="order_list_details-left me-5">
                                                                 <img src={item.image.secure_url} alt="" width="170px" height="250px" />
@@ -53,7 +61,7 @@ const OrderList = () => {
                                                                     <p className='mb-2'><span className="fw-bold">Selected Size: </span>{item.selectedSize}</p>
                                                                     <p className='mb-2'><span className="fw-bold">Item Code: </span>{item.itemCode}</p>
                                                                     <p className='mb-2'><span className="fw-bold">Description: </span>{item.description}</p>
-
+                                                                    <div className="divider"><hr /></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -71,7 +79,7 @@ const OrderList = () => {
                                             {/* SHIPPING ADDRESS */}
                                             <div className="shipping-address my-1 py-2">
                                                 <h4 className='mb-3'>Shipping Address</h4>
-                                                <textarea className='shipping-address-bar' name="" rows="1" value={order.address} placeholder='Shipping Address Show Here'></textarea>
+                                                <textarea className='shipping-address-bar' name="" rows="3" value={order.address} placeholder='Shipping Address Show Here'></textarea>
                                             </div>
                                         </div>
                                     </div>

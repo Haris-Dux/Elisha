@@ -86,6 +86,8 @@ const TopSalesAllProducts = () => {
 
   // GETTING ALL PRODUCTS
   const allProducts = useSelector((state) => state.product.products);
+
+
   const topSalesProducts = allProducts.filter(
     (product) => product.topSales === true
   );
@@ -286,7 +288,7 @@ const TopSalesAllProducts = () => {
             <div className="row mx-0">
               {products.map((item) => {
                 return (
-                  <div key={item.id} className="col-md-3">
+                  <div key={item.id} className="phone-width col-sm-4 col-md-3">
                     <div className="card all-product-body-card my-2">
                       <div onClick={() => handleItemClick(item.id)}>
                         <img

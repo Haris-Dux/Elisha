@@ -9,16 +9,14 @@ import { getAllOrderForUserAsync } from '../features/orderSlice';
 
 const LogoComponent = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   // GET USER DATA
-
   const user = useSelector((state) => state.auth.user);
-  // console.log('user', user);
-  console.log('User from Redux:', user);
 
   const { cart, totalQuantity } = useSelector((state) => state.womenData);
 
-  const dispatch = useDispatch();
 
 
   const handleOrderList = () => {
@@ -57,7 +55,7 @@ const LogoComponent = () => {
                   src={logo}
                   className="logo-img-cont-img"
                   alt=""
-                  width="105px"
+                  width="100px"
                 />
               </Link>
             </div>
@@ -94,14 +92,14 @@ const LogoComponent = () => {
                     </div>
                   </>
                 ) : (
-                  <i className="user fa-solid fa-user mx-3 fs-4"></i>
+                  <i className="user fa-solid fa-user mx-3 fs-5"></i>
                 )}
               </Link>
 
 
               {/* CART ICON */}
               <Link to="/cartpage" type="button" className="btn cart-button ps-0 position-relative">
-                <i className="fa-solid fa-cart-shopping mx-2 fs-4"></i>
+                <i className="fa-solid fa-cart-shopping mx-2 fs-5"></i>
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   {totalQuantity}
                 </span>

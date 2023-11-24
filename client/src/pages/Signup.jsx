@@ -12,6 +12,8 @@ const Signup = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
+  const [showPassword, setShowPassword] = useState(false);
+
   // Initialize state variables for form inputs and error message
   const [formData, setFormData] = useState({
     name: "",
@@ -30,6 +32,10 @@ const Signup = () => {
   }, [user, navigate]);
 
 
+  // TOGGLE PASSWORD VISIBILITY
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
 
   // Handle form input changes and update state
@@ -104,7 +110,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <input
                     type="password"
                     className="form-control form-control-inputs"
@@ -115,8 +121,37 @@ const Signup = () => {
                     autoComplete="new-password"
                     required
                   />
-                </div>
+                </div> */}
+
                 <div className="mb-3">
+                  <div className="input-group">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control form-control-inputs"
+                      placeholder="Password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      autoComplete="new-password"
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={togglePasswordVisibility}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {showPassword ? (
+                          <i className="far fa-eye"></i>
+                        ) : (
+                          <i className="far fa-eye-slash"></i>
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+
+                {/* <div className="mb-3">
                   <input
                     type="password"
                     className="form-control form-control-inputs"
@@ -127,6 +162,33 @@ const Signup = () => {
                     autoComplete="new-password"
                     required
                   />
+                </div> */}
+
+                <div className="mb-3">
+                  <div className="input-group">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="form-control form-control-inputs"
+                      placeholder="Confirm Password"
+                      name="cpassword"
+                      value={formData.cpassword}
+                      onChange={handleInputChange}
+                      autoComplete="new-password"
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={togglePasswordVisibility}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {showPassword ? (
+                          <i className="far fa-eye"></i>
+                        ) : (
+                          <i className="far fa-eye-slash"></i>
+                        )}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 <button type="submit" className="btn sign-btn my-2">
